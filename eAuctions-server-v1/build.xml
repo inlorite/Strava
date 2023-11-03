@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="4.server" name="eAuctions-server-v1">    
+	<property name="src.dir" location="src"/>
+   	<property name="bin.dir" location="bin"/>
+	<property name="dist.dir" location="dist"/>
+	<property name="lib.dir" location="lib"/>
+	<property name="export.file" value="eAuctions.jar"/>
+	<property name="policy.file" location="security/java.policy"/>	
+	<property name="rmiregistry.IP" value="127.0.0.1"/> 
+	<property name="rmiregistry.port" value="1099"/> 
+	<property name="server.name" value="eAuctions"/>
+
+	<path id="classpath">
+        <fileset dir="${lib.dir}">
+            <include name="**/*.jar"/>
+        </fileset>
+        <pathelement location="${bin.dir}"/>
+    </path>
+	
+	<target name="1.build" description="Builds the project">
+		<delete dir="${bin.dir}"/>
+		<mkdir dir="${bin.dir}"/>
+		<javac srcdir="${src.dir}" destdir="${bin.dir}" classpathref="classpath" deprecation="true" fork="true" includeantruntime="no"/>
+    </target>
+		
+	<target name="2.export" depends="1.build" description="Export classes into a .jar file">
+		<delete dir="${dist.dir}"/>
+		<mkdir dir="${dist.dir}"/>
+		<jar destfile="${dist.dir}/${export.file}" basedir="${bin.dir}" includes="**/remote/I**.class, **/dto/**.class"/>
+	</target>
+	
+	<target name="3.local.test" depends="1.build" description="Runs local repository test">
+		<java classname="es.deusto.ingenieria.sd.auctions.server.test.LocalTest" classpathref="classpath" fork="true">
+		</java>
+    </target>
+	
+	<target name="4.server" depends="1.build" description="Runs the Server">
+		<java classname="es.deusto.ingenieria.sd.auctions.server.MainProgram" classpathref="classpath" fork="true">
+        	<jvmarg value="-Djava.rmi.server.codebase=file:${bin.dir}/"/>
+			<jvmarg value="-Djava.security.policy=${policy.file}"/>
+        	<arg value="${rmiregistry.IP}"/> 
+	 		<arg value="${rmiregistry.port}"/> 
+			<arg value="${server.name}"/> 
+        </java>
+    </target>
+</project>

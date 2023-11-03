@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="3.server" name="eAuctions-currencyExchangeServer">    
+	<property name="src.dir" location="src"/>
+   	<property name="bin.dir" location="bin"/>
+	<property name="dist.dir" location="dist"/>
+	<property name="export.file" value="CurrencyExchange.jar"/>
+	<property name="policy.file" location="security/java.policy"/>	
+	<property name="rmiregistry.IP" value="127.0.0.1"/> 
+	<property name="rmiregistry.port" value="1099"/> 
+	<property name="server.name" value="CurrencyExchange"/>
+
+	<path id="classpath">
+        <pathelement location="${bin.dir}"/>
+    </path>
+	
+	<target name="1.build" description="Builds the project">
+		<delete dir="${bin.dir}"/>
+		<mkdir dir="${bin.dir}"/>
+		<javac srcdir="${src.dir}" destdir="${bin.dir}" classpathref="classpath" deprecation="true" fork="true" includeantruntime="no"/>
+    </target>
+	
+	<target name="2.export" depends="1.build" description="Export classes into a .jar file">
+		<delete dir="${dist.dir}"/>
+		<mkdir dir="${dist.dir}"/>
+		<jar destfile="${dist.dir}/${export.file}" basedir="${bin.dir}" includes="**/remote/I**.class"/>
+	</target>
+		
+	<target name="3.server" description="Runs the Server">
+		<java classname="es.deusto.ingenieria.sd.auctions.currency.server.CurrecyExchangeServer" classpathref="classpath" fork="true">
+        	<jvmarg value="-Djava.rmi.server.codebase=file:${bin.dir}/"/>
+			<jvmarg value="-Djava.security.policy=${policy.file}"/>
+        	<arg value="${rmiregistry.IP}"/> 
+	 		<arg value="${rmiregistry.port}"/> 
+			<arg value="${server.name}"/> 
+        </java>
+    </target>
+</project>

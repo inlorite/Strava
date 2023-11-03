@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="2.client" name="eAuctions-client">    
+	<property environment="env"/>
+	<property name="source.dir" location="src"/>
+   	<property name="build.dir" location="bin"/>
+	<property name="lib.dir" location="lib"/>
+	<property name="rmiregistry.port" value="1099"/>
+	<property name="rmiregistry.IP" value="127.0.0.1"/> 
+	<property name="server.name" value="eAuctions"/>
+	<property name="policy.file" location="security/java.policy"/>	
+
+	<path id="classpath">
+        <fileset dir="${lib.dir}">
+            <include name="**/*.jar"/>
+        </fileset>
+        <pathelement location="${build.dir}"/>    	
+    </path>
+	
+	<target name="1.build" description="Builds the project">
+		<delete dir="${build.dir}"/>
+		<mkdir dir="${build.dir}"/>
+		<javac srcdir="${source.dir}" destdir="${build.dir}" classpathref="classpath" deprecation="true" fork="true" includeantruntime="no"/>
+    </target>
+    
+	<target name="2.client" depends="1.build"  description="Runs Client program">
+		<java classname="es.deusto.ingenieria.sd.auctions.client.MainProgram" classpathref="classpath" fork="true">
+			<jvmarg value="-Djava.security.policy=${policy.file}"/>			
+        	<arg value="${rmiregistry.IP}"/> 
+	 		<arg value="${rmiregistry.port}"/> 
+			<arg value="${server.name}"/> 
+        </java>
+    </target>
+</project>
