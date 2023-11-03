@@ -16,6 +16,7 @@ public class MainProgram {
 		ServiceLocator serviceLocator = new ServiceLocator();
 		
 		System.out.println("test");
+		System.out.println("test");
 		//args[0] = RMIRegistry IP
 		//args[1] = RMIRegistry Port
 		//args[2] = Service Name
