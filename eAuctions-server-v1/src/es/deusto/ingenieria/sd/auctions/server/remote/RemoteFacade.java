@@ -33,7 +33,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		super();
 	}
 
-	// Métodos Autenticación
+	/////////////////////// METODOS AUTENTICACION ///////////////////////
 
 	@Override
 	public synchronized long login(String email, String password) throws RemoteException {
@@ -71,15 +71,17 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 
 	public long register() throws RemoteException; // TODO
 
-	// Métodos SesionEntrenamiento
+	/////////////////////// METODOS SESIONENTRENAMIENTO ///////////////////////
 
 	public void crearSesionEntrenamiento(SesionEntrenamientoDTO sesionEntrenamientoDTO, long token)
 			throws RemoteException {
 		System.out.println(" * RemoteFacade crearSesionEntrenamiento()");
 
+		SesionEntrenamiento sesionEntrenamiento;
+
 		if (sesionEntrenamientoDTO != null && this.serverState.containsKey(token)) {
 			// Convert domain object to DTO
-			SesionEntrenamiento sesionEntrenamiento = SesionEntrenamientoAssembler.getInstance()
+			sesionEntrenamiento = SesionEntrenamientoAssembler.getInstance()
 					.dtoToSesionEntrenamiento(sesionEntrenamientoDTO);
 		} else {
 			throw new RemoteException("crearSesionEntrenamiento() fails!");
@@ -127,7 +129,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		sesionesEntrenamientoAppService.eliminarSesionEntrenamiento(sesionEntrenamiento, this.serverState.get(token));
 	}
 
-	// Métodos Reto
+	/////////////////////// METODOS RETO ///////////////////////
 
 	public void crearReto(RetoDTO retoDTO, long token) throws RemoteException {
 		System.out.println(" * RemoteFacade crearReto()");
@@ -193,7 +195,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 
 	public void eliminarReto(RetoDTO retoDTO, long token) throws RemoteException {
 		System.out.println(" * RemoteFacade eliminarReto()");
-		
+
 		Reto reto;
 
 		if (retoDTO != null && this.serverState.containsKey(token)) {
@@ -204,7 +206,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		}
 
 		// Delete Reto using RetosAppService
-		retosAppService.eliminarReto(reto, this.serverState.get(token);
+		retosAppService.eliminarReto(reto, this.serverState.get(token));
 	}
 
 	///////////////////// METODOS ANTIGUOS ////////////////////////
