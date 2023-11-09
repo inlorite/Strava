@@ -40,4 +40,14 @@ public class RetosAppService {
 		reto.setTiempo(tiempo);
 		reto.setCreador(usuario);
 	}
+	
+	public boolean apuntarseReto(Reto reto, Usuario usuario) {
+		if (reto.getParticipantes().contains(usuario)) {
+			return false;
+		} else {
+			reto.getParticipantes().add(usuario);
+			return true;
+		}
+	}
+	
 }
