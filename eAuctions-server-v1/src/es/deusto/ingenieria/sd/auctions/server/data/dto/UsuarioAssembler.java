@@ -17,7 +17,7 @@ public class UsuarioAssembler {
 		return instance;
 	}
 
-	public UsuarioDTO userToDTO(Usuario usuario) {
+	public UsuarioDTO usuarioToDTO(Usuario usuario) {
 		UsuarioDTO dto = new UsuarioDTO();
 
 		dto.setNombre(usuario.getNombre());

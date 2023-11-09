@@ -7,15 +7,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import es.deusto.ingenieria.sd.auctions.server.data.domain.Article;
-import es.deusto.ingenieria.sd.auctions.server.data.domain.Category;
+import es.deusto.ingenieria.sd.auctions.server.data.domain.Reto;
+import es.deusto.ingenieria.sd.auctions.server.data.domain.SesionEntrenamiento;
 import es.deusto.ingenieria.sd.auctions.server.data.domain.Usuario;
-import es.deusto.ingenieria.sd.auctions.server.data.dto.ArticleAssembler;
-import es.deusto.ingenieria.sd.auctions.server.data.dto.ArticleDTO;
-import es.deusto.ingenieria.sd.auctions.server.data.dto.CategoryAssembler;
-import es.deusto.ingenieria.sd.auctions.server.data.dto.CategoryDTO;
+import es.deusto.ingenieria.sd.auctions.server.data.dto.RetoAssembler;
+import es.deusto.ingenieria.sd.auctions.server.data.dto.RetoDTO;
+import es.deusto.ingenieria.sd.auctions.server.data.dto.SesionEntrenamientoAssembler;
+import es.deusto.ingenieria.sd.auctions.server.data.dto.SesionEntrenamientoDTO;
 import es.deusto.ingenieria.sd.auctions.server.services.SesionesEntrenamientoAppService;
 import es.deusto.ingenieria.sd.auctions.server.services.AutenticacionAppService;
+import es.deusto.ingenieria.sd.auctions.server.services.RetosAppService;
 
 public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {	
 	private static final long serialVersionUID = 1L;
@@ -24,19 +25,22 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	private Map<Long, Usuario> serverState = new HashMap<>();
 	
 	//TODO: Remove this instances when Singleton Pattern is implemented
-	private AutenticacionAppService loginService = new AutenticacionAppService();
-	private SesionesEntrenamientoAppService bidService = new SesionesEntrenamientoAppService();
+	private AutenticacionAppService autenticacionService = new AutenticacionAppService();
+	private SesionesEntrenamientoAppService sesionesEntrenamientoAppService = new SesionesEntrenamientoAppService();
+	private RetosAppService retosAppService = new RetosAppService();
 
 	public RemoteFacade() throws RemoteException {
 		super();		
 	}
+	
+	// Métodos Autenticación
 	
 	@Override
 	public synchronized long login(String email, String password) throws RemoteException {
 		System.out.println(" * RemoteFacade login(): " + email + " / " + password);
 				
 		//Perform login() using LoginAppService
-		Usuario user = loginService.login(email, password);
+		Usuario user = autenticacionService.login(email, password);
 			
 		//If login() success user is stored in the Server State
 		if (user != null) {
@@ -64,6 +68,54 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 			throw new RemoteException("User is not logged in!");
 		}
 	}
+	
+	public long register() throws RemoteException; // TODO
+
+	// Métodos SesionEntrenamiento
+
+	public void crearSesionEntrenamiento() throws RemoteException; // TODO
+
+	public List<SesionEntrenamientoDTO> getSesionesEntrenamiento() throws RemoteException {
+		System.out.println(" * RemoteFacade getSesionesEntrenamiento()");
+		
+		//Get Categories using BidAppService
+		List<SesionEntrenamiento> sesiones = sesionesEntrenamientoAppService.getSesionesEntrenamiento();
+		
+		if (sesiones != null) {
+			//Convert domain object to DTO
+			return SesionEntrenamientoAssembler.getInstance().sesionEntrenamientoToDTO(sesiones);
+		} else {
+			throw new RemoteException("getSesionesEntrenamiento() fails!");
+		}
+	}
+
+	public void eliminarSesionEntrenamiento() throws RemoteException; // TODO
+
+	// Métodos Reto
+
+	public void crearReto() throws RemoteException; // TODO
+
+	public List<RetoDTO> getRetos() throws RemoteException {
+		System.out.println(" * RemoteFacade getRetos()");
+		
+		//Get Categories using BidAppService
+		List<Reto> retos = retosAppService.getRetos();
+		
+		if (retos != null) {
+			//Convert domain object to DTO
+			return RetoAssembler.getInstance().retoToDTO(retos);
+		} else {
+			throw new RemoteException("getRetos() fails!");
+		}
+	}
+
+	public void apuntarseReto() throws RemoteException; // TODO
+
+	public void desapuntarseReto() throws RemoteException; // TODO
+
+	public void eliminarReto() throws RemoteException; // TODO
+	
+	///////////////////// METODOS ANTIGUOS ////////////////////////
 	
 	@Override
 	public List<CategoryDTO> getCategories() throws RemoteException {

@@ -10,7 +10,7 @@ import es.deusto.ingenieria.sd.auctions.server.data.dto.SesionEntrenamientoDTO;
 //This interface defines the API of the Server. It represents the Remote Facade pattern
 public interface IRemoteFacade extends Remote {
 
-	// Métodos Login
+	// Métodos Autenticación
 
 	public long login(String email, String password) throws RemoteException;
 
