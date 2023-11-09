@@ -1,6 +1,8 @@
 package es.deusto.ingenieria.sd.auctions.server.services;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import es.deusto.ingenieria.sd.auctions.server.data.domain.Usuario;
 
@@ -8,6 +10,11 @@ import es.deusto.ingenieria.sd.auctions.server.data.domain.Usuario;
 public class AutenticacionAppService {
 
 	private static AutenticacionAppService instance;
+	private List<Usuario> usuarios = new ArrayList<Usuario>();
+	
+	public List<Usuario> getUsuarios() {
+		return usuarios;
+	}
 
 	public Usuario login(String email, String password) {
 		// TODO: Get User using DAO and check
@@ -24,6 +31,8 @@ public class AutenticacionAppService {
 			return null;
 		}
 	}
+
+	
 
 	public Usuario register(String nombre, String email, Date fechaNacimiento, float peso, float altura,
 			int frecuenciaCardiacaMax, int frecuenciaCardiacaReposo, String contrasena) {
