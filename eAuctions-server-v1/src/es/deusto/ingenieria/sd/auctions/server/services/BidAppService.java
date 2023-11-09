@@ -8,7 +8,7 @@ import java.util.List;
 import es.deusto.ingenieria.sd.auctions.server.data.domain.Article;
 import es.deusto.ingenieria.sd.auctions.server.data.domain.Bid;
 import es.deusto.ingenieria.sd.auctions.server.data.domain.Category;
-import es.deusto.ingenieria.sd.auctions.server.data.domain.User;
+import es.deusto.ingenieria.sd.auctions.server.data.domain.Usuario;
 
 //TODO: Implement Singleton Pattern
 public class BidAppService {
@@ -25,12 +25,12 @@ public class BidAppService {
 	//TODO: remove when DAO Pattern is implemented
 	private void initilizeData() {
 		//Create Users
-		User user0 = new User();
+		Usuario user0 = new Usuario();
 		user0.setEmail("thomas.e2001@gmail.com");
 		user0.setNickname("Thomas");
 		user0.setPassword("$!9PhNz,");
 		
-		User user1 = new User();
+		Usuario user1 = new Usuario();
 		user1.setEmail("sample@gmail.com");
 		user1.setNickname("buyer33");		
 		user1.setPassword("hqc`}3Hb");
@@ -104,7 +104,7 @@ public class BidAppService {
 		return null;
 	}
 
-	public boolean makeBid(User user, int number, float amount) {
+	public boolean makeBid(Usuario user, int number, float amount) {
 		//TODO: Find the artile using DAO Pattern
 		Article article = null;
 		

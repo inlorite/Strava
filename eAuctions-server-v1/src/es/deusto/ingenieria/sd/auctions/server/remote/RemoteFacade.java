@@ -9,7 +9,7 @@ import java.util.Map;
 
 import es.deusto.ingenieria.sd.auctions.server.data.domain.Article;
 import es.deusto.ingenieria.sd.auctions.server.data.domain.Category;
-import es.deusto.ingenieria.sd.auctions.server.data.domain.User;
+import es.deusto.ingenieria.sd.auctions.server.data.domain.Usuario;
 import es.deusto.ingenieria.sd.auctions.server.data.dto.ArticleAssembler;
 import es.deusto.ingenieria.sd.auctions.server.data.dto.ArticleDTO;
 import es.deusto.ingenieria.sd.auctions.server.data.dto.CategoryAssembler;
@@ -21,7 +21,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	private static final long serialVersionUID = 1L;
 
 	//Data structure for manage Server State
-	private Map<Long, User> serverState = new HashMap<>();
+	private Map<Long, Usuario> serverState = new HashMap<>();
 	
 	//TODO: Remove this instances when Singleton Pattern is implemented
 	private LoginAppService loginService = new LoginAppService();
@@ -36,7 +36,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		System.out.println(" * RemoteFacade login(): " + email + " / " + password);
 				
 		//Perform login() using LoginAppService
-		User user = loginService.login(email, password);
+		Usuario user = loginService.login(email, password);
 			
 		//If login() success user is stored in the Server State
 		if (user != null) {
