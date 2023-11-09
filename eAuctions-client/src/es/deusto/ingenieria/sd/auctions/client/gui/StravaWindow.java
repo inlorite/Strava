@@ -5,20 +5,20 @@ import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
 
-import es.deusto.ingenieria.sd.auctions.client.controller.BidController;
+import es.deusto.ingenieria.sd.auctions.client.controller.StravaController;
 import es.deusto.ingenieria.sd.auctions.server.data.dto.ArticleDTO;
 import es.deusto.ingenieria.sd.auctions.server.data.dto.CategoryDTO;
 
 //This clase simulates the GUI of the Bid use case
-public class BidWindow {
+public class StravaWindow {
 	
-	private BidController controller;
+	private StravaController controller;
 	
 	//This attributes are user for formatting currencies and dates
 	private static NumberFormat CURRENCY_FORMATTER = NumberFormat.getCurrencyInstance(Locale.getDefault());
 	private static DateFormat DATE_FORMATTER = DateFormat.getDateTimeInstance();
 	
-	public BidWindow(BidController bid) {
+	public StravaWindow(StravaController bid) {
 		this.controller = bid;
 	}
 

@@ -5,14 +5,14 @@ import java.rmi.RemoteException;
 import es.deusto.ingenieria.sd.auctions.client.remote.ServiceLocator;
 
 //This class implements Controller pattern.
-public class LoginController {	
+public class AutenticacionController {	
 	
 	//Reference to the Service Locator
 	private ServiceLocator serviceLocator;
 	//This attribute stores the token when login success
 	private long token = -1; //-1 = login has not been done or fails
 
-	public LoginController(ServiceLocator serviceLocator) {
+	public AutenticacionController(ServiceLocator serviceLocator) {
 		this.serviceLocator = serviceLocator;
 	}
 	

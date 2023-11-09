@@ -8,12 +8,12 @@ import es.deusto.ingenieria.sd.auctions.server.data.dto.ArticleDTO;
 import es.deusto.ingenieria.sd.auctions.server.data.dto.CategoryDTO;
 
 //This class implements Controller pattern.
-public class BidController {
+public class StravaController {
 	
 	//Reference to the Service Locator
 	private ServiceLocator serviceLocator;
 	
-	public BidController(ServiceLocator serviceLocator) {
+	public StravaController(ServiceLocator serviceLocator) {
 		this.serviceLocator = serviceLocator; 
 	}
 

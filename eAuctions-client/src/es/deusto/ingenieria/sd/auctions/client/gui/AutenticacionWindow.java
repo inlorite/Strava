@@ -1,13 +1,13 @@
 package es.deusto.ingenieria.sd.auctions.client.gui;
 
-import es.deusto.ingenieria.sd.auctions.client.controller.LoginController;
+import es.deusto.ingenieria.sd.auctions.client.controller.AutenticacionController;
 
-public class LoginDialog {	
-	private LoginController controller;	
+public class AutenticacionWindow {	
+	private AutenticacionController controller;	
 	private String email = "thomas.e2001@gmail.com";
 	private String password = "$!9PhNz,";
 
-	public LoginDialog(LoginController controller) {
+	public AutenticacionWindow(AutenticacionController controller) {
 		this.controller = controller;
 	}
 	
