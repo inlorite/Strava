@@ -20,21 +20,21 @@ public interface IRemoteFacade extends Remote {
 
 	// Métodos SesionEntrenamiento
 
-	public void crearSesionEntrenamiento() throws RemoteException; // TODO
+	public void crearSesionEntrenamiento(SesionEntrenamientoDTO sesionEntrenamientoDTO, long token) throws RemoteException; // TODO
 
-	public List<SesionEntrenamientoDTO> getSesionesEntrenamiento() throws RemoteException; // TODO
+	public List<SesionEntrenamientoDTO> getSesionesEntrenamiento(long token) throws RemoteException; // TODO
 
-	public void eliminarSesionEntrenamiento() throws RemoteException; // TODO
+	public void eliminarSesionEntrenamiento(SesionEntrenamientoDTO sesionEntrenamientoDTO, long token) throws RemoteException; // TODO
 
 	// Métodos Reto
 
-	public void crearReto() throws RemoteException; // TODO
+	public void crearReto(RetoDTO retoDTO, long token) throws RemoteException; // TODO
 
 	public List<RetoDTO> getRetos() throws RemoteException; // TODO
 
-	public void apuntarseReto() throws RemoteException; // TODO
+	public void apuntarseReto(RetoDTO retoDTO, long token) throws RemoteException; // TODO
 
-	public void desapuntarseReto() throws RemoteException; // TODO
+	public void desapuntarseReto(RetoDTO retoDTO, long token) throws RemoteException; // TODO
 
-	public void eliminarReto() throws RemoteException; // TODO
+	public void eliminarReto(RetoDTO retoDTO, long token) throws RemoteException; // TODO
 }

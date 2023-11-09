@@ -27,4 +27,16 @@ public class SesionEntrenamientoAssembler {
 
 		return dto;
 	}
+
+	public SesionEntrenamiento dtoToSesionEntrenamiento(SesionEntrenamientoDTO dto) {
+		SesionEntrenamiento sesionEntrenamiento = new SesionEntrenamiento();
+
+		sesionEntrenamiento.setTitulo(dto.getTitulo());
+		sesionEntrenamiento.setDistancia(dto.getDistancia());
+		sesionEntrenamiento.setFechaInicio(dto.getFechaInicio());
+		sesionEntrenamiento.setHoraInicio(dto.getHoraInicio());
+		sesionEntrenamiento.setDuracion(dto.getDuracion());
+
+		return sesionEntrenamiento;
+	}
 }

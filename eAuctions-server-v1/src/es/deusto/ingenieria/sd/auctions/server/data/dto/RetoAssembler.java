@@ -28,4 +28,17 @@ public class RetoAssembler {
 
 		return dto;
 	}
+	
+	public Reto dtoToReto(RetoDTO dto) {
+		Reto reto = new Reto();
+
+		reto.setDistancia(dto.getDistancia());
+		reto.setFechaFin(dto.getFechaFin());
+		reto.setFechaInicio(dto.getFechaInicio());
+		reto.setNombre(dto.getNombre());
+		reto.setTiempo(dto.getTiempo());
+		reto.setCreador(dto.getCreador());
+
+		return reto;
+	}
 }

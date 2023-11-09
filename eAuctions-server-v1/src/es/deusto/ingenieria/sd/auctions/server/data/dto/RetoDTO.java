@@ -13,7 +13,7 @@ public class RetoDTO implements Serializable {
 	private Date fechaFin;
 	private float distancia;
 	private float tiempo;
-	private UsuarioDTO creador;
+	private String creador;
 
 	public String getNombre() {
 		return nombre;
@@ -55,11 +55,11 @@ public class RetoDTO implements Serializable {
 		this.tiempo = tiempo;
 	}
 	
-	public UsuarioDTO getCreador() {
+	public String getCreador() {
 		return creador;
 	}
 
-	public void setCreador(UsuarioDTO creador) {
+	public void setCreador(String creador) {
 		this.creador = creador;
 	}
 
