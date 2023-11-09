@@ -8,6 +8,7 @@ import java.util.List;
 import es.deusto.ingenieria.sd.auctions.server.data.domain.Article;
 import es.deusto.ingenieria.sd.auctions.server.data.domain.Bid;
 import es.deusto.ingenieria.sd.auctions.server.data.domain.Category;
+import es.deusto.ingenieria.sd.auctions.server.data.domain.SesionEntrenamiento;
 import es.deusto.ingenieria.sd.auctions.server.data.domain.Usuario;
 
 //TODO: Implement Singleton Pattern
@@ -87,6 +88,19 @@ public class SesionesEntrenamientoAppService {
 		this.articles.add(xiaomi);
 	}
 	
+	/////////////////////// METODOS PUBLICOS ///////////////////////
+	
+	public boolean crearSesionEntrenamiento(Usuario usuario, SesionEntrenamiento sesionEntrenamiento) {
+		// TODO
+	}
+	
+	public List<SesionEntrenamiento> getSesionesEntrenamiento(String usuario) {
+		// TODO
+	}
+	
+	public boolean eliminarSesionEntrenamiento(String usuario, String sesionEntrenamiento) {
+		// TODO
+	}
 	
 	public List<Category> getCategories() {
 		//TODO: Get all the categories using DAO Pattern		

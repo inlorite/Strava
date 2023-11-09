@@ -88,7 +88,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		}
 
 		// Create SesionEntrenamiento using SesionesEntrenamientoAppService
-		sesionesEntrenamientoAppService.crearSesionEntrenamiento(sesionEntrenamiento.getTitulo(), this.serverState.get(token).getNombre());
+		sesionesEntrenamientoAppService.crearSesionEntrenamiento(this.serverState.get(token), sesionEntrenamiento);
 	}
 
 	public List<SesionEntrenamientoDTO> getSesionesEntrenamiento(long token) throws RemoteException {
@@ -144,7 +144,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		}
 
 		// Create Reto using RetosAppService
-		retosAppService.crearReto(reto.getNombre(), this.serverState.get(token).getNombre());
+		retosAppService.crearReto(reto);
 	}
 
 	public List<RetoDTO> getRetos() throws RemoteException {
@@ -174,7 +174,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		}
 
 		// Apuntarse Reto using RetosAppService
-		retosAppService.apuntarseReto(reto.getNombre(), this.serverState.get(token).getNombre());
+		retosAppService.apuntarseReto(this.serverState.get(token).getNombre(), reto.getNombre());
 	}
 
 	public void desapuntarseReto(RetoDTO retoDTO, long token) throws RemoteException {
@@ -190,7 +190,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		}
 
 		// Desapuntarse Reto using RetosAppService
-		retosAppService.desapuntarseReto(reto.getNombre(), this.serverState.get(token).getNombre());
+		retosAppService.desapuntarseReto(this.serverState.get(token).getNombre(), reto.getNombre());
 	}
 
 	public void eliminarReto(RetoDTO retoDTO, long token) throws RemoteException {

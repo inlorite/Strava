@@ -31,7 +31,7 @@ public class RetosAppService {
 		return this.retos;
 	}
 
-	public boolean crearRetos(Reto reto) {
+	public boolean crearReto(Reto reto) {
 		
 		if(!this.retos.contains(reto)) {
 			this.retos.add(reto);
