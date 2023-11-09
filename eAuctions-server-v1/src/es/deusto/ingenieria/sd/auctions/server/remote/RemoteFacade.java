@@ -88,7 +88,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		}
 
 		// Create SesionEntrenamiento using SesionesEntrenamientoAppService
-		sesionesEntrenamientoAppService.crearSesionEntrenamiento(sesionEntrenamiento, this.serverState.get(token));
+		sesionesEntrenamientoAppService.crearSesionEntrenamiento(sesionEntrenamiento.getTitulo(), this.serverState.get(token).getNombre());
 	}
 
 	public List<SesionEntrenamientoDTO> getSesionesEntrenamiento(long token) throws RemoteException {
@@ -98,7 +98,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 
 		// Get SesionEntrenamiento using SesionesEntrenamientoAppService
 		if (this.serverState.containsKey(token)) {
-			sesiones = sesionesEntrenamientoAppService.getSesionesEntrenamiento(this.serverState.get(token));
+			sesiones = sesionesEntrenamientoAppService.getSesionesEntrenamiento(this.serverState.get(token).getNombre());
 		} else {
 			throw new RemoteException("getSesionesEntrenamiento() fails!");
 		}
@@ -126,7 +126,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		}
 
 		// Delete SesionEntrenamiento using SesionesEntrenamientoAppService
-		sesionesEntrenamientoAppService.eliminarSesionEntrenamiento(sesionEntrenamiento, this.serverState.get(token));
+		sesionesEntrenamientoAppService.eliminarSesionEntrenamiento(sesionEntrenamiento.getTitulo(), this.serverState.get(token).getNombre());
 	}
 
 	/////////////////////// METODOS RETO ///////////////////////
@@ -138,13 +138,13 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 
 		if (retoDTO != null && this.serverState.containsKey(token)) {
 			// Convert domain object to DTO
-			reto = SesionEntrenamientoAssembler.getInstance().dtoToReto(retoDTO);
+			reto = RetoAssembler.getInstance().dtoToReto(retoDTO);
 		} else {
 			throw new RemoteException("crearReto() fails!");
 		}
 
 		// Create Reto using RetosAppService
-		retosAppService.crearReto(reto, this.serverState.get(token));
+		retosAppService.crearReto(reto.getNombre(), this.serverState.get(token).getNombre());
 	}
 
 	public List<RetoDTO> getRetos() throws RemoteException {
@@ -168,13 +168,13 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 
 		if (retoDTO != null && this.serverState.containsKey(token)) {
 			// Convert domain object to DTO
-			reto = SesionEntrenamientoAssembler.getInstance().dtoToReto(retoDTO);
+			reto = RetoAssembler.getInstance().dtoToReto(retoDTO);
 		} else {
 			throw new RemoteException("apuntarseReto() fails!");
 		}
 
 		// Apuntarse Reto using RetosAppService
-		retosAppService.apuntarseReto(reto, this.serverState.get(token));
+		retosAppService.apuntarseReto(reto.getNombre(), this.serverState.get(token).getNombre());
 	}
 
 	public void desapuntarseReto(RetoDTO retoDTO, long token) throws RemoteException {
@@ -184,13 +184,13 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 
 		if (retoDTO != null && this.serverState.containsKey(token)) {
 			// Convert domain object to DTO
-			reto = SesionEntrenamientoAssembler.getInstance().dtoToReto(retoDTO);
+			reto = RetoAssembler.getInstance().dtoToReto(retoDTO);
 		} else {
 			throw new RemoteException("desapuntarseReto() fails!");
 		}
 
 		// Desapuntarse Reto using RetosAppService
-		retosAppService.desapuntarseReto(reto, this.serverState.get(token));
+		retosAppService.desapuntarseReto(reto.getNombre(), this.serverState.get(token).getNombre());
 	}
 
 	public void eliminarReto(RetoDTO retoDTO, long token) throws RemoteException {
@@ -200,13 +200,13 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 
 		if (retoDTO != null && this.serverState.containsKey(token)) {
 			// Convert domain object to DTO
-			reto = SesionEntrenamientoAssembler.getInstance().dtoToReto(retoDTO);
+			reto = RetoAssembler.getInstance().dtoToReto(retoDTO);
 		} else {
 			throw new RemoteException("eliminarReto() fails!");
 		}
 
 		// Delete Reto using RetosAppService
-		retosAppService.eliminarReto(reto, this.serverState.get(token));
+		retosAppService.eliminarReto(reto.getNombre(), this.serverState.get(token).getNombre());
 	}
 
 	///////////////////// METODOS ANTIGUOS ////////////////////////
