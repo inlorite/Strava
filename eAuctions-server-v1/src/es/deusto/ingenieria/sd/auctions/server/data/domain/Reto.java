@@ -1,6 +1,7 @@
 package es.deusto.ingenieria.sd.auctions.server.data.domain;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 public class Reto {
@@ -10,6 +11,15 @@ public class Reto {
 	private float distancia;
 	private float tiempo;
 	private Usuario creador;
+	private List<Usuario> participantes;
+
+	public List<Usuario> getParticipantes() {
+		return participantes;
+	}
+
+	public void setParticipantes(List<Usuario> participantes) {
+		this.participantes = participantes;
+	}
 
 	public String getNombre() {
 		return nombre;
