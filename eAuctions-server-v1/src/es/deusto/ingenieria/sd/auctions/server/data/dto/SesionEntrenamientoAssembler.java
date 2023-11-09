@@ -16,7 +16,7 @@ public class SesionEntrenamientoAssembler {
 		return instance;
 	}
 
-	public SesionEntrenamientoDTO SesionEntrenamientoToDTO(SesionEntrenamiento sesionEntrenamiento) {
+	public SesionEntrenamientoDTO sesionEntrenamientoToDTO(SesionEntrenamiento sesionEntrenamiento) {
 		SesionEntrenamientoDTO dto = new SesionEntrenamientoDTO();
 
 		dto.setTitulo(sesionEntrenamiento.getTitulo());
