@@ -14,8 +14,8 @@ import es.deusto.ingenieria.sd.auctions.server.data.dto.ArticleAssembler;
 import es.deusto.ingenieria.sd.auctions.server.data.dto.ArticleDTO;
 import es.deusto.ingenieria.sd.auctions.server.data.dto.CategoryAssembler;
 import es.deusto.ingenieria.sd.auctions.server.data.dto.CategoryDTO;
-import es.deusto.ingenieria.sd.auctions.server.services.BidAppService;
-import es.deusto.ingenieria.sd.auctions.server.services.LoginAppService;
+import es.deusto.ingenieria.sd.auctions.server.services.SesionesEntrenamientoAppService;
+import es.deusto.ingenieria.sd.auctions.server.services.AutenticacionAppService;
 
 public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {	
 	private static final long serialVersionUID = 1L;
@@ -24,8 +24,8 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	private Map<Long, Usuario> serverState = new HashMap<>();
 	
 	//TODO: Remove this instances when Singleton Pattern is implemented
-	private LoginAppService loginService = new LoginAppService();
-	private BidAppService bidService = new BidAppService();
+	private AutenticacionAppService loginService = new AutenticacionAppService();
+	private SesionesEntrenamientoAppService bidService = new SesionesEntrenamientoAppService();
 
 	public RemoteFacade() throws RemoteException {
 		super();		

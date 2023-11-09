@@ -3,7 +3,7 @@ package es.deusto.ingenieria.sd.auctions.server.services;
 import es.deusto.ingenieria.sd.auctions.server.data.domain.Usuario;
 
 //TODO: Implement Singleton Pattern
-public class LoginAppService {
+public class AutenticacionAppService {
 		
 	public Usuario login(String email, String password) {
 		//TODO: Get User using DAO and check 		

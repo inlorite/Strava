@@ -11,13 +11,13 @@ import es.deusto.ingenieria.sd.auctions.server.data.domain.Category;
 import es.deusto.ingenieria.sd.auctions.server.data.domain.Usuario;
 
 //TODO: Implement Singleton Pattern
-public class BidAppService {
+public class SesionesEntrenamientoAppService {
 	
 	//TODO: remove when DAO Pattern is implemented
 	private List<Category> categories = new ArrayList<>();
 	private List<Article> articles = new ArrayList<>();
 	
-	public BidAppService() {
+	public SesionesEntrenamientoAppService() {
 		//TODO: remove when DAO Pattern is implemented
 		this.initilizeData();
 	}
