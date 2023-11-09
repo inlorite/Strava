@@ -31,7 +31,7 @@ public class RetosAppService {
 		return this.retos;
 	}
 
-	public void crearRetos(String nombre, Date fechaInicio, Date fechaFin, float distancia, float tiempo, Usuario usuario) {
+	public boolean crearRetos(String nombre, Date fechaInicio, Date fechaFin, float distancia, float tiempo, Usuario usuario) {
 		Reto reto = new Reto();
 		reto.setNombre(nombre);
 		reto.setFechaInicio(fechaInicio);
@@ -39,6 +39,12 @@ public class RetosAppService {
 		reto.setDistancia(distancia);
 		reto.setTiempo(tiempo);
 		reto.setCreador(usuario);
+		if(!this.retos.contains(reto)) {
+			this.retos.add(reto);
+			return false;
+		} else {
+			return true;
+		}
 	}
 	
 	public boolean apuntarseReto(Reto reto, Usuario usuario) {
@@ -47,6 +53,24 @@ public class RetosAppService {
 		} else {
 			reto.getParticipantes().add(usuario);
 			return true;
+		}
+	}
+	
+	public boolean desapuntarseReto(Reto reto, Usuario usuario) {
+		if (reto.getParticipantes().contains(usuario)) {
+			reto.getParticipantes().remove(usuario);
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean eliminarReto(Reto reto) {
+		if (this.retos.contains(reto)) {
+			this.retos.remove(reto);
+			return true;
+		} else {
+			return false;
 		}
 	}
 	
