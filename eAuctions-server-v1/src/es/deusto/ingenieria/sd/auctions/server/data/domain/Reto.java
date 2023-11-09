@@ -9,6 +9,7 @@ public class Reto {
 	private Date fechaFin;
 	private float distancia;
 	private float tiempo;
+	private Usuario creador;
 
 	public String getNombre() {
 		return nombre;
@@ -50,9 +51,17 @@ public class Reto {
 		this.tiempo = tiempo;
 	}
 
+	public Usuario getCreador() {
+		return creador;
+	}
+
+	public void setCreador(Usuario creador) {
+		this.creador = creador;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(distancia, fechaFin, fechaInicio, nombre, tiempo);
+		return Objects.hash(creador, distancia, fechaFin, fechaInicio, nombre, tiempo);
 	}
 
 	@Override
@@ -64,7 +73,8 @@ public class Reto {
 		if (getClass() != obj.getClass())
 			return false;
 		Reto other = (Reto) obj;
-		return Float.floatToIntBits(distancia) == Float.floatToIntBits(other.distancia)
+		return Objects.equals(creador, other.creador)
+				&& Float.floatToIntBits(distancia) == Float.floatToIntBits(other.distancia)
 				&& Objects.equals(fechaFin, other.fechaFin) && Objects.equals(fechaInicio, other.fechaInicio)
 				&& Objects.equals(nombre, other.nombre)
 				&& Float.floatToIntBits(tiempo) == Float.floatToIntBits(other.tiempo);
@@ -73,7 +83,7 @@ public class Reto {
 	@Override
 	public String toString() {
 		return "Reto [nombre=" + nombre + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", distancia="
-				+ distancia + ", tiempo=" + tiempo + "]";
+				+ distancia + ", tiempo=" + tiempo + ", creador=" + creador + "]";
 	}
 
 }

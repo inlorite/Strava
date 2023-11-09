@@ -3,6 +3,8 @@ package es.deusto.ingenieria.sd.auctions.server.data.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import es.deusto.ingenieria.sd.auctions.server.data.domain.Usuario;
+
 public class RetoDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -11,6 +13,7 @@ public class RetoDTO implements Serializable {
 	private Date fechaFin;
 	private float distancia;
 	private float tiempo;
+	private UsuarioDTO creador;
 
 	public String getNombre() {
 		return nombre;
@@ -50,6 +53,14 @@ public class RetoDTO implements Serializable {
 
 	public void setTiempo(float tiempo) {
 		this.tiempo = tiempo;
+	}
+	
+	public UsuarioDTO getCreador() {
+		return creador;
+	}
+
+	public void setCreador(UsuarioDTO creador) {
+		this.creador = creador;
 	}
 
 	public static long getSerialversionuid() {
