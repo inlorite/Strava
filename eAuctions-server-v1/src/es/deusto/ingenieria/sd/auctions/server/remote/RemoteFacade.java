@@ -18,37 +18,37 @@ import es.deusto.ingenieria.sd.auctions.server.services.SesionesEntrenamientoApp
 import es.deusto.ingenieria.sd.auctions.server.services.AutenticacionAppService;
 import es.deusto.ingenieria.sd.auctions.server.services.RetosAppService;
 
-public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {	
+public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	private static final long serialVersionUID = 1L;
 
-	//Data structure for manage Server State
+	// Data structure for manage Server State
 	private Map<Long, Usuario> serverState = new HashMap<>();
-	
-	//TODO: Remove this instances when Singleton Pattern is implemented
+
+	// TODO: Remove this instances when Singleton Pattern is implemented
 	private AutenticacionAppService autenticacionService = new AutenticacionAppService();
 	private SesionesEntrenamientoAppService sesionesEntrenamientoAppService = new SesionesEntrenamientoAppService();
 	private RetosAppService retosAppService = new RetosAppService();
 
 	public RemoteFacade() throws RemoteException {
-		super();		
+		super();
 	}
-	
+
 	// Métodos Autenticación
-	
+
 	@Override
 	public synchronized long login(String email, String password) throws RemoteException {
 		System.out.println(" * RemoteFacade login(): " + email + " / " + password);
-				
-		//Perform login() using LoginAppService
+
+		// Perform login() using LoginAppService
 		Usuario user = autenticacionService.login(email, password);
-			
-		//If login() success user is stored in the Server State
+
+		// If login() success user is stored in the Server State
 		if (user != null) {
-			//If user is not logged in 
+			// If user is not logged in
 			if (!this.serverState.values().contains(user)) {
-				Long token = Calendar.getInstance().getTimeInMillis();		
-				this.serverState.put(token, user);		
-				return(token);
+				Long token = Calendar.getInstance().getTimeInMillis();
+				this.serverState.put(token, user);
+				return (token);
 			} else {
 				throw new RemoteException("User is already logged in!");
 			}
@@ -56,76 +56,150 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 			throw new RemoteException("Login fails!");
 		}
 	}
-	
+
 	@Override
 	public synchronized void logout(long token) throws RemoteException {
 		System.out.println(" * RemoteFacade logout(): " + token);
-		
+
 		if (this.serverState.containsKey(token)) {
-			//Logout means remove the User from Server State
+			// Logout means remove the User from Server State
 			this.serverState.remove(token);
 		} else {
 			throw new RemoteException("User is not logged in!");
 		}
 	}
-	
+
 	public long register() throws RemoteException; // TODO
 
 	// Métodos SesionEntrenamiento
 
-	public void crearSesionEntrenamiento() throws RemoteException; // TODO
+	public void crearSesionEntrenamiento(SesionEntrenamientoDTO sesionEntrenamientoDTO) throws RemoteException {
+		System.out.println(" * RemoteFacade crearSesionEntrenamiento()");
+
+		if (sesionEntrenamientoDTO != null) {
+			// Convert domain object to DTO
+			SesionEntrenamiento sesionEntrenamiento = SesionEntrenamientoAssembler.getInstance()
+					.dtoToSesionEntrenamiento(sesionEntrenamientoDTO);
+		} else {
+			throw new RemoteException("crearSesionEntrenamiento() fails!");
+		}
+
+		// Create SesionEntrenamiento using SesionesEntrenamientoAppService
+		sesionesEntrenamientoAppService.crearSesionEntrenamiento(sesionEntrenamiento);
+	}
 
 	public List<SesionEntrenamientoDTO> getSesionesEntrenamiento() throws RemoteException {
 		System.out.println(" * RemoteFacade getSesionesEntrenamiento()");
-		
-		//Get Categories using BidAppService
+
+		// Get SesionEntrenamiento using SesionesEntrenamientoAppService
 		List<SesionEntrenamiento> sesiones = sesionesEntrenamientoAppService.getSesionesEntrenamiento();
-		
+
 		if (sesiones != null) {
-			//Convert domain object to DTO
+			// Convert domain object to DTO
 			return SesionEntrenamientoAssembler.getInstance().sesionEntrenamientoToDTO(sesiones);
 		} else {
 			throw new RemoteException("getSesionesEntrenamiento() fails!");
 		}
 	}
 
-	public void eliminarSesionEntrenamiento() throws RemoteException; // TODO
+	public void eliminarSesionEntrenamiento(SesionEntrenamientoDTO sesionEntrenamientoDTO) throws RemoteException {
+		System.out.println(" * RemoteFacade eliminarSesionEntrenamiento()");
+
+		if (sesionEntrenamientoDTO != null) {
+			// Convert domain object to DTO
+			SesionEntrenamiento sesionEntrenamiento = SesionEntrenamientoAssembler.getInstance()
+					.dtoToSesionEntrenamiento(sesionEntrenamientoDTO);
+		} else {
+			throw new RemoteException("eliminarSesionEntrenamiento() fails!");
+		}
+
+		// Delete SesionEntrenamiento using SesionesEntrenamientoAppService
+		sesionesEntrenamientoAppService.eliminarSesionEntrenamiento(sesionEntrenamiento);
+	}
 
 	// Métodos Reto
 
-	public void crearReto() throws RemoteException; // TODO
+	public void crearReto(RetoDTO retoDTO) throws RemoteException {
+		System.out.println(" * RemoteFacade crearReto()");
+
+		if (retoDTO != null) {
+			// Convert domain object to DTO
+			Reto reto = SesionEntrenamientoAssembler.getInstance().dtoToReto(retoDTO);
+		} else {
+			throw new RemoteException("crearReto() fails!");
+		}
+
+		// Create Reto using RetosAppService
+		retosAppService.crearReto(reto);
+	}
 
 	public List<RetoDTO> getRetos() throws RemoteException {
 		System.out.println(" * RemoteFacade getRetos()");
-		
-		//Get Categories using BidAppService
+
+		// Get Reto using RetosAppService
 		List<Reto> retos = retosAppService.getRetos();
-		
+
 		if (retos != null) {
-			//Convert domain object to DTO
+			// Convert domain object to DTO
 			return RetoAssembler.getInstance().retoToDTO(retos);
 		} else {
 			throw new RemoteException("getRetos() fails!");
 		}
 	}
 
-	public void apuntarseReto() throws RemoteException; // TODO
+	public void apuntarseReto(RetoDTO retoDTO, long token) throws RemoteException {
+		System.out.println(" * RemoteFacade apuntarseReto()");
 
-	public void desapuntarseReto() throws RemoteException; // TODO
+		if (retoDTO != null) {
+			// Convert domain object to DTO
+			Reto reto = SesionEntrenamientoAssembler.getInstance().dtoToReto(retoDTO);
+		} else {
+			throw new RemoteException("apuntarseReto() fails!");
+		}
 
-	public void eliminarReto() throws RemoteException; // TODO
-	
+		// Apuntarse Reto using RetosAppService
+		retosAppService.apuntarseReto(reto, this.serverState.get(token));
+	}
+
+	public void desapuntarseReto(RetoDTO retoDTO, long token) throws RemoteException {
+		System.out.println(" * RemoteFacade desapuntarseReto()");
+
+		if (retoDTO != null) {
+			// Convert domain object to DTO
+			Reto reto = SesionEntrenamientoAssembler.getInstance().dtoToReto(retoDTO);
+		} else {
+			throw new RemoteException("desapuntarseReto() fails!");
+		}
+
+		// Desapuntarse Reto using RetosAppService
+		retosAppService.desapuntarseReto(reto, this.serverState.get(token));
+	}
+
+	public void eliminarReto(RetoDTO retoDTO) throws RemoteException {
+		System.out.println(" * RemoteFacade eliminarReto()");
+
+		if (retoDTO != null) {
+			// Convert domain object to DTO
+			Reto reto = SesionEntrenamientoAssembler.getInstance().dtoToReto(retoDTO);
+		} else {
+			throw new RemoteException("eliminarReto() fails!");
+		}
+
+		// Delete Reto using RetosAppService
+		retosAppService.eliminarReto(reto);
+	}
+
 	///////////////////// METODOS ANTIGUOS ////////////////////////
-	
+
 	@Override
 	public List<CategoryDTO> getCategories() throws RemoteException {
 		System.out.println(" * RemoteFacade getCategories()");
-		
-		//Get Categories using BidAppService
-		List<Category> categories = bidService.getCategories();
-		
+
+		// Get Categories using BidAppService
+		List<Category> categories = sesionesEntrenamientoAppService.getCategories();
+
 		if (categories != null) {
-			//Convert domain object to DTO
+			// Convert domain object to DTO
 			return CategoryAssembler.getInstance().categoryToDTO(categories);
 		} else {
 			throw new RemoteException("getCategories() fails!");
@@ -136,24 +210,24 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	public List<ArticleDTO> getArticles(String category) throws RemoteException {
 		System.out.println(" * RemoteFacade getArticle('" + category + "')");
 
-		//Get Articles using BidAppService
-		List<Article> articles = bidService.getArticles(category);
-		
+		// Get Articles using BidAppService
+		List<Article> articles = sesionesEntrenamientoAppService.getArticles(category);
+
 		if (articles != null) {
-			//Convert domain object to DTO
+			// Convert domain object to DTO
 			return ArticleAssembler.getInstance().articleToDTO(articles);
 		} else {
 			throw new RemoteException("getArticles() fails!");
 		}
 	}
-	
+
 	@Override
-	public boolean makeBid(long token, int article, float amount) throws RemoteException {		
+	public boolean makeBid(long token, int article, float amount) throws RemoteException {
 		System.out.println(" * RemoteFacade makeBid article : " + article + " / amount " + amount);
-		
-		if (this.serverState.containsKey(token)) {						
-			//Make the bid using Bid Application Service
-			if (bidService.makeBid(this.serverState.get(token), article, amount)) {
+
+		if (this.serverState.containsKey(token)) {
+			// Make the bid using Bid Application Service
+			if (sesionesEntrenamientoAppService.makeBid(this.serverState.get(token), article, amount)) {
 				return true;
 			} else {
 				throw new RemoteException("makeBid() fails!");
@@ -167,9 +241,9 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	public float getUSDRate() throws RemoteException {
 		System.out.println(" * RemoteFacade get USD rate");
 
-		//Get rate using BidAppService
-		float rate = bidService.getUSDRate();
-		
+		// Get rate using BidAppService
+		float rate = sesionesEntrenamientoAppService.getUSDRate();
+
 		if (rate != -1) {
 			return rate;
 		} else {
@@ -180,10 +254,10 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	@Override
 	public float getGBPRate() throws RemoteException {
 		System.out.println(" * RemoteFacade get GBP rate");
-		
-		//Get rate using BidAppService
-		float rate = bidService.getGBPRate();
-		
+
+		// Get rate using BidAppService
+		float rate = sesionesEntrenamientoAppService.getGBPRate();
+
 		if (rate != -1) {
 			return rate;
 		} else {
