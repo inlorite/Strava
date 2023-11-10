@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import es.deusto.ingenieria.sd.auctions.server.data.domain.Reto;
 import es.deusto.ingenieria.sd.auctions.server.data.domain.SesionEntrenamiento;
@@ -14,6 +15,8 @@ import es.deusto.ingenieria.sd.auctions.server.data.dto.RetoAssembler;
 import es.deusto.ingenieria.sd.auctions.server.data.dto.RetoDTO;
 import es.deusto.ingenieria.sd.auctions.server.data.dto.SesionEntrenamientoAssembler;
 import es.deusto.ingenieria.sd.auctions.server.data.dto.SesionEntrenamientoDTO;
+import es.deusto.ingenieria.sd.auctions.server.data.dto.UsuarioRegisterAssembler;
+import es.deusto.ingenieria.sd.auctions.server.data.dto.UsuarioRegisterDTO;
 import es.deusto.ingenieria.sd.auctions.server.services.SesionesEntrenamientoAppService;
 import es.deusto.ingenieria.sd.auctions.server.services.AutenticacionAppService;
 import es.deusto.ingenieria.sd.auctions.server.services.RetosAppService;
@@ -25,7 +28,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	private Map<Long, Usuario> serverState = new HashMap<>();
 
 	// TODO: Remove this instances when Singleton Pattern is implemented
-	private AutenticacionAppService autenticacionService = new AutenticacionAppService();
+	private AutenticacionAppService autenticacionAppService = new AutenticacionAppService();
 	private SesionesEntrenamientoAppService sesionesEntrenamientoAppService = new SesionesEntrenamientoAppService();
 	private RetosAppService retosAppService = new RetosAppService();
 
@@ -40,7 +43,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		System.out.println(" * RemoteFacade login(): " + email + " / " + password);
 
 		// Perform login() using LoginAppService
-		Usuario user = autenticacionService.login(email, password);
+		Usuario user = autenticacionAppService.login(email, password);
 
 		// If login() success user is stored in the Server State
 		if (user != null) {
@@ -69,7 +72,26 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		}
 	}
 
-	public long register() throws RemoteException; // TODO
+	public long register(UsuarioRegisterDTO usuarioRegisterDTO) throws RemoteException {
+		System.out.println(" * RemoteFacade register(): " + usuarioRegisterDTO.getNombre());
+		
+		Usuario usuario;
+		
+		if (usuarioRegisterDTO != null) {
+			usuario = UsuarioRegisterAssembler.getInstance().dtoToUsuario(usuarioRegisterDTO);
+		} else
+			throw new RemoteException("Could not register the user!");
+		
+		if (autenticacionAppService.register(usuario)) {
+			try {
+				return login(usuario.getEmail(), usuario.getContrasena());
+			} catch (RemoteException ex) {
+				throw ex;
+			}
+		}
+		else
+			throw new RemoteException("Could not login the user!");
+	}
 
 	/////////////////////// METODOS SESIONENTRENAMIENTO ///////////////////////
 
@@ -98,14 +120,16 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 
 		// Get SesionEntrenamiento using SesionesEntrenamientoAppService
 		if (this.serverState.containsKey(token)) {
-			sesiones = sesionesEntrenamientoAppService.getSesionesEntrenamiento(this.serverState.get(token).getNombre());
+			sesiones = sesionesEntrenamientoAppService
+					.getSesionesEntrenamiento(this.serverState.get(token).getNombre());
 		} else {
 			throw new RemoteException("getSesionesEntrenamiento() fails!");
 		}
 
 		if (sesiones != null && this.serverState.containsKey(token)) {
 			// Convert domain object to DTO
-			return SesionEntrenamientoAssembler.getInstance().sesionEntrenamientoToDTO(sesiones);
+			return sesiones.stream().map(e -> SesionEntrenamientoAssembler.getInstance().sesionEntrenamientoToDTO(e))
+					.collect(Collectors.toList());
 		} else {
 			throw new RemoteException("getSesionesEntrenamiento() fails!");
 		}
@@ -126,7 +150,8 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		}
 
 		// Delete SesionEntrenamiento using SesionesEntrenamientoAppService
-		sesionesEntrenamientoAppService.eliminarSesionEntrenamiento(sesionEntrenamiento.getTitulo(), this.serverState.get(token).getNombre());
+		sesionesEntrenamientoAppService.eliminarSesionEntrenamiento(sesionEntrenamiento.getTitulo(),
+				this.serverState.get(token).getNombre());
 	}
 
 	/////////////////////// METODOS RETO ///////////////////////
@@ -155,7 +180,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 
 		if (retos != null) {
 			// Convert domain object to DTO
-			return RetoAssembler.getInstance().retoToDTO(retos);
+			return retos.stream().map(e -> RetoAssembler.getInstance().retoToDTO(e)).collect(Collectors.toList());
 		} else {
 			throw new RemoteException("getRetos() fails!");
 		}
@@ -206,7 +231,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		}
 
 		// Delete Reto using RetosAppService
-		retosAppService.eliminarReto(reto.getNombre(), this.serverState.get(token).getNombre());
+		retosAppService.eliminarReto(reto.getNombre());
 	}
 
 	///////////////////// METODOS ANTIGUOS ////////////////////////
