@@ -39,12 +39,12 @@ public class SesionesEntrenamientoAppService {
 
 	}
 
-	public List<SesionEntrenamiento> getSesionesEntrenamiento(String usuario) {
-		// TODO
+	public List<SesionEntrenamiento> getSesionesEntrenamiento() {
+		return sesionesEntrenamiento;
 	}
-
-	public boolean eliminarSesionEntrenamiento(String usuario, String sesionEntrenamiento) {
-		// TODO
+	
+	public List<SesionEntrenamiento> getSesionesEntrenamiento(Usuario usuario) {
+		return usuario.getSesionesEntrenamiento();
 	}
 
 	public List<Category> getCategories() {
