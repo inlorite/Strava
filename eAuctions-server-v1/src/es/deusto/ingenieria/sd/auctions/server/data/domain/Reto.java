@@ -10,7 +10,7 @@ public class Reto {
 	private Date fechaFin;
 	private float distancia;
 	private float tiempo;
-	private Usuario creador;
+	private String creador;
 	private List<Usuario> participantes;
 
 	public List<Usuario> getParticipantes() {
@@ -61,11 +61,11 @@ public class Reto {
 		this.tiempo = tiempo;
 	}
 
-	public Usuario getCreador() {
+	public String getCreador() {
 		return creador;
 	}
 
-	public void setCreador(Usuario creador) {
+	public void setCreador(String creador) {
 		this.creador = creador;
 	}
 
