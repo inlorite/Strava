@@ -95,7 +95,7 @@ public class Usuario {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(email);
+		return Objects.hash(email, nombre);
 	}
 
 	@Override
@@ -107,7 +107,7 @@ public class Usuario {
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		return Objects.equals(email, other.email);
+		return Objects.equals(email, other.email) && Objects.equals(nombre, other.nombre);
 	}
 
 	@Override

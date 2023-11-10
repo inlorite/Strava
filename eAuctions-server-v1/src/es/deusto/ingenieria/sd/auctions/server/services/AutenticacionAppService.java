@@ -11,48 +11,34 @@ public class AutenticacionAppService {
 
 	private static AutenticacionAppService instance;
 	private List<Usuario> usuarios = new ArrayList<Usuario>();
-	
+
 	public List<Usuario> getUsuarios() {
 		return usuarios;
 	}
 
 	public Usuario login(String email, String password) {
 		// TODO: Get User using DAO and check
-		Usuario user = new Usuario();
-		user.setEmail("test@gmail.com");
-		user.setNombre("Test");
-		// Generate the hash of the password
-		String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex("test123");
-		user.setContrasena(sha1);
-
-		if (user.getEmail().equals(email) && user.checkContrasena(password)) {
-			return user;
-		} else {
-			return null;
+		for (Usuario u : usuarios) {
+			if (u.getEmail().equals(email)) {
+				if (u.getContrasena().equals(org.apache.commons.codec.digest.DigestUtils.sha1Hex(password))) {
+					return u;
+				} else {
+					System.out.println("Contrasena incorrecta.");
+				}
+			} else {
+				System.out.println("El usuario no existe.");
+			}
 		}
+		return null;
 	}
 
-	
-
-	public Usuario register(String nombre, String email, Date fechaNacimiento, float peso, float altura,
-			int frecuenciaCardiacaMax, int frecuenciaCardiacaReposo, String contrasena) {
+	public boolean register(Usuario usuario) {
 		// TODO: Get User using DAO and check
-		Usuario user = new Usuario();
-		user.setEmail(email);
-		user.setNombre(nombre);
-		String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex(contrasena);
-		user.setContrasena(sha1);
-		user.setFechaNacimiento(fechaNacimiento);
-		user.setPeso(peso);
-		user.setAltura(altura);
-		user.setFrecuenciaCardiacaMax(frecuenciaCardiacaMax);
-		user.setFrecuenciaCardiacaReposo(frecuenciaCardiacaReposo);
-
-		if (user.getEmail().equals("test@gmail.com") && user.getNombre().equals("Test")) {
-			return null;
-		} else {
-			return user;
+		if (!usuarios.contains(usuario)) {
+			usuarios.add(usuario);
+			return true;
 		}
+		return false;
 	}
 
 	public static AutenticacionAppService getInstance() {
