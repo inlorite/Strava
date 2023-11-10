@@ -14,6 +14,16 @@ public class Usuario {
 	private int frecuenciaCardiacaMax;
 	private int frecuenciaCardiacaReposo;
 	private String contrasena;
+	private List<SesionEntrenamiento> sesionesEntrenamiento = new ArrayList<SesionEntrenamiento>();
+	
+
+	public List<SesionEntrenamiento> getSesionesEntrenamiento() {
+		return sesionesEntrenamiento;
+	}
+
+	public void setSesionesEntrenamiento(List<SesionEntrenamiento> sesionesEntrenamiento) {
+		this.sesionesEntrenamiento = sesionesEntrenamiento;
+	}
 
 	public String getNombre() {
 		return nombre;
@@ -85,8 +95,7 @@ public class Usuario {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(altura, contrasena, email, fechaNacimiento, frecuenciaCardiacaMax, frecuenciaCardiacaReposo,
-				nombre, peso);
+		return Objects.hash(email);
 	}
 
 	@Override
@@ -98,18 +107,16 @@ public class Usuario {
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		return Float.floatToIntBits(altura) == Float.floatToIntBits(other.altura)
-				&& Objects.equals(contrasena, other.contrasena) && Objects.equals(email, other.email)
-				&& Objects.equals(fechaNacimiento, other.fechaNacimiento)
-				&& frecuenciaCardiacaMax == other.frecuenciaCardiacaMax
-				&& frecuenciaCardiacaReposo == other.frecuenciaCardiacaReposo && Objects.equals(nombre, other.nombre)
-				&& Float.floatToIntBits(peso) == Float.floatToIntBits(other.peso);
+		return Objects.equals(email, other.email);
 	}
 
 	@Override
 	public String toString() {
 		return "Usuario [nombre=" + nombre + ", email=" + email + ", fechaNacimiento=" + fechaNacimiento + ", peso="
 				+ peso + ", altura=" + altura + ", frecuenciaCardiacaMax=" + frecuenciaCardiacaMax
-				+ ", frecuenciaCardiacaReposo=" + frecuenciaCardiacaReposo + ", contrasena=" + contrasena + "]";
+				+ ", frecuenciaCardiacaReposo=" + frecuenciaCardiacaReposo + ", contrasena=" + contrasena
+				+ ", sesionesEntrenamiento=" + sesionesEntrenamiento + "]";
 	}
+
+	
 }
