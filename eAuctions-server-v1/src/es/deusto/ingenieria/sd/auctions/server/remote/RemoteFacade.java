@@ -74,22 +74,21 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 
 	public long register(UsuarioRegisterDTO usuarioRegisterDTO) throws RemoteException {
 		System.out.println(" * RemoteFacade register(): " + usuarioRegisterDTO.getNombre());
-		
+
 		Usuario usuario;
-		
+
 		if (usuarioRegisterDTO != null) {
 			usuario = UsuarioRegisterAssembler.getInstance().dtoToUsuario(usuarioRegisterDTO);
 		} else
 			throw new RemoteException("Could not register the user!");
-		
+
 		if (autenticacionAppService.register(usuario)) {
 			try {
 				return login(usuario.getEmail(), usuario.getContrasena());
 			} catch (RemoteException ex) {
 				throw ex;
 			}
-		}
-		else
+		} else
 			throw new RemoteException("Could not login the user!");
 	}
 
@@ -114,7 +113,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	}
 
 	public List<SesionEntrenamientoDTO> getSesionesEntrenamiento(long token) throws RemoteException {
-		System.out.println(" * RemoteFacade getSesionesEntrenamiento()");
+		System.out.println(" * RemoteFacade getSesionesEntrenamiento(token)");
 
 		List<SesionEntrenamiento> sesiones;
 
@@ -123,10 +122,25 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 			sesiones = sesionesEntrenamientoAppService
 					.getSesionesEntrenamiento(this.serverState.get(token).getNombre());
 		} else {
-			throw new RemoteException("getSesionesEntrenamiento() fails!");
+			throw new RemoteException("getSesionesEntrenamiento(token) fails!");
 		}
 
-		if (sesiones != null && this.serverState.containsKey(token)) {
+		if (sesiones != null) {
+			// Convert domain object to DTO
+			return sesiones.stream().map(e -> SesionEntrenamientoAssembler.getInstance().sesionEntrenamientoToDTO(e))
+					.collect(Collectors.toList());
+		} else {
+			throw new RemoteException("getSesionesEntrenamiento(token) fails!");
+		}
+	}
+
+	public List<SesionEntrenamientoDTO> getSesionesEntrenamiento() throws RemoteException {
+		System.out.println(" * RemoteFacade getSesionesEntrenamiento()");
+
+		// Get SesionEntrenamiento using SesionesEntrenamientoAppService
+		List<SesionEntrenamiento> sesiones = sesionesEntrenamientoAppService.getSesionesEntrenamiento();
+
+		if (sesiones != null) {
 			// Convert domain object to DTO
 			return sesiones.stream().map(e -> SesionEntrenamientoAssembler.getInstance().sesionEntrenamientoToDTO(e))
 					.collect(Collectors.toList());
@@ -170,6 +184,26 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 
 		// Create Reto using RetosAppService
 		retosAppService.crearReto(reto);
+	}
+
+	public List<RetoDTO> getRetos(long token) throws RemoteException {
+		System.out.println(" * RemoteFacade getRetos(token)");
+
+		List<Reto> retos;
+
+		// Get SesionEntrenamiento using SesionesEntrenamientoAppService
+		if (this.serverState.containsKey(token)) {
+			retos = retosAppService.getRetos(this.serverState.get(token).getNombre());
+		} else {
+			throw new RemoteException("getRetos(token) fails!");
+		}
+
+		if (retos != null) {
+			// Convert domain object to DTO
+			return retos.stream().map(e -> RetoAssembler.getInstance().retoToDTO(e)).collect(Collectors.toList());
+		} else {
+			throw new RemoteException("getRetos(token) fails!");
+		}
 	}
 
 	public List<RetoDTO> getRetos() throws RemoteException {

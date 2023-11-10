@@ -21,21 +21,25 @@ public interface IRemoteFacade extends Remote {
 
 	// Métodos SesionEntrenamiento
 
-	public void crearSesionEntrenamiento(SesionEntrenamientoDTO sesionEntrenamientoDTO, long token) throws RemoteException; // TODO
+	public void crearSesionEntrenamiento(SesionEntrenamientoDTO sesionEntrenamientoDTO, long token) throws RemoteException;
 
-	public List<SesionEntrenamientoDTO> getSesionesEntrenamiento(long token) throws RemoteException; // TODO
+	public List<SesionEntrenamientoDTO> getSesionesEntrenamiento(long token) throws RemoteException;
+	
+	public List<SesionEntrenamientoDTO> getSesionesEntrenamiento() throws RemoteException;
 
-	public void eliminarSesionEntrenamiento(SesionEntrenamientoDTO sesionEntrenamientoDTO, long token) throws RemoteException; // TODO
+	public void eliminarSesionEntrenamiento(SesionEntrenamientoDTO sesionEntrenamientoDTO, long token) throws RemoteException;
 
 	// Métodos Reto
 
-	public void crearReto(RetoDTO retoDTO, long token) throws RemoteException; // TODO
+	public void crearReto(RetoDTO retoDTO, long token) throws RemoteException;
+	
+	public List<RetoDTO> getRetos(long token) throws RemoteException;
 
-	public List<RetoDTO> getRetos() throws RemoteException; // TODO
+	public List<RetoDTO> getRetos() throws RemoteException;
 
-	public void apuntarseReto(RetoDTO retoDTO, long token) throws RemoteException; // TODO
+	public void apuntarseReto(RetoDTO retoDTO, long token) throws RemoteException;
 
-	public void desapuntarseReto(RetoDTO retoDTO, long token) throws RemoteException; // TODO
+	public void desapuntarseReto(RetoDTO retoDTO, long token) throws RemoteException;
 
-	public void eliminarReto(RetoDTO retoDTO, long token) throws RemoteException; // TODO
+	public void eliminarReto(RetoDTO retoDTO, long token) throws RemoteException;
 }
