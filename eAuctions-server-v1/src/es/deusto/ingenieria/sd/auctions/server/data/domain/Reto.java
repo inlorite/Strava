@@ -11,13 +11,13 @@ public class Reto {
 	private float distancia;
 	private float tiempo;
 	private String creador;
-	private List<Usuario> participantes;
+	private List<String> participantes;
 
-	public List<Usuario> getParticipantes() {
+	public List<String> getParticipantes() {
 		return participantes;
 	}
 
-	public void setParticipantes(List<Usuario> participantes) {
+	public void setParticipantes(List<String> participantes) {
 		this.participantes = participantes;
 	}
 

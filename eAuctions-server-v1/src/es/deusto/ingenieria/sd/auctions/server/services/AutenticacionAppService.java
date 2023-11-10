@@ -15,6 +15,15 @@ public class AutenticacionAppService {
 	public List<Usuario> getUsuarios() {
 		return usuarios;
 	}
+	
+	public Usuario getUsuario(String usuario) {
+		for (Usuario u : usuarios) {
+			if (u.getNombre().equals(usuario)) {
+				return u;
+			}
+		}
+		return null;
+	}
 
 	public Usuario login(String email, String password) {
 		// TODO: Get User using DAO and check

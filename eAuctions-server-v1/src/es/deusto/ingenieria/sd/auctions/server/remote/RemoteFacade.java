@@ -79,8 +79,9 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 
 		if (usuarioRegisterDTO != null) {
 			usuario = UsuarioRegisterAssembler.getInstance().dtoToUsuario(usuarioRegisterDTO);
-		} else
+		} else {
 			throw new RemoteException("Could not register the user!");
+		}
 
 		if (autenticacionAppService.register(usuario)) {
 			try {
@@ -109,7 +110,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		}
 
 		// Create SesionEntrenamiento using SesionesEntrenamientoAppService
-		sesionesEntrenamientoAppService.crearSesionEntrenamiento(this.serverState.get(token), sesionEntrenamiento);
+		sesionesEntrenamientoAppService.crearSesionEntrenamiento(autenticacionAppService.getUsuario(serverState.get(token).getNombre()), sesionEntrenamiento);
 	}
 
 	public List<SesionEntrenamientoDTO> getSesionesEntrenamiento(long token) throws RemoteException {
@@ -120,7 +121,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		// Get SesionEntrenamiento using SesionesEntrenamientoAppService
 		if (this.serverState.containsKey(token)) {
 			sesiones = sesionesEntrenamientoAppService
-					.getSesionesEntrenamiento(this.serverState.get(token).getNombre());
+					.getSesionesEntrenamiento(autenticacionAppService.getUsuario(serverState.get(token).getNombre()));
 		} else {
 			throw new RemoteException("getSesionesEntrenamiento(token) fails!");
 		}
@@ -147,25 +148,6 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		} else {
 			throw new RemoteException("getSesionesEntrenamiento() fails!");
 		}
-	}
-
-	public void eliminarSesionEntrenamiento(SesionEntrenamientoDTO sesionEntrenamientoDTO, long token)
-			throws RemoteException {
-		System.out.println(" * RemoteFacade eliminarSesionEntrenamiento()");
-
-		SesionEntrenamiento sesionEntrenamiento;
-
-		if (sesionEntrenamientoDTO != null && this.serverState.containsKey(token)) {
-			// Convert domain object to DTO
-			sesionEntrenamiento = SesionEntrenamientoAssembler.getInstance()
-					.dtoToSesionEntrenamiento(sesionEntrenamientoDTO);
-		} else {
-			throw new RemoteException("eliminarSesionEntrenamiento() fails!");
-		}
-
-		// Delete SesionEntrenamiento using SesionesEntrenamientoAppService
-		sesionesEntrenamientoAppService.eliminarSesionEntrenamiento(sesionEntrenamiento.getTitulo(),
-				this.serverState.get(token).getNombre());
 	}
 
 	/////////////////////// METODOS RETO ///////////////////////

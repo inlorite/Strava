@@ -31,86 +31,58 @@ public class RetosAppService {
 		return this.retos;
 	}
 
-	public boolean crearReto(Reto reto) {
-		
-		if(!this.retos.contains(reto)) {
-			this.retos.add(reto);
-			return true;
-		} else {
-			return false;
-		}
-		
-	}
-	
-	private Usuario getUsuarioPorNombre(String usuario) {
-		
-		for (Usuario u : AutenticacionAppService.getInstance().getUsuarios()) {
-			if (u.getNombre().equals(usuario)) {
-				return u;
-			}
-		}
-		return null;
-		
-	}
-	
 	private Reto getRetoPorNombre(String reto) {
-		
 		for (Reto r : this.retos) {
 			if (r.getNombre().equals(reto)) {
 				return r;
 			}
 		}
 		return null;
-		
+	}
+	
+	public boolean crearReto(Reto reto) {
+		if(!this.retos.contains(reto)) {
+			this.retos.add(reto);
+			return true;
+		}
+		return false;
 	}
 	
 	public boolean apuntarseReto(String usuario, String reto) {
-		
-		Usuario u = this.getUsuarioPorNombre(usuario);
 		Reto r = this.getRetoPorNombre(reto);
 		
-		if (u != null && r != null) {
-			if (r.getParticipantes().contains(u)) {
-				return false;
-			} else {
-				r.getParticipantes().add(u);
+		if (r != null) {
+			if (!r.getParticipantes().contains(usuario)) {
+				r.getParticipantes().add(usuario);
 				return true;
 			}
-		} else {
-			return false;
 		}
-		
+		return false;
 	}
 	
 	public boolean desapuntarseReto(String usuario, String reto) {
-		
-		Usuario u = this.getUsuarioPorNombre(usuario);
 		Reto r = this.getRetoPorNombre(reto);		
 		
-		if (u != null && r != null) {
-			if (r.getParticipantes().contains(u)) {
-				r.getParticipantes().remove(u);
+		if (r != null) {
+			if (r.getParticipantes().contains(usuario)) {
+				r.getParticipantes().remove(usuario);
 				return true;
-			} else {
-				return false;
 			}
-		} else {
-			return false;
 		}
+		return false;
 		
 	}
 	
-	public boolean eliminarReto(String reto) {
-		
+	public boolean eliminarReto(String usuario, String reto) {
 		Reto r = this.getRetoPorNombre(reto);
 		
-		if (this.retos.contains(r)) {
-			this.retos.remove(r);
-			return true;
-		} else {
-			return false;
+		if (r != null) {
+			if (r.getCreador().equals(usuario)) {
+				this.retos.remove(r);
+				return true;
+			}
 		}
-		
+		return false;
 	}
 	
 }
