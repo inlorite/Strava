@@ -21,7 +21,7 @@ public interface IRemoteFacade extends Remote {
 
 	// Métodos SesionEntrenamiento
 
-	public void crearSesionEntrenamiento(SesionEntrenamientoDTO sesionEntrenamientoDTO, long token) throws RemoteException;
+	public boolean crearSesionEntrenamiento(SesionEntrenamientoDTO sesionEntrenamientoDTO, long token) throws RemoteException;
 
 	public List<SesionEntrenamientoDTO> getSesionesEntrenamiento(long token) throws RemoteException;
 	
@@ -29,15 +29,15 @@ public interface IRemoteFacade extends Remote {
 
 	// Métodos Reto
 
-	public void crearReto(RetoDTO retoDTO, long token) throws RemoteException;
+	public boolean crearReto(RetoDTO retoDTO, long token) throws RemoteException;
 	
 	public List<RetoDTO> getRetos(long token) throws RemoteException;
 
 	public List<RetoDTO> getRetos() throws RemoteException;
 
-	public void apuntarseReto(RetoDTO retoDTO, long token) throws RemoteException;
+	public boolean apuntarseReto(String reto, long token) throws RemoteException;
 
-	public void desapuntarseReto(RetoDTO retoDTO, long token) throws RemoteException;
+	public boolean desapuntarseReto(String reto, long token) throws RemoteException;
 
-	public void eliminarReto(RetoDTO retoDTO, long token) throws RemoteException;
+	public boolean eliminarReto(String reto, long token) throws RemoteException;
 }

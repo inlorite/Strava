@@ -95,7 +95,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 
 	/////////////////////// METODOS SESIONENTRENAMIENTO ///////////////////////
 
-	public void crearSesionEntrenamiento(SesionEntrenamientoDTO sesionEntrenamientoDTO, long token)
+	public boolean crearSesionEntrenamiento(SesionEntrenamientoDTO sesionEntrenamientoDTO, long token)
 			throws RemoteException {
 		System.out.println(" * RemoteFacade crearSesionEntrenamiento()");
 
@@ -111,6 +111,8 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 
 		// Create SesionEntrenamiento using SesionesEntrenamientoAppService
 		sesionesEntrenamientoAppService.crearSesionEntrenamiento(autenticacionAppService.getUsuario(serverState.get(token).getNombre()), sesionEntrenamiento);
+		
+		return true;
 	}
 
 	public List<SesionEntrenamientoDTO> getSesionesEntrenamiento(long token) throws RemoteException {
@@ -152,10 +154,11 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 
 	/////////////////////// METODOS RETO ///////////////////////
 
-	public void crearReto(RetoDTO retoDTO, long token) throws RemoteException {
+	public boolean crearReto(RetoDTO retoDTO, long token) throws RemoteException {
 		System.out.println(" * RemoteFacade crearReto()");
 
 		Reto reto;
+		retoDTO.setCreador(serverState.get(token).getNombre());
 
 		if (retoDTO != null && this.serverState.containsKey(token)) {
 			// Convert domain object to DTO
@@ -166,6 +169,8 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 
 		// Create Reto using RetosAppService
 		retosAppService.crearReto(reto);
+		
+		return true;
 	}
 
 	public List<RetoDTO> getRetos(long token) throws RemoteException {
@@ -202,52 +207,40 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		}
 	}
 
-	public void apuntarseReto(RetoDTO retoDTO, long token) throws RemoteException {
+	public boolean apuntarseReto(String reto, long token) throws RemoteException {
 		System.out.println(" * RemoteFacade apuntarseReto()");
 
-		Reto reto;
-
-		if (retoDTO != null && this.serverState.containsKey(token)) {
-			// Convert domain object to DTO
-			reto = RetoAssembler.getInstance().dtoToReto(retoDTO);
+		if (reto != null && this.serverState.containsKey(token)) {
+			// Apuntarse Reto using RetosAppService
+			retosAppService.apuntarseReto(this.serverState.get(token).getNombre(), reto);
+			return true;
 		} else {
 			throw new RemoteException("apuntarseReto() fails!");
 		}
-
-		// Apuntarse Reto using RetosAppService
-		retosAppService.apuntarseReto(this.serverState.get(token).getNombre(), reto.getNombre());
 	}
 
-	public void desapuntarseReto(RetoDTO retoDTO, long token) throws RemoteException {
+	public boolean desapuntarseReto(String reto, long token) throws RemoteException {
 		System.out.println(" * RemoteFacade desapuntarseReto()");
 
-		Reto reto;
-
-		if (retoDTO != null && this.serverState.containsKey(token)) {
-			// Convert domain object to DTO
-			reto = RetoAssembler.getInstance().dtoToReto(retoDTO);
+		if (reto != null && this.serverState.containsKey(token)) {
+			// Desapuntarse Reto using RetosAppService
+			retosAppService.desapuntarseReto(this.serverState.get(token).getNombre(), reto);
+			return true;
 		} else {
 			throw new RemoteException("desapuntarseReto() fails!");
 		}
-
-		// Desapuntarse Reto using RetosAppService
-		retosAppService.desapuntarseReto(this.serverState.get(token).getNombre(), reto.getNombre());
 	}
 
-	public void eliminarReto(RetoDTO retoDTO, long token) throws RemoteException {
+	public boolean eliminarReto(String reto, long token) throws RemoteException {
 		System.out.println(" * RemoteFacade eliminarReto()");
 
-		Reto reto;
-
-		if (retoDTO != null && this.serverState.containsKey(token)) {
-			// Convert domain object to DTO
-			reto = RetoAssembler.getInstance().dtoToReto(retoDTO);
+		if (reto != null && this.serverState.containsKey(token)) {
+			// Delete Reto using RetosAppService
+			retosAppService.eliminarReto(serverState.get(token).getNombre(), reto);
+			return true;
 		} else {
 			throw new RemoteException("eliminarReto() fails!");
 		}
-
-		// Delete Reto using RetosAppService
-		retosAppService.eliminarReto(serverState.get(token).getNombre(), reto.getNombre());
 	}
 
 	///////////////////// METODOS ANTIGUOS ////////////////////////
