@@ -6,15 +6,16 @@ import java.util.List;
 import es.deusto.ingenieria.sd.auctions.client.remote.ServiceLocator;
 import es.deusto.ingenieria.sd.auctions.server.data.dto.ArticleDTO;
 import es.deusto.ingenieria.sd.auctions.server.data.dto.CategoryDTO;
+import es.deusto.ingenieria.sd.auctions.server.services.AutenticacionAppService;
 
 //This class implements Controller pattern.
 public class StravaController {
-	
-	//Reference to the Service Locator
+
+	// Reference to the Service Locator
 	private ServiceLocator serviceLocator;
-	
+
 	public StravaController(ServiceLocator serviceLocator) {
-		this.serviceLocator = serviceLocator; 
+		this.serviceLocator = serviceLocator;
 	}
 
 	public List<CategoryDTO> getCategories() {
@@ -43,7 +44,7 @@ public class StravaController {
 			return false;
 		}
 	}
-	
+
 	public float getUSDRate() {
 		try {
 			return this.serviceLocator.getService().getUSDRate();
@@ -52,7 +53,7 @@ public class StravaController {
 			return -1;
 		}
 	}
-	
+
 	public float getGBPRate() {
 		try {
 			return this.serviceLocator.getService().getGBPRate();
