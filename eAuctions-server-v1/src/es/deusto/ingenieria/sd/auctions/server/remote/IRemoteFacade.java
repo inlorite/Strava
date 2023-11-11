@@ -27,8 +27,6 @@ public interface IRemoteFacade extends Remote {
 	
 	public List<SesionEntrenamientoDTO> getSesionesEntrenamiento() throws RemoteException;
 
-	public void eliminarSesionEntrenamiento(SesionEntrenamientoDTO sesionEntrenamientoDTO, long token) throws RemoteException;
-
 	// Métodos Reto
 
 	public void crearReto(RetoDTO retoDTO, long token) throws RemoteException;

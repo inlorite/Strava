@@ -247,7 +247,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		}
 
 		// Delete Reto using RetosAppService
-		retosAppService.eliminarReto(reto.getNombre());
+		retosAppService.eliminarReto(serverState.get(token).getNombre(), reto.getNombre());
 	}
 
 	///////////////////// METODOS ANTIGUOS ////////////////////////
