@@ -12,12 +12,7 @@ import es.deusto.ingenieria.sd.auctions.server.data.dto.UsuarioDTO;
 //This class implements Controller pattern.
 public class StravaController {
 
-	// Reference to the Service Locator
-	private ServiceLocator serviceLocator;
-
-	public StravaController(ServiceLocator serviceLocator) {
-		this.serviceLocator = serviceLocator;
-	}
+	private static StravaController instance;
 
 	// Métodos SesionEntrenamiento
 
@@ -115,51 +110,12 @@ public class StravaController {
 			System.out.println("# Error eliminating Reto: " + e);
 		}
 	}
-
-	// Metodos antiguos
-
-	public List<CategoryDTO> getCategories() {
-		try {
-			return this.serviceLocator.getService().getCategories();
-		} catch (RemoteException e) {
-			System.out.println("# Error getting all categories: " + e);
-			return null;
+	
+	public static StravaController getInstance() {
+		if (instance == null) {
+			instance = new StravaController();
 		}
-	}
-
-	public List<ArticleDTO> getArticles(String category) {
-		try {
-			return this.serviceLocator.getService().getArticles(category);
-		} catch (RemoteException e) {
-			System.out.println("# Error getting articles of a category: " + e);
-			return null;
-		}
-	}
-
-	public boolean makeBid(long token, int article, float bid) {
-		try {
-			return this.serviceLocator.getService().makeBid(token, article, bid);
-		} catch (RemoteException e) {
-			System.out.println("# Error making a bid: " + e);
-			return false;
-		}
-	}
-
-	public float getUSDRate() {
-		try {
-			return this.serviceLocator.getService().getUSDRate();
-		} catch (RemoteException e) {
-			System.out.println("# Error getting USD rate: " + e);
-			return -1;
-		}
-	}
-
-	public float getGBPRate() {
-		try {
-			return this.serviceLocator.getService().getGBPRate();
-		} catch (RemoteException e) {
-			System.err.println("# Error getting GBP rate: " + e);
-			return -1;
-		}
+		
+		return instance;
 	}
 }

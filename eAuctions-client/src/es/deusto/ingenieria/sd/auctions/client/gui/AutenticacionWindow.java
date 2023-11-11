@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import java.util.logging.Level;
 
 import javax.swing.ImageIcon;
@@ -20,106 +21,105 @@ import javax.swing.border.EmptyBorder;
 
 import es.deusto.ingenieria.sd.auctions.client.controller.AutenticacionController;
 
-
-public class AutenticacionWindow extends JFrame{	
+public class AutenticacionWindow extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private AutenticacionController controller;	
-	private String email = "thomas.e2001@gmail.com";
-	private String password = "$!9PhNz,";
-	public static AutenticacionWindow autenticacionWindow;
-	public static StravaWindow stravaWindow;
-	
-	JLabel lLogo;
-	ImageIcon iiLogo;
-	JPanel pData;
-	JPanel pButton;
-	JTextField tfUser;
+	private static AutenticacionWindow instance;
+
+	JTextField tfEmail;
 	JPasswordField tfPassword;
 	JButton bRegister;
 	JButton bLogin;
-	
-	public AutenticacionWindow() {
+
+	private AutenticacionWindow() {
 		Container cp = this.getContentPane();
 		cp.setLayout(new BorderLayout());
-		
+
 		// LOGO
-		iiLogo = new ImageIcon("data/logo.png");
-		lLogo = new JLabel(iiLogo);
+		ImageIcon iiLogo = new ImageIcon("src\\es\\deusto\\ingenieria\\sd\\auctions\\client\\gui\\assets\\logo.png");
+		JLabel lLogo = new JLabel(iiLogo);
 		cp.add(lLogo, BorderLayout.NORTH);
-		
+
 		// FORMULARIO
-		pData = new JPanel();
+		JPanel pData = new JPanel();
 		pData.setLayout(new GridLayout(5, 1, 5, 10));
 		pData.setBorder(new EmptyBorder(new Insets(10, 10, 10, 10)));
-		pData.setBackground(new Color(255, 255, 255));
-		pButton = new JPanel();
+		
+		JPanel pButton = new JPanel();
 		pButton.setLayout(new GridLayout(1, 2, 5, 10));
-		
+
 		pData.add(new JLabel("Email: "));
-		tfUser = new JTextField();
+		tfEmail = new JTextField();
+		pData.add(tfEmail);
 		
-		pData.add(tfUser);
 		pData.add(new JLabel("Password: "));
 		tfPassword = new JPasswordField();
-		
 		pData.add(tfPassword);
+		
 		bRegister = new JButton("Register");
-		bLogin = new JButton("Login");
 		pButton.add(bRegister);
+		bLogin = new JButton("Login");
 		pButton.add(bLogin);
 		pData.add(pButton);
+		
 		cp.add(pData);
-		
-		autenticacionWindow = this;
-		
+
 		bRegister.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		
+
 		bLogin.addActionListener(new ActionListener() {
-			
+
 			@SuppressWarnings("deprecation")
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String email = tfUser.getText();
+				String email = tfEmail.getText();
 				String password = tfPassword.getText();
-				
-				boolean login = controller.login(email, password);
-				
+
+				boolean login = login(email, password);
+
 				if (login) {
-					//stravaWindow = new StravaWindow();
+					// stravaWindow = new StravaWindow();
 				} else {
 					System.out.println("datos incorrectos");
 				}
-				
+
 			}
-			
+
 		});
+
+		this.setTitle("Strava Autenticacion");
+		this.pack();
+		this.setLocationRelativeTo(null); // para centrar la ventana al ejecutarla
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setResizable(false);
+		this.setVisible(true);
 	}
 
-	public AutenticacionWindow(AutenticacionController controller) {
-		this.controller = controller;
-	}
-	
-	public boolean login() {		
-		System.out.println(" - Login into the server: '" + this.email + "' - '" + this.password + "' ...");
+	public boolean login(String email, String password) {
 		String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex(password);
-		System.out.println("\t* Password hash: " + sha1);		
-		boolean result = this.controller.login(email, sha1);
-		System.out.println("\t* Login result: " + result);
-		System.out.println("\t* Token: " + this.controller.getToken());
 
-		return result;
+		return AutenticacionController.getInstance().login(email, sha1);
+	}
+
+	public boolean logout() {
 	}
 	
-	public void logout() {
-		System.out.println(" - Logout from the server...");		
-		this.controller.logout();
-		System.out.println("\t* Logout success!");		
-
+	public boolean register(String nombre, String email, Date fechaNacimiento, float peso, float altura, int frecuenciaCardiacaMax, int frecuenciaCardiacaReposo, String contrasena) {
+		String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex(contrasena);
+		
+		return AutenticacionController.getInstance().register(nombre, email, fechaNacimiento, peso, altura, frecuenciaCardiacaMax, frecuenciaCardiacaReposo, sha1);
 	}
+	
+	public static AutenticacionWindow getInstance() {
+		if (instance == null) {
+			instance = new AutenticacionWindow();
+		}
+		
+		return instance;
+	}
+	
 }

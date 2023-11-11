@@ -7,6 +7,7 @@ import es.deusto.ingenieria.sd.auctions.server.remote.IRemoteFacade;
 //This class implements Service Locator pattern
 public class ServiceLocator {
 	
+	private static ServiceLocator instance;
 	//Remote Facade reference
 	private IRemoteFacade service;
 
@@ -28,5 +29,13 @@ public class ServiceLocator {
 
 	public IRemoteFacade getService() {
 		return this.service;
+	}
+	
+	public static ServiceLocator getInstance() {
+		if (instance == null) {
+			instance = new ServiceLocator();
+		}
+		
+		return instance;
 	}
 }
