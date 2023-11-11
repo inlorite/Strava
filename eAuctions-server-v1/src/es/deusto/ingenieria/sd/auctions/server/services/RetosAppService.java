@@ -26,6 +26,18 @@ public class RetosAppService {
 		
 	}
 	
+	public List<Reto> getRetos(String usuario) {
+		//TODO: Get all the categories using DAO Pattern
+		List<Reto> retosUsuario = new ArrayList<Reto>();
+		
+		for (Reto reto : retos) {
+			if (reto.getCreador().equals(usuario))
+				retosUsuario.add(reto);
+		}
+		
+		return retosUsuario;
+	}
+	
 	public List<Reto> getRetos() {
 		//TODO: Get all the categories using DAO Pattern		
 		return this.retos;
