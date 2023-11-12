@@ -20,17 +20,17 @@ public class RetosAppService {
 	
 	public RetosAppService() {
 		//TODO: remove when DAO Pattern is implemented
-		this.initilizeData();
+		this.initializeData();
 	}
 	
 	//TODO: remove when DAO Pattern is implemented
-	private void initilizeData() {
+	private void initializeData() {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		
 		// Inicializar reto 1
 		Reto r1 = new Reto();
-		r1.setCreador("Iñigo");
+		r1.setCreador("Inigo");
 		r1.setDistancia(19.2f);
 		r1.setFechaInicio(new Date(Calendar.getInstance().getTimeInMillis()));
 		
@@ -46,7 +46,7 @@ public class RetosAppService {
 		r1.setNombre("Reto 1");
 		
 		List<String> participantes = new ArrayList<>();
-		participantes.add("Iñigo");
+		participantes.add("Inigo");
 		r1.setParticipantes(participantes);
 		
 		r1.setTiempo(120);
