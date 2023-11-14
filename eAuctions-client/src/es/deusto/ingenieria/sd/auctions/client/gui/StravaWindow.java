@@ -18,8 +18,10 @@ public class StravaWindow extends JFrame {
 	public static CardLayout cl;
 	
 	public static DMenuBar menuBar;
+	/*
 	public static DPanelSesiones pSesiones;
 	public static DPanelRetos pRetos;
+	*/
 
 	public static boolean networking = true;
 
@@ -39,6 +41,7 @@ public class StravaWindow extends JFrame {
 		
 		menuBar = new DMenuBar();
 		
+		/*
 		pSesiones = new DPanelSesiones();
 		pRetos = new DPanelRetos();
 		
@@ -46,6 +49,7 @@ public class StravaWindow extends JFrame {
 		
 		mainPanel.add(pSesiones, "SESIONES");
 		mainPanel.add(pRetos, "RETOS");
+		*/
 		
 		cl.show(mainPanel, "RETOS");
 		

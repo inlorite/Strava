@@ -21,7 +21,7 @@ public class SesionesEntrenamientoAppService {
 
 	public SesionesEntrenamientoAppService() {
 		// TODO: remove when DAO Pattern is implemented
-		this.initializeData();
+		//this.initializeData();
 	}
 
 	// TODO: remove when DAO Pattern is implemented

@@ -27,7 +27,7 @@ public class StravaController {
 		sesionEntrenamientoDTO.setDuracion(duracion);
 
 		try {
-			this.serviceLocator.getService().crearSesionEntrenamiento(sesionEntrenamientoDTO, token);
+			ServiceLocator.getInstance().getService().crearSesionEntrenamiento(sesionEntrenamientoDTO, token);
 		} catch (RemoteException e) {
 			System.out.println("# Error creating Sesion Entrenamiento: " + e);
 		}
@@ -35,7 +35,7 @@ public class StravaController {
 
 	public List<SesionEntrenamientoDTO> getSesionesEntrenamiento(long token) {
 		try {
-			return this.serviceLocator.getService().getSesionesEntrenamiento(token);
+			return ServiceLocator.getInstance().getService().getSesionesEntrenamiento(token);
 		} catch (RemoteException e) {
 			System.out.println("# Error getting user's Sesiones Entrenamiento: " + e);
 			return null;
@@ -44,7 +44,7 @@ public class StravaController {
 
 	public List<SesionEntrenamientoDTO> getSesionesEntrenamiento() {
 		try {
-			return this.serviceLocator.getService().getSesionesEntrenamiento();
+			return ServiceLocator.getInstance().getService().getSesionesEntrenamiento();
 		} catch (RemoteException e) {
 			System.out.println("# Error getting Sesiones Entrenamiento: " + e);
 			return null;
@@ -63,7 +63,7 @@ public class StravaController {
 		retoDTO.setTiempo(tiempo);
 
 		try {
-			this.serviceLocator.getService().crearReto(retoDTO, token);
+			ServiceLocator.getInstance().getService().crearReto(retoDTO, token);
 		} catch (RemoteException e) {
 			System.out.println("# Error creating Reto: " + e);
 		}
@@ -71,7 +71,7 @@ public class StravaController {
 
 	public List<RetoDTO> getRetos(long token) {
 		try {
-			return this.serviceLocator.getService().getRetos(token);
+			return ServiceLocator.getInstance().getService().getRetos(token);
 		} catch (RemoteException e) {
 			System.out.println("# Error getting user's Retos: " + e);
 			return null;
@@ -80,7 +80,7 @@ public class StravaController {
 
 	public List<RetoDTO> getRetos() {
 		try {
-			return this.serviceLocator.getService().getRetos();
+			return ServiceLocator.getInstance().getService().getRetos();
 		} catch (RemoteException e) {
 			System.out.println("# Error getting Retos: " + e);
 			return null;
@@ -89,7 +89,7 @@ public class StravaController {
 
 	public void apuntarseReto(String reto, long token) {
 		try {
-			this.serviceLocator.getService().apuntarseReto(reto, token);
+			ServiceLocator.getInstance().getService().apuntarseReto(reto, token);
 		} catch (RemoteException e) {
 			System.out.println("# Error apuntarseReto(): " + e);
 		}
@@ -97,7 +97,7 @@ public class StravaController {
 
 	public void desapuntarseReto(String reto, long token) {
 		try {
-			this.serviceLocator.getService().desapuntarseReto(reto, token);
+			ServiceLocator.getInstance().getService().desapuntarseReto(reto, token);
 		} catch (RemoteException e) {
 			System.out.println("# Error desapuntarseReto(): " + e);
 		}
@@ -105,7 +105,7 @@ public class StravaController {
 
 	public void eliminarReto(String reto, long token) {
 		try {
-			this.serviceLocator.getService().eliminarReto(reto, token);
+			ServiceLocator.getInstance().getService().eliminarReto(reto, token);
 		} catch (RemoteException e) {
 			System.out.println("# Error eliminating Reto: " + e);
 		}

@@ -21,7 +21,7 @@ public class AutenticacionAppService {
 	
 	public AutenticacionAppService() {
 		//TODO: remove when DAO Pattern is implemented
-		this.initializeData();
+		//this.initializeData();
 	}
 
 	private void initializeData() {
@@ -31,7 +31,7 @@ public class AutenticacionAppService {
 		//Inicializar usuario 1
 		Usuario u1 = new Usuario();
 		u1.setAltura(1.7f);
-		u1.setContrasena("12345");
+		u1.setContrasena(org.apache.commons.codec.digest.DigestUtils.sha1Hex("12345"));
 		u1.setEmail("inigo@gmail.com");
 		
 		try {
@@ -111,7 +111,7 @@ public class AutenticacionAppService {
 		// TODO: Get User using DAO and check
 		for (Usuario u : usuarios) {
 			if (u.getEmail().equals(email)) {
-				if (u.getContrasena().equals(org.apache.commons.codec.digest.DigestUtils.sha1Hex(password))) {
+				if (u.getContrasena().equals(password)) {
 					return u;
 				} else {
 					System.out.println("Contrasena incorrecta.");

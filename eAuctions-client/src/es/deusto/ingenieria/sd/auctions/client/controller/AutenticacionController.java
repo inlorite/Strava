@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.util.Date;
 
 import es.deusto.ingenieria.sd.auctions.client.remote.ServiceLocator;
+import es.deusto.ingenieria.sd.auctions.server.data.dto.UsuarioRegisterDTO;
 
 //This class implements Controller pattern.
 public class AutenticacionController {	

@@ -10,6 +10,9 @@ public class ServiceLocator {
 	private static ServiceLocator instance;
 	//Remote Facade reference
 	private IRemoteFacade service;
+	
+	private ServiceLocator() {
+	}
 
 	@SuppressWarnings({ "removal", "deprecation" })
 	public void setService(String ip, String port, String serviceName) {

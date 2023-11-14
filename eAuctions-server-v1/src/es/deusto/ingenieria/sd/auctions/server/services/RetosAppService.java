@@ -20,7 +20,7 @@ public class RetosAppService {
 	
 	public RetosAppService() {
 		//TODO: remove when DAO Pattern is implemented
-		this.initializeData();
+		//this.initializeData();
 	}
 	
 	//TODO: remove when DAO Pattern is implemented

@@ -68,6 +68,22 @@ public class AutenticacionWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				String nombre = "test";
+				String email = "test@gmail.com";
+				Date fechaNacimiento = new Date();
+				float peso = 48.5f;
+				float altura = 160.2f;
+				int frecuenciaCardiacaMax = 5;
+				int frecuenciaCardiacaReposo = 12;
+				String contrasena = "test123";
+				
+				boolean r = register(nombre, email, fechaNacimiento, peso, altura, frecuenciaCardiacaMax, frecuenciaCardiacaReposo, contrasena);
+				
+				if (r) {
+					System.out.println("te has registrado correctamente");
+				} else {
+					System.out.println("error register");
+				}
 			}
 		});
 
@@ -83,6 +99,7 @@ public class AutenticacionWindow extends JFrame {
 
 				if (login) {
 					// stravaWindow = new StravaWindow();
+					System.out.println("hola te has logueado");
 				} else {
 					System.out.println("datos incorrectos");
 				}
@@ -106,6 +123,7 @@ public class AutenticacionWindow extends JFrame {
 	}
 
 	public boolean logout() {
+		return true;
 	}
 	
 	public boolean register(String nombre, String email, Date fechaNacimiento, float peso, float altura, int frecuenciaCardiacaMax, int frecuenciaCardiacaReposo, String contrasena) {
