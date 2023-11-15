@@ -128,6 +128,8 @@ public class AutenticacionWindow extends JFrame {
 						
 						if (register) {
 							System.out.println("te has registrado");
+							AutenticacionWindow.getInstance().setVisible(false);
+							StravaWindow.getInstance().setVisible(true);
 						} else {
 							System.out.println("registro incorrecto");
 						}

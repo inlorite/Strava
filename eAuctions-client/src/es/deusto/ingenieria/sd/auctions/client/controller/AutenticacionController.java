@@ -11,9 +11,9 @@ public class AutenticacionController {
 	
 	private static AutenticacionController instance;
 	//This attribute stores the token when login success
-	private long token = -1; //-1 = login has not been done or fails
+	private static long token = -1; //-1 = login has not been done or fails
 	
-	public long getToken() {
+	public static long getToken() {
 		return token;
 	}
 

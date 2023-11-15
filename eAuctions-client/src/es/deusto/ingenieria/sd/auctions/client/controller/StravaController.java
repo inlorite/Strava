@@ -16,7 +16,7 @@ public class StravaController {
 
 	// Métodos SesionEntrenamiento
 
-	public void crearSesionEntrenamiento(long token, String titulo, float distancia, Date fechaInicio, long horaInicio,
+	public boolean crearSesionEntrenamiento(long token, String titulo, float distancia, Date fechaInicio, long horaInicio,
 			float duracion) {
 
 		SesionEntrenamientoDTO sesionEntrenamientoDTO = new SesionEntrenamientoDTO();
@@ -27,9 +27,10 @@ public class StravaController {
 		sesionEntrenamientoDTO.setDuracion(duracion);
 
 		try {
-			ServiceLocator.getInstance().getService().crearSesionEntrenamiento(sesionEntrenamientoDTO, token);
+			return ServiceLocator.getInstance().getService().crearSesionEntrenamiento(sesionEntrenamientoDTO, token);
 		} catch (RemoteException e) {
 			System.out.println("# Error creating Sesion Entrenamiento: " + e);
+			return false;
 		}
 	}
 
@@ -53,7 +54,7 @@ public class StravaController {
 
 	// Métodos Reto
 
-	public void crearReto(String nombre, Date fechaInicio, Date fechaFin, float distancia, float tiempo, long token) {
+	public boolean crearReto(String nombre, Date fechaInicio, Date fechaFin, float distancia, float tiempo, long token) {
 
 		RetoDTO retoDTO = new RetoDTO();
 		retoDTO.setNombre(nombre);
@@ -63,9 +64,10 @@ public class StravaController {
 		retoDTO.setTiempo(tiempo);
 
 		try {
-			ServiceLocator.getInstance().getService().crearReto(retoDTO, token);
+			return ServiceLocator.getInstance().getService().crearReto(retoDTO, token);
 		} catch (RemoteException e) {
 			System.out.println("# Error creating Reto: " + e);
+			return false;
 		}
 	}
 
@@ -87,27 +89,30 @@ public class StravaController {
 		}
 	}
 
-	public void apuntarseReto(String reto, long token) {
+	public boolean apuntarseReto(String reto, long token) {
 		try {
-			ServiceLocator.getInstance().getService().apuntarseReto(reto, token);
+			return ServiceLocator.getInstance().getService().apuntarseReto(reto, token);
 		} catch (RemoteException e) {
 			System.out.println("# Error apuntarseReto(): " + e);
+			return false;
 		}
 	}
 
-	public void desapuntarseReto(String reto, long token) {
+	public boolean desapuntarseReto(String reto, long token) {
 		try {
-			ServiceLocator.getInstance().getService().desapuntarseReto(reto, token);
+			return ServiceLocator.getInstance().getService().desapuntarseReto(reto, token);
 		} catch (RemoteException e) {
 			System.out.println("# Error desapuntarseReto(): " + e);
+			return false;
 		}
 	}
 
-	public void eliminarReto(String reto, long token) {
+	public boolean eliminarReto(String reto, long token) {
 		try {
-			ServiceLocator.getInstance().getService().eliminarReto(reto, token);
+			return ServiceLocator.getInstance().getService().eliminarReto(reto, token);
 		} catch (RemoteException e) {
 			System.out.println("# Error eliminating Reto: " + e);
+			return false;
 		}
 	}
 	

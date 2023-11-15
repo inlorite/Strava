@@ -1,34 +1,38 @@
 package es.deusto.ingenieria.sd.auctions.client.gui;
 
 import java.awt.*;
+import java.rmi.RemoteException;
+import java.util.Date;
+import java.util.List;
+
 import javax.swing.*;
 
 import es.deusto.ingenieria.sd.auctions.client.controller.StravaController;
 import es.deusto.ingenieria.sd.auctions.client.gui.customComponents.*;
+import es.deusto.ingenieria.sd.auctions.client.remote.ServiceLocator;
+import es.deusto.ingenieria.sd.auctions.server.data.dto.RetoDTO;
+import es.deusto.ingenieria.sd.auctions.server.data.dto.SesionEntrenamientoDTO;
 
 //This clase simulates the GUI of the Strava use case
 public class StravaWindow extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	private static StravaWindow instance;
 
 	public static final int GAP = 10;
 
 	public static Container cp;
 	public static JPanel mainPanel;
 	public static CardLayout cl;
-	
+
 	public static DMenuBar menuBar;
-	/*
+
 	public static DPanelSesiones pSesiones;
 	public static DPanelRetos pRetos;
-	*/
 
 	public static boolean networking = true;
 
-	private StravaController controller;
-
-	public StravaWindow(StravaController strava) {
-		this.controller = strava;
+	public StravaWindow() {
 
 		cp = this.getContentPane();
 		cp.setLayout(new BorderLayout(GAP, GAP));
@@ -38,31 +42,29 @@ public class StravaWindow extends JFrame {
 		mainPanel = new JPanel();
 		cl = new CardLayout(GAP, GAP);
 		mainPanel.setLayout(cl);
-		
+
 		menuBar = new DMenuBar();
-		
-		/*
+
 		pSesiones = new DPanelSesiones();
 		pRetos = new DPanelRetos();
-		
+
 		cp.add(menuBar, BorderLayout.NORTH);
-		
+
 		mainPanel.add(pSesiones, "SESIONES");
 		mainPanel.add(pRetos, "RETOS");
-		*/
-		
+
 		cl.show(mainPanel, "RETOS");
-		
+
 		cp.add(mainPanel, BorderLayout.CENTER);
 //		cp.add(pBiblioteca, BorderLayout.CENTER);
 //		cp.add(pTienda, BorderLayout.CENTER);
 //		cp.add(pPerfil, BorderLayout.CENTER);
-		
+
 //		if (networking) {
 //			vChat = new VChat();
 //			client = new Client(VLogin.loggedUser, vChat.dlmChatbox);
 //		}
-			
+
 		this.setTitle("Strava - Retos");
 		this.setIconImage(new ImageIcon("data/icon.png").getImage());
 		this.pack();
@@ -71,5 +73,65 @@ public class StravaWindow extends JFrame {
 		this.setResizable(true);
 		this.setVisible(true);
 		this.setSize(new Dimension(1000, 800));
+	}
+
+	public static StravaWindow getInstance() {
+		if (instance == null) {
+			instance = new StravaWindow();
+		}
+
+		return instance;
+	}
+
+	//Metodos sesiones
+	
+	public boolean crearSesionEntrenamiento(long token, String titulo, float distancia, Date fechaInicio,
+			long horaInicio, float duracion) {
+
+		return StravaController.getInstance().crearSesionEntrenamiento(token, titulo, distancia, fechaInicio,
+				horaInicio, duracion);
+	}
+
+	public List<SesionEntrenamientoDTO> getSesionesEntrenamiento(long token) {
+		
+		return StravaController.getInstance().getSesionesEntrenamiento(token);
+	}
+
+	public List<SesionEntrenamientoDTO> getSesionesEntrenamiento() {
+		
+		return StravaController.getInstance().getSesionesEntrenamiento();
+	}
+
+	// Métodos Reto
+
+	public boolean crearReto(String nombre, Date fechaInicio, Date fechaFin, float distancia, float tiempo,
+			long token) {
+
+		return StravaController.getInstance().crearReto(nombre, fechaInicio, fechaFin, distancia, tiempo, token);
+	}
+	
+	public List<RetoDTO> getRetos(long token) {
+		
+		return StravaController.getInstance().getRetos(token);			
+	}
+	
+	public List<RetoDTO> getRetos() {
+
+			return StravaController.getInstance().getRetos();	
+	}
+	
+	public boolean apuntarseReto(String reto, long token) {
+		
+			return StravaController.getInstance().apuntarseReto(reto, token);
+	}
+	
+	public boolean desapuntarseReto(String reto, long token) {
+		
+			return StravaController.getInstance().desapuntarseReto(reto, token);
+	}
+
+	public boolean eliminarReto(String reto, long token) {
+		
+			return StravaController.getInstance().eliminarReto(reto, token);
 	}
 }
