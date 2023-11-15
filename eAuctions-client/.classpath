@@ -8,5 +8,8 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="lib/commons-codec-1.15.jar"/>
 	<classpathentry kind="lib" path="lib/eAuctions.jar"/>
+	<classpathentry kind="lib" path="lib/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="lib/jgoodies-common-1.2.0.jar"/>
+	<classpathentry kind="lib" path="lib/jgoodies-looks-2.4.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

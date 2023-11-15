@@ -14,10 +14,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import com.toedter.calendar.JDateChooser;
 
 import es.deusto.ingenieria.sd.auctions.client.controller.AutenticacionController;
 
@@ -68,6 +71,7 @@ public class AutenticacionWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				/*
 				String nombre = "test";
 				String email = "test@gmail.com";
 				Date fechaNacimiento = new Date();
@@ -83,6 +87,54 @@ public class AutenticacionWindow extends JFrame {
 					System.out.println("te has registrado correctamente");
 				} else {
 					System.out.println("error register");
+				}
+				*/
+				
+				JTextField tfNombre = new JTextField();
+				JTextField tfEmail = new JTextField();
+				JDateChooser dcNacimiento = new JDateChooser("yyyy/MM/dd", "####/##/##", '_');
+				JTextField tfPeso = new JTextField();
+				JTextField tfAltura = new JTextField();
+				JTextField tfFrecCardiMax = new JTextField();
+				JTextField tfFrecCardiRep = new JTextField();
+				JPasswordField pfContrasena = new JPasswordField();
+				
+				Object[] fields = {
+						"Nombre", tfNombre,
+						"Email", tfEmail,
+						"Fecha nacimiento", dcNacimiento,
+						"Peso", tfPeso,
+						"Altura", tfAltura,
+						"Frecuencia cardiaca maxima", tfFrecCardiMax,
+						"Frecuencia cardiaca reposo", tfFrecCardiRep,
+						"Contrasena", pfContrasena
+				};
+				
+				int result = JOptionPane.showConfirmDialog(null, fields, "Registro", JOptionPane.OK_CANCEL_OPTION);
+				
+				if (result == JOptionPane.OK_OPTION) {
+					try {
+						String nombre = tfNombre.getText();
+						String email = tfEmail.getText();
+						Date fechaNacimiento = dcNacimiento.getDate();
+						float peso = Float.parseFloat(tfPeso.getText());
+						float altura = Float.parseFloat(tfAltura.getText());
+						int frecuenciaCardiacaMax = Integer.parseInt(tfFrecCardiMax.getText());
+						int frecuenciaCardiacaReposo = Integer.parseInt(tfFrecCardiRep.getText());
+						String contrasena = pfContrasena.getText();
+						
+						boolean register = register(nombre, email, fechaNacimiento, peso, altura, frecuenciaCardiacaMax, frecuenciaCardiacaReposo, contrasena);
+						
+						if (register) {
+							System.out.println("te has registrado");
+						} else {
+							System.out.println("registro incorrecto");
+						}
+					} catch (Exception ex) {
+						ex.printStackTrace();
+					}
+				} else {
+					System.out.println("Cancelar");
 				}
 			}
 		});
