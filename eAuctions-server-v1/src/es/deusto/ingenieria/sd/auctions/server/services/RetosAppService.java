@@ -15,10 +15,11 @@ import es.deusto.ingenieria.sd.auctions.server.data.domain.Usuario;
 //TODO: Implement Singleton Pattern
 public class RetosAppService {
 	
+	private static RetosAppService instance;
 	//TODO: remove when DAO Pattern is implemented
 	private List<Reto> retos = new ArrayList<>();
 	
-	public RetosAppService() {
+	private RetosAppService() {
 		//TODO: remove when DAO Pattern is implemented
 		//this.initializeData();
 	}
@@ -170,6 +171,14 @@ public class RetosAppService {
 			}
 		}
 		return false;
+	}
+	
+	public static RetosAppService getInstance() {
+		if (instance == null) {
+			instance = new RetosAppService();
+		}
+
+		return instance;
 	}
 	
 }

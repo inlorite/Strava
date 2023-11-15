@@ -17,20 +17,15 @@ import es.deusto.ingenieria.sd.auctions.server.data.dto.SesionEntrenamientoAssem
 import es.deusto.ingenieria.sd.auctions.server.data.dto.SesionEntrenamientoDTO;
 import es.deusto.ingenieria.sd.auctions.server.data.dto.UsuarioRegisterAssembler;
 import es.deusto.ingenieria.sd.auctions.server.data.dto.UsuarioRegisterDTO;
-import es.deusto.ingenieria.sd.auctions.server.services.SesionesEntrenamientoAppService;
 import es.deusto.ingenieria.sd.auctions.server.services.AutenticacionAppService;
 import es.deusto.ingenieria.sd.auctions.server.services.RetosAppService;
+import es.deusto.ingenieria.sd.auctions.server.services.SesionesEntrenamientoAppService;
 
 public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	private static final long serialVersionUID = 1L;
 
 	// Data structure for manage Server State
 	private Map<Long, Usuario> serverState = new HashMap<>();
-
-	// TODO: Remove this instances when Singleton Pattern is implemented
-	private AutenticacionAppService autenticacionAppService = new AutenticacionAppService();
-	private SesionesEntrenamientoAppService sesionesEntrenamientoAppService = new SesionesEntrenamientoAppService();
-	private RetosAppService retosAppService = new RetosAppService();
 
 	public RemoteFacade() throws RemoteException {
 		super();
@@ -43,7 +38,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		System.out.println(" * RemoteFacade login(): " + email + " / " + password);
 
 		// Perform login() using LoginAppService
-		Usuario user = autenticacionAppService.login(email, password);
+		Usuario user = AutenticacionAppService.getInstance().login(email, password);
 
 		// If login() success user is stored in the Server State
 		if (user != null) {
@@ -83,7 +78,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 			throw new RemoteException("Could not register the user!");
 		}
 
-		if (autenticacionAppService.register(usuario)) {
+		if (AutenticacionAppService.getInstance().register(usuario)) {
 			try {
 				return login(usuario.getEmail(), usuario.getContrasena());
 			} catch (RemoteException ex) {
@@ -109,8 +104,8 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 			throw new RemoteException("crearSesionEntrenamiento() fails!");
 		}
 
-		// Create SesionEntrenamiento using SesionesEntrenamientoAppService
-		sesionesEntrenamientoAppService.crearSesionEntrenamiento(autenticacionAppService.getUsuario(serverState.get(token).getNombre()), sesionEntrenamiento);
+		// Create SesionEntrenamiento using SesionesEntrenamientoAppService.getInstance()
+		SesionesEntrenamientoAppService.getInstance().crearSesionEntrenamiento(AutenticacionAppService.getInstance().getUsuario(serverState.get(token).getNombre()), sesionEntrenamiento);
 		
 		return true;
 	}
@@ -120,10 +115,10 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 
 		List<SesionEntrenamiento> sesiones;
 
-		// Get SesionEntrenamiento using SesionesEntrenamientoAppService
+		// Get SesionEntrenamiento using SesionesEntrenamientoAppService.getInstance()
 		if (this.serverState.containsKey(token)) {
-			sesiones = sesionesEntrenamientoAppService
-					.getSesionesEntrenamiento(autenticacionAppService.getUsuario(serverState.get(token).getNombre()));
+			sesiones = SesionesEntrenamientoAppService.getInstance()
+					.getSesionesEntrenamiento(AutenticacionAppService.getInstance().getUsuario(serverState.get(token).getNombre()));
 		} else {
 			throw new RemoteException("getSesionesEntrenamiento(token) fails!");
 		}
@@ -140,8 +135,8 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	public List<SesionEntrenamientoDTO> getSesionesEntrenamiento() throws RemoteException {
 		System.out.println(" * RemoteFacade getSesionesEntrenamiento()");
 
-		// Get SesionEntrenamiento using SesionesEntrenamientoAppService
-		List<SesionEntrenamiento> sesiones = sesionesEntrenamientoAppService.getSesionesEntrenamiento();
+		// Get SesionEntrenamiento using SesionesEntrenamientoAppService.getInstance()
+		List<SesionEntrenamiento> sesiones = SesionesEntrenamientoAppService.getInstance().getSesionesEntrenamiento();
 
 		if (sesiones != null) {
 			// Convert domain object to DTO
@@ -167,8 +162,8 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 			throw new RemoteException("crearReto() fails!");
 		}
 
-		// Create Reto using RetosAppService
-		retosAppService.crearReto(reto);
+		// Create Reto using RetosAppService.getInstance()
+		RetosAppService.getInstance().crearReto(reto);
 		
 		return true;
 	}
@@ -178,9 +173,9 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 
 		List<Reto> retos;
 
-		// Get SesionEntrenamiento using SesionesEntrenamientoAppService
+		// Get SesionEntrenamiento using SesionesEntrenamientoAppService.getInstance()
 		if (this.serverState.containsKey(token)) {
-			retos = retosAppService.getRetos(this.serverState.get(token).getNombre());
+			retos = RetosAppService.getInstance().getRetos(this.serverState.get(token).getNombre());
 		} else {
 			throw new RemoteException("getRetos(token) fails!");
 		}
@@ -196,8 +191,8 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	public List<RetoDTO> getRetos() throws RemoteException {
 		System.out.println(" * RemoteFacade getRetos()");
 
-		// Get Reto using RetosAppService
-		List<Reto> retos = retosAppService.getRetos();
+		// Get Reto using RetosAppService.getInstance()
+		List<Reto> retos = RetosAppService.getInstance().getRetos();
 
 		if (retos != null) {
 			// Convert domain object to DTO
@@ -211,8 +206,8 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		System.out.println(" * RemoteFacade apuntarseReto()");
 
 		if (reto != null && this.serverState.containsKey(token)) {
-			// Apuntarse Reto using RetosAppService
-			retosAppService.apuntarseReto(this.serverState.get(token).getNombre(), reto);
+			// Apuntarse Reto using RetosAppService.getInstance()
+			RetosAppService.getInstance().apuntarseReto(this.serverState.get(token).getNombre(), reto);
 			return true;
 		} else {
 			throw new RemoteException("apuntarseReto() fails!");
@@ -223,8 +218,8 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		System.out.println(" * RemoteFacade desapuntarseReto()");
 
 		if (reto != null && this.serverState.containsKey(token)) {
-			// Desapuntarse Reto using RetosAppService
-			retosAppService.desapuntarseReto(this.serverState.get(token).getNombre(), reto);
+			// Desapuntarse Reto using RetosAppService.getInstance()
+			RetosAppService.getInstance().desapuntarseReto(this.serverState.get(token).getNombre(), reto);
 			return true;
 		} else {
 			throw new RemoteException("desapuntarseReto() fails!");
@@ -235,8 +230,8 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		System.out.println(" * RemoteFacade eliminarReto()");
 
 		if (reto != null && this.serverState.containsKey(token)) {
-			// Delete Reto using RetosAppService
-			retosAppService.eliminarReto(serverState.get(token).getNombre(), reto);
+			// Delete Reto using RetosAppService.getInstance()
+			RetosAppService.getInstance().eliminarReto(serverState.get(token).getNombre(), reto);
 			return true;
 		} else {
 			throw new RemoteException("eliminarReto() fails!");

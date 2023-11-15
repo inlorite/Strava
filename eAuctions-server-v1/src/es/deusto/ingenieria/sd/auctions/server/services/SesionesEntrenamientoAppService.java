@@ -16,10 +16,11 @@ import es.deusto.ingenieria.sd.auctions.server.data.domain.Usuario;
 //TODO: Implement Singleton Pattern
 public class SesionesEntrenamientoAppService {
 
+	private static SesionesEntrenamientoAppService instance;
 	// TODO: remove when DAO Pattern is implemented
 	private List<SesionEntrenamiento> sesionesEntrenamiento = new ArrayList<>();
 
-	public SesionesEntrenamientoAppService() {
+	private SesionesEntrenamientoAppService() {
 		// TODO: remove when DAO Pattern is implemented
 		//this.initializeData();
 	}
@@ -104,6 +105,14 @@ public class SesionesEntrenamientoAppService {
 
 	public List<SesionEntrenamiento> getSesionesEntrenamiento(Usuario usuario) {
 		return usuario.getSesionesEntrenamiento();
+	}
+	
+	public static SesionesEntrenamientoAppService getInstance() {
+		if (instance == null) {
+			instance = new SesionesEntrenamientoAppService();
+		}
+
+		return instance;
 	}
 
 }
