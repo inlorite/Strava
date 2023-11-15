@@ -1,5 +1,8 @@
 package es.deusto.ingenieria.sd.auctions.server.data.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import es.deusto.ingenieria.sd.auctions.server.data.domain.SesionEntrenamiento;
 
 public class SesionEntrenamientoAssembler {
@@ -38,5 +41,27 @@ public class SesionEntrenamientoAssembler {
 		sesionEntrenamiento.setDuracion(dto.getDuracion());
 
 		return sesionEntrenamiento;
+	}
+
+	public List<SesionEntrenamientoDTO> sesionEntrenamientoToDTO(List<SesionEntrenamiento> sesionesEntrenamiento) {
+		List<SesionEntrenamientoDTO> dtos = new ArrayList<>();
+
+		for (SesionEntrenamiento s : sesionesEntrenamiento) {
+
+			dtos.add(this.sesionEntrenamientoToDTO(s));
+		}
+
+		return dtos;
+	}
+
+	public List<SesionEntrenamiento> dtoToSesionEntrenamiento(List<SesionEntrenamientoDTO> sesionesEntrenamientoDTO) {
+		List<SesionEntrenamiento> sesiones = new ArrayList<>();
+
+		for (SesionEntrenamientoDTO dto : sesionesEntrenamientoDTO) {
+
+			sesiones.add(this.dtoToSesionEntrenamiento(dto));
+		}
+
+		return sesiones;
 	}
 }

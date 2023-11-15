@@ -1,5 +1,6 @@
 package es.deusto.ingenieria.sd.auctions.server.data.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -11,7 +12,7 @@ public class Reto {
 	private float distancia;
 	private float tiempo;
 	private String creador;
-	private List<String> participantes;
+	private List<String> participantes = new ArrayList<>();
 
 	public List<String> getParticipantes() {
 		return participantes;

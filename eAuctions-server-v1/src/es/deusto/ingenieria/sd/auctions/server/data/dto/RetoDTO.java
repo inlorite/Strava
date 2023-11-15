@@ -2,6 +2,7 @@ package es.deusto.ingenieria.sd.auctions.server.data.dto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import es.deusto.ingenieria.sd.auctions.server.data.domain.Usuario;
 
@@ -14,6 +15,15 @@ public class RetoDTO implements Serializable {
 	private float distancia;
 	private float tiempo;
 	private String creador;
+	private List<String> participantes;
+
+	public List<String> getParticipantes() {
+		return participantes;
+	}
+
+	public void setParticipantes(List<String> participantes) {
+		this.participantes = participantes;
+	}
 
 	public String getNombre() {
 		return nombre;
