@@ -121,6 +121,7 @@ public class AutenticacionWindow extends JFrame {
 						float altura = Float.parseFloat(tfAltura.getText());
 						int frecuenciaCardiacaMax = Integer.parseInt(tfFrecCardiMax.getText());
 						int frecuenciaCardiacaReposo = Integer.parseInt(tfFrecCardiRep.getText());
+						@SuppressWarnings("deprecation")
 						String contrasena = pfContrasena.getText();
 						
 						boolean register = register(nombre, email, fechaNacimiento, peso, altura, frecuenciaCardiacaMax, frecuenciaCardiacaReposo, contrasena);

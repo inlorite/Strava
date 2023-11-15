@@ -18,12 +18,16 @@ public class AutenticacionController {
 	}
 
 	public boolean login(String email, String password) {
-		try {
-			this.token = ServiceLocator.getInstance().getService().login(email, password);			
-			return true;
-		} catch (RemoteException e) {
-			System.out.println("# Error during login: " + e);
-			this.token = -1;
+		if (!email.isEmpty() && !password.isEmpty()) {
+			try {
+				this.token = ServiceLocator.getInstance().getService().login(email, password);			
+				return true;
+			} catch (RemoteException e) {
+				System.out.println("# Error during login: " + e);
+				this.token = -1;
+				return false;
+			}
+		} else {
 			return false;
 		}
 	}
@@ -40,22 +44,26 @@ public class AutenticacionController {
 	}
 	
 	public boolean register(String nombre, String email, Date fechaNacimiento, float peso, float altura, int frecuenciaCardiacaMax, int frecuenciaCardiacaReposo, String contrasena) {
-		try {
-			UsuarioRegisterDTO usuario = new UsuarioRegisterDTO();
-			usuario.setNombre(nombre);
-			usuario.setEmail(email);
-			usuario.setFechaNacimiento(fechaNacimiento);
-			usuario.setPeso(peso);
-			usuario.setAltura(altura);
-			usuario.setFrecuenciaCardiacaMax(frecuenciaCardiacaMax);
-			usuario.setFrecuenciaCardiacaReposo(frecuenciaCardiacaReposo);
-			usuario.setContrasena(contrasena);
-			
-			this.token = ServiceLocator.getInstance().getService().register(usuario);
-			return true;
-		} catch (RemoteException e) {
-			System.out.println("# Error during register: " + e);
-			this.token = -1;
+		if (!nombre.isEmpty() && !email.isEmpty() && fechaNacimiento != null && peso != 0 && altura != 0 && frecuenciaCardiacaMax != 0 && frecuenciaCardiacaReposo != 0 && !contrasena.isEmpty()) {
+			try {
+				UsuarioRegisterDTO usuario = new UsuarioRegisterDTO();
+				usuario.setNombre(nombre);
+				usuario.setEmail(email);
+				usuario.setFechaNacimiento(fechaNacimiento);
+				usuario.setPeso(peso);
+				usuario.setAltura(altura);
+				usuario.setFrecuenciaCardiacaMax(frecuenciaCardiacaMax);
+				usuario.setFrecuenciaCardiacaReposo(frecuenciaCardiacaReposo);
+				usuario.setContrasena(contrasena);
+				
+				this.token = ServiceLocator.getInstance().getService().register(usuario);
+				return true;
+			} catch (RemoteException e) {
+				System.out.println("# Error during register: " + e);
+				this.token = -1;
+				return false;
+			}
+		} else {
 			return false;
 		}
 	}
