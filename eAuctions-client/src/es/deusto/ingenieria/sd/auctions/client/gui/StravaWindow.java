@@ -98,7 +98,7 @@ public class StravaWindow extends JFrame {
 	}
 
 	public List<SesionEntrenamientoDTO> getSesionesEntrenamiento() {
-		
+		System.out.println("PASO1");
 		return StravaController.getInstance().getSesionesEntrenamiento();
 	}
 

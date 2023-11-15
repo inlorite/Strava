@@ -36,12 +36,13 @@ public class DMenuBar extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				bRetos.setEnabled(false);
-				bSesiones.setEnabled(true);
+				bRetos.setEnabled(true);
+				bSesiones.setEnabled(false);
+				StravaWindow.cl.show(StravaWindow.mainPanel, "SESIONES");
 
 				/*
 				DPanelSesiones.loadDataModels();
-				StravaWindow.cl.show(StravaWindow.mainPanel, "SESIONES");
+				
 				AutenticacionWindow.stravaWindow.setTitle("Strava - Sesiones");
 				*/
 			}
@@ -51,16 +52,17 @@ public class DMenuBar extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				bRetos.setEnabled(false);
+				bSesiones.setEnabled(true);
+				StravaWindow.cl.show(StravaWindow.mainPanel, "RETOS");
 				/*
-				bRetos.setEnabled(true);
-				bSesiones.setEnabled(false);
-
 				DPanelRetos.lBanner.setIcon(null);
 				DPanelRetos.lInfo.setText("");
 				DPanelRetos.bComprar.setEnabled(false);
 
 				DPanelRetos.loadTablaJuegos();
-				StravaWindow.cl.show(StravaWindow.mainPanel, "RETOS");
+				
 				AutenticacionWindow.stravaWindow.setTitle("Strava - Retos");
 				*/
 			}

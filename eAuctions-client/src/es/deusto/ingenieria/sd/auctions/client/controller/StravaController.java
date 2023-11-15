@@ -45,6 +45,7 @@ public class StravaController {
 
 	public List<SesionEntrenamientoDTO> getSesionesEntrenamiento() {
 		try {
+			System.out.println("PASO2");
 			return ServiceLocator.getInstance().getService().getSesionesEntrenamiento();
 		} catch (RemoteException e) {
 			System.out.println("# Error getting Sesiones Entrenamiento: " + e);
