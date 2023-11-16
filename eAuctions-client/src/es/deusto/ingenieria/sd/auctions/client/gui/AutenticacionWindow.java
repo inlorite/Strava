@@ -7,6 +7,8 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Date;
 import java.util.logging.Level;
 
@@ -71,25 +73,6 @@ public class AutenticacionWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				/*
-				String nombre = "test";
-				String email = "test@gmail.com";
-				Date fechaNacimiento = new Date();
-				float peso = 48.5f;
-				float altura = 160.2f;
-				int frecuenciaCardiacaMax = 5;
-				int frecuenciaCardiacaReposo = 12;
-				String contrasena = "test123";
-				
-				boolean r = register(nombre, email, fechaNacimiento, peso, altura, frecuenciaCardiacaMax, frecuenciaCardiacaReposo, contrasena);
-				
-				if (r) {
-					System.out.println("te has registrado correctamente");
-				} else {
-					System.out.println("error register");
-				}
-				*/
-				
 				JTextField tfNombre = new JTextField();
 				JTextField tfEmail = new JTextField();
 				JDateChooser dcNacimiento = new JDateChooser("yyyy/MM/dd", "####/##/##", '_');
@@ -124,6 +107,17 @@ public class AutenticacionWindow extends JFrame {
 						@SuppressWarnings("deprecation")
 						String contrasena = pfContrasena.getText();
 						
+						/*
+						String nombre = "test";
+						String email = "test@gmail.com";
+						Date fechaNacimiento = new Date(100);
+						float peso = 12f;
+						float altura = 12f;
+						int frecuenciaCardiacaMax = 12;
+						int frecuenciaCardiacaReposo = 12;
+						String contrasena = "test";
+						*/
+						
 						boolean register = register(nombre, email, fechaNacimiento, peso, altura, frecuenciaCardiacaMax, frecuenciaCardiacaReposo, contrasena);
 						
 						if (register) {
@@ -153,14 +147,22 @@ public class AutenticacionWindow extends JFrame {
 				boolean login = login(email, password);
 
 				if (login) {
-					// stravaWindow = new StravaWindow();
 					System.out.println("hola te has logueado");
+					AutenticacionWindow.getInstance().setVisible(false);
+					StravaWindow.getInstance().setVisible(true);
 				} else {
 					System.out.println("datos incorrectos");
 				}
 
 			}
 
+		});
+		
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				AutenticacionController.getInstance().logout();
+			}
 		});
 
 		this.setTitle("Strava Autenticacion");

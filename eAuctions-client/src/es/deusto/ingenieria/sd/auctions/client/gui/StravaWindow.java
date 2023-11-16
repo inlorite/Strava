@@ -1,12 +1,16 @@
 package es.deusto.ingenieria.sd.auctions.client.gui;
 
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.List;
 
 import javax.swing.*;
 
+import es.deusto.ingenieria.sd.auctions.client.controller.AutenticacionController;
 import es.deusto.ingenieria.sd.auctions.client.controller.StravaController;
 import es.deusto.ingenieria.sd.auctions.client.gui.customComponents.*;
 import es.deusto.ingenieria.sd.auctions.client.remote.ServiceLocator;
@@ -64,6 +68,13 @@ public class StravaWindow extends JFrame {
 //			vChat = new VChat();
 //			client = new Client(VLogin.loggedUser, vChat.dlmChatbox);
 //		}
+		
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				AutenticacionController.getInstance().logout();
+			}
+		});
 
 		this.setTitle("Strava - Retos");
 		this.setIconImage(new ImageIcon("data/icon.png").getImage());

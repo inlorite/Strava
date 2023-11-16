@@ -93,6 +93,7 @@ public class SesionesEntrenamientoAppService {
 
 	public boolean crearSesionEntrenamiento(Usuario usuario, SesionEntrenamiento sesionEntrenamiento) {
 		if (!usuario.getSesionesEntrenamiento().contains(sesionEntrenamiento)) {
+			sesionesEntrenamiento.add(sesionEntrenamiento);
 			usuario.getSesionesEntrenamiento().add(sesionEntrenamiento);
 			return true;
 		}

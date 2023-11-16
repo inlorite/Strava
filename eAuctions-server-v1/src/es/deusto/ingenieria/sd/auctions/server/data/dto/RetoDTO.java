@@ -77,4 +77,10 @@ public class RetoDTO implements Serializable {
 		return serialVersionUID;
 	}
 
+	@Override
+	public String toString() {
+		return "RetoDTO [nombre=" + nombre + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", distancia="
+				+ distancia + ", tiempo=" + tiempo + ", creador=" + creador + ", participantes=" + participantes + "]";
+	}
+	
 }

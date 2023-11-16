@@ -7,18 +7,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
 import com.toedter.calendar.JDateChooser;
 
 import es.deusto.ingenieria.sd.auctions.client.controller.AutenticacionController;
+import es.deusto.ingenieria.sd.auctions.client.controller.StravaController;
 import es.deusto.ingenieria.sd.auctions.client.gui.AutenticacionWindow;
 import es.deusto.ingenieria.sd.auctions.client.gui.StravaWindow;
 import es.deusto.ingenieria.sd.auctions.server.data.dto.SesionEntrenamientoDTO;
@@ -29,13 +24,15 @@ public class DPanelSesiones extends JPanel {
 	
 	private JPanel pGetSesiones;
 	private JButton bGetSesiones;
+	private JScrollPane spSesiones;
 	private JList<String> lSesiones;
-	private DefaultListModel<String> modelo;
+	private DefaultListModel<String> dlmSesiones;
 	
 	private JPanel pGetSesionesUsuario;
 	private JButton bGetSesionesUsuario;
-	private JList<SesionEntrenamientoDTO> lSesionesUsuario;
-	private DefaultListModel<SesionEntrenamientoDTO> modeloUsuario;
+	private JScrollPane spSesionesUsuario;
+	private JList<String> lSesionesUsuario;
+	private DefaultListModel<String> dlmSesionesUsuario;
 	
 	private JPanel pCrearSesion;
 	private JButton bCrearSesion;
@@ -48,22 +45,24 @@ public class DPanelSesiones extends JPanel {
 		pGetSesiones = new JPanel();
 		pGetSesiones.setLayout(new GridLayout(2, 1, 5, 5));
 		pGetSesiones.setBorder(new TitledBorder("Obtener sesiones"));
-		lSesiones = new JList<String>();
-		modelo = new DefaultListModel<String>();
-		lSesiones.setModel(modelo);
+		lSesiones = new JList<>();
+		spSesiones = new JScrollPane(lSesiones);
+		spSesiones.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED );
+		spSesiones.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED );
 		bGetSesiones = new JButton("Obtener Sesiones");
-		pGetSesiones.add(lSesiones);
+		pGetSesiones.add(spSesiones);
 		pGetSesiones.add(bGetSesiones);
 		this.add(pGetSesiones);
 		
 		pGetSesionesUsuario = new JPanel();
 		pGetSesionesUsuario.setLayout(new GridLayout(2, 1, 5, 5));
 		pGetSesionesUsuario.setBorder(new TitledBorder("Obtener sesiones usuario"));
-		lSesionesUsuario = new JList<SesionEntrenamientoDTO>();	
-		modeloUsuario = new DefaultListModel<SesionEntrenamientoDTO>();
-		lSesionesUsuario.setModel(modeloUsuario);
+		lSesionesUsuario = new JList<>();
+		spSesionesUsuario = new JScrollPane(lSesionesUsuario);
+		spSesionesUsuario.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED );
+		spSesionesUsuario.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED );
 		bGetSesionesUsuario = new JButton("Obtener mis Sesiones");
-		pGetSesionesUsuario.add(lSesionesUsuario);
+		pGetSesionesUsuario.add(spSesionesUsuario);
 		pGetSesionesUsuario.add(bGetSesionesUsuario);
 		this.add(pGetSesionesUsuario);
 		
@@ -74,20 +73,34 @@ public class DPanelSesiones extends JPanel {
 		pCrearSesion.add(bCrearSesion);
 		this.add(pCrearSesion);
 		
-		
-		
 		bGetSesiones.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				List<SesionEntrenamientoDTO> lista = new ArrayList<>();
-				lista = StravaWindow.getInstance().getSesionesEntrenamiento();
+				dlmSesiones = new DefaultListModel<>();
+				List<SesionEntrenamientoDTO> lista = StravaWindow.getInstance().getSesionesEntrenamiento();
+				System.out.println("Hola "+lista.get(0).getTitulo());
 				for (SesionEntrenamientoDTO sesionEntrenamientoDTO : lista) {
-					System.out.println("Hola "+sesionEntrenamientoDTO.getTitulo());
-					modelo.add(UNDEFINED_CONDITION, sesionEntrenamientoDTO.getTitulo());
+					dlmSesiones.addElement(sesionEntrenamientoDTO.toString());
 				}
-				lSesiones.setModel(modelo);
-				pGetSesiones.updateUI();				
+				lSesiones.setModel(dlmSesiones);
+				pGetSesiones.updateUI();
+				
+			}
+		});
+		
+		bGetSesionesUsuario.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dlmSesionesUsuario = new DefaultListModel<>();
+				List<SesionEntrenamientoDTO> lista = StravaWindow.getInstance().getSesionesEntrenamiento(AutenticacionController.getToken());
+				System.out.println("Hola "+lista.get(0).getTitulo());
+				for (SesionEntrenamientoDTO sesionEntrenamientoDTO : lista) {
+					dlmSesionesUsuario.addElement(sesionEntrenamientoDTO.toString());
+				}
+				lSesionesUsuario.setModel(dlmSesionesUsuario);
+				pGetSesionesUsuario.updateUI();
 				
 			}
 		});
@@ -137,12 +150,6 @@ public class DPanelSesiones extends JPanel {
 					System.out.println("Cancelar");
 				}
 			}
-				
-			
-		});
-		
+		});	
 	}
-	
-	
-
 }

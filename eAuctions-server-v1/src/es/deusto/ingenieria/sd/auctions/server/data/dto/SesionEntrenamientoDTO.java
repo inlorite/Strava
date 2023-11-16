@@ -55,4 +55,11 @@ public class SesionEntrenamientoDTO implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+	@Override
+	public String toString() {
+		return "SesionEntrenamientoDTO [titulo=" + titulo + ", distancia=" + distancia + ", fechaInicio=" + fechaInicio
+				+ ", horaInicio=" + horaInicio + ", duracion=" + duracion + "]";
+	}
+	
 }

@@ -20,11 +20,11 @@ public class AutenticacionController {
 	public boolean login(String email, String password) {
 		if (!email.isEmpty() && !password.isEmpty()) {
 			try {
-				this.token = ServiceLocator.getInstance().getService().login(email, password);			
+				AutenticacionController.token = ServiceLocator.getInstance().getService().login(email, password);			
 				return true;
 			} catch (RemoteException e) {
 				System.out.println("# Error during login: " + e);
-				this.token = -1;
+				AutenticacionController.token = -1;
 				return false;
 			}
 		} else {
@@ -34,8 +34,8 @@ public class AutenticacionController {
 	
 	public boolean logout() {
 		try {
-			ServiceLocator.getInstance().getService().logout(this.token);
-			this.token = -1;
+			ServiceLocator.getInstance().getService().logout(AutenticacionController.token);
+			AutenticacionController.token = -1;
 			return true;
 		} catch (RemoteException e) {
 			System.out.println("# Error during logout: " + e);

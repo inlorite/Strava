@@ -140,8 +140,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 
 		if (sesiones != null) {
 			// Convert domain object to DTO
-			return sesiones.stream().map(e -> SesionEntrenamientoAssembler.getInstance().sesionEntrenamientoToDTO(e))
-					.collect(Collectors.toList());
+			return SesionEntrenamientoAssembler.getInstance().sesionEntrenamientoToDTO(sesiones);
 		} else {
 			throw new RemoteException("getSesionesEntrenamiento() fails!");
 		}
