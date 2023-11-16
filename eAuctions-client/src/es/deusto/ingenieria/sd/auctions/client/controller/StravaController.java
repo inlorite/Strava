@@ -17,7 +17,7 @@ public class StravaController {
 	// Métodos SesionEntrenamiento
 
 	public boolean crearSesionEntrenamiento(long token, String titulo, float distancia, Date fechaInicio, long horaInicio,
-			float duracion) {
+			float duracion, String deporte) {
 
 		SesionEntrenamientoDTO sesionEntrenamientoDTO = new SesionEntrenamientoDTO();
 		sesionEntrenamientoDTO.setTitulo(titulo);
@@ -25,6 +25,7 @@ public class StravaController {
 		sesionEntrenamientoDTO.setFechaInicio(fechaInicio);
 		sesionEntrenamientoDTO.setHoraInicio(horaInicio);
 		sesionEntrenamientoDTO.setDuracion(duracion);
+		sesionEntrenamientoDTO.setDeporte(deporte);
 
 		try {
 			return ServiceLocator.getInstance().getService().crearSesionEntrenamiento(sesionEntrenamientoDTO, token);
@@ -55,7 +56,7 @@ public class StravaController {
 
 	// Métodos Reto
 
-	public boolean crearReto(String nombre, Date fechaInicio, Date fechaFin, float distancia, float tiempo, long token) {
+	public boolean crearReto(String nombre, Date fechaInicio, Date fechaFin, float distancia, float tiempo, long token, String tipoReto) {
 
 		RetoDTO retoDTO = new RetoDTO();
 		retoDTO.setNombre(nombre);
@@ -63,6 +64,7 @@ public class StravaController {
 		retoDTO.setFechaFin(fechaFin);
 		retoDTO.setDistancia(distancia);
 		retoDTO.setTiempo(tiempo);
+		retoDTO.setTipoReto(tipoReto);
 
 		try {
 			return ServiceLocator.getInstance().getService().crearReto(retoDTO, token);

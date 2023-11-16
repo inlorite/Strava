@@ -9,6 +9,15 @@ public class SesionEntrenamiento {
 	private Date fechaInicio;
 	private long horaInicio;
 	private float duracion;
+	private String deporte;
+
+	public String getDeporte() {
+		return deporte;
+	}
+
+	public void setDeporte(String deporte) {
+		this.deporte = deporte;
+	}
 
 	public String getTitulo() {
 		return titulo;
@@ -73,7 +82,7 @@ public class SesionEntrenamiento {
 	@Override
 	public String toString() {
 		return "SesionEntrenamiento [titulo=" + titulo + ", distancia=" + distancia + ", fechaInicio=" + fechaInicio
-				+ ", horaInicio=" + horaInicio + ", duracion=" + duracion + "]";
+				+ ", horaInicio=" + horaInicio + ", duracion=" + duracion + ", deporte=" + deporte + "]";
 	}
 
 }

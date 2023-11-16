@@ -3,6 +3,8 @@ package es.deusto.ingenieria.sd.auctions.server.data.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import es.deusto.ingenieria.sd.auctions.server.data.domain.Deporte;
+
 public class SesionEntrenamientoDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -11,6 +13,15 @@ public class SesionEntrenamientoDTO implements Serializable {
 	private Date fechaInicio;
 	private long horaInicio;
 	private float duracion;
+	private String deporte;
+
+	public String getDeporte() {
+		return deporte;
+	}
+
+	public void setDeporte(String deporte) {
+		this.deporte = deporte;
+	}
 
 	public String getTitulo() {
 		return titulo;
@@ -59,7 +70,7 @@ public class SesionEntrenamientoDTO implements Serializable {
 	@Override
 	public String toString() {
 		return "SesionEntrenamientoDTO [titulo=" + titulo + ", distancia=" + distancia + ", fechaInicio=" + fechaInicio
-				+ ", horaInicio=" + horaInicio + ", duracion=" + duracion + "]";
+				+ ", horaInicio=" + horaInicio + ", duracion=" + duracion + ", deporte=" + deporte + "]";
 	}
 	
 }

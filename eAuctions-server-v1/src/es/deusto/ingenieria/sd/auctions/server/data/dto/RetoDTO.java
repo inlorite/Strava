@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import es.deusto.ingenieria.sd.auctions.server.data.domain.TipoReto;
 import es.deusto.ingenieria.sd.auctions.server.data.domain.Usuario;
 
 public class RetoDTO implements Serializable {
@@ -16,6 +17,15 @@ public class RetoDTO implements Serializable {
 	private float tiempo;
 	private String creador;
 	private List<String> participantes;
+	private String tipoReto;
+
+	public String getTipoReto() {
+		return tipoReto;
+	}
+
+	public void setTipoReto(String tipoReto) {
+		this.tipoReto = tipoReto;
+	}
 
 	public List<String> getParticipantes() {
 		return participantes;
@@ -80,7 +90,8 @@ public class RetoDTO implements Serializable {
 	@Override
 	public String toString() {
 		return "RetoDTO [nombre=" + nombre + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", distancia="
-				+ distancia + ", tiempo=" + tiempo + ", creador=" + creador + ", participantes=" + participantes + "]";
+				+ distancia + ", tiempo=" + tiempo + ", creador=" + creador + ", participantes=" + participantes
+				+ ", tipoReto=" + tipoReto + "]";
 	}
 	
 }

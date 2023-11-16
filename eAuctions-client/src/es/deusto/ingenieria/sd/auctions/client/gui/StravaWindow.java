@@ -97,10 +97,10 @@ public class StravaWindow extends JFrame {
 	//Metodos sesiones
 	
 	public boolean crearSesionEntrenamiento(long token, String titulo, float distancia, Date fechaInicio,
-			long horaInicio, float duracion) {
+			long horaInicio, float duracion, String deporte) {
 
 		return StravaController.getInstance().crearSesionEntrenamiento(token, titulo, distancia, fechaInicio,
-				horaInicio, duracion);
+				horaInicio, duracion, deporte);
 	}
 
 	public List<SesionEntrenamientoDTO> getSesionesEntrenamiento(long token) {
@@ -116,9 +116,9 @@ public class StravaWindow extends JFrame {
 	// Métodos Reto
 
 	public boolean crearReto(String nombre, Date fechaInicio, Date fechaFin, float distancia, float tiempo,
-			long token) {
+			long token, String tipoReto) {
 
-		return StravaController.getInstance().crearReto(nombre, fechaInicio, fechaFin, distancia, tiempo, token);
+		return StravaController.getInstance().crearReto(nombre, fechaInicio, fechaFin, distancia, tiempo, token, tipoReto);
 	}
 	
 	public List<RetoDTO> getRetos(long token) {

@@ -30,6 +30,7 @@ public class RetoAssembler {
 		dto.setTiempo(reto.getTiempo());
 		dto.setCreador(reto.getCreador());
 		dto.setParticipantes(reto.getParticipantes());
+		dto.setTipoReto(reto.getTipoReto());
 
 		return dto;
 	}
@@ -44,6 +45,7 @@ public class RetoAssembler {
 		reto.setTiempo(dto.getTiempo());
 		reto.setCreador(dto.getCreador());
 		reto.setParticipantes(dto.getParticipantes());
+		reto.setTipoReto(dto.getTipoReto());
 
 		return reto;
 	}

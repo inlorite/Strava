@@ -1,5 +1,6 @@
 package es.deusto.ingenieria.sd.auctions.client.gui.customComponents;
 
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,7 +35,6 @@ public class DPanelSesiones extends JPanel {
 	private JList<String> lSesionesUsuario;
 	private DefaultListModel<String> dlmSesionesUsuario;
 	
-	private JPanel pCrearSesion;
 	private JButton bCrearSesion;
 	
 	
@@ -43,35 +43,34 @@ public class DPanelSesiones extends JPanel {
 		this.setLayout(new GridLayout(1, 3, 5, 5));
 		
 		pGetSesiones = new JPanel();
-		pGetSesiones.setLayout(new GridLayout(2, 1, 5, 5));
+		pGetSesiones.setLayout(new BorderLayout(5, 5));
 		pGetSesiones.setBorder(new TitledBorder("Obtener sesiones"));
 		lSesiones = new JList<>();
 		spSesiones = new JScrollPane(lSesiones);
 		spSesiones.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED );
 		spSesiones.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED );
 		bGetSesiones = new JButton("Obtener Sesiones");
-		pGetSesiones.add(spSesiones);
-		pGetSesiones.add(bGetSesiones);
+		pGetSesiones.add(spSesiones, BorderLayout.CENTER);
+		pGetSesiones.add(bGetSesiones, BorderLayout.SOUTH);
 		this.add(pGetSesiones);
 		
 		pGetSesionesUsuario = new JPanel();
-		pGetSesionesUsuario.setLayout(new GridLayout(2, 1, 5, 5));
+		pGetSesionesUsuario.setLayout(new BorderLayout(5, 5));
 		pGetSesionesUsuario.setBorder(new TitledBorder("Obtener sesiones usuario"));
 		lSesionesUsuario = new JList<>();
 		spSesionesUsuario = new JScrollPane(lSesionesUsuario);
 		spSesionesUsuario.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED );
 		spSesionesUsuario.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED );
-		bGetSesionesUsuario = new JButton("Obtener mis Sesiones");
-		pGetSesionesUsuario.add(spSesionesUsuario);
-		pGetSesionesUsuario.add(bGetSesionesUsuario);
-		this.add(pGetSesionesUsuario);
+		pGetSesionesUsuario.add(spSesionesUsuario, BorderLayout.CENTER);
 		
-		pCrearSesion = new JPanel();
-		pCrearSesion.setLayout(new GridLayout(1, 1, 5, 5));
-		pCrearSesion.setBorder(new TitledBorder("Crear Sesion"));
+		JPanel pBotones = new JPanel(new GridLayout(1, 2, 5, 5));
+		bGetSesionesUsuario = new JButton("Obtener mis Sesiones");
 		bCrearSesion = new JButton("Crear sesion");
-		pCrearSesion.add(bCrearSesion);
-		this.add(pCrearSesion);
+		pBotones.add(bGetSesionesUsuario);
+		pBotones.add(bCrearSesion);
+		pGetSesionesUsuario.add(pBotones, BorderLayout.SOUTH);
+		
+		this.add(pGetSesionesUsuario);
 		
 		bGetSesiones.addActionListener(new ActionListener() {
 
@@ -115,13 +114,16 @@ public class DPanelSesiones extends JPanel {
 				JDateChooser dcFechaInicio = new JDateChooser("yyyy/MM/dd", "####/##/##", '_');
 				JTextField tfHoraInicio = new JTextField();
 				JTextField tfDuracion = new JTextField();
+				String[] opciones = {"Ciclismo", "Running"};
+				JComboBox<String> cbDeporte = new JComboBox<>(opciones);
 				
 				Object[] fields = {
 						"Titulo", tfTitulo,
 						"Distancia", tfDistancia,
 						"Fecha inicio", dcFechaInicio,
 						"Hora inicio", tfHoraInicio,
-						"Duracion", tfDuracion
+						"Duracion", tfDuracion,
+						"Deporte", cbDeporte
 				};
 				
 				int result = JOptionPane.showConfirmDialog(null, fields, "CrearSesion", JOptionPane.OK_CANCEL_OPTION);
@@ -133,8 +135,9 @@ public class DPanelSesiones extends JPanel {
 						Date fechaInicio = dcFechaInicio.getDate();
 						long horaInicio = Long.parseLong(tfHoraInicio.getText());
 						float duracion = Float.parseFloat(tfDuracion.getText());
+						String deporte = (String) cbDeporte.getSelectedItem();
 						
-						boolean resultado  = StravaWindow.getInstance().crearSesionEntrenamiento(AutenticacionController.getToken(),titulo, distancia, fechaInicio, horaInicio,  duracion);
+						boolean resultado  = StravaWindow.getInstance().crearSesionEntrenamiento(AutenticacionController.getToken(),titulo, distancia, fechaInicio, horaInicio,  duracion, deporte);
 						
 						if (resultado) {
 							System.out.println("sesion creada");

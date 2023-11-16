@@ -107,8 +107,9 @@ public class RetosAppService {
 		List<Reto> retosUsuario = new ArrayList<Reto>();
 		
 		for (Reto reto : retos) {
-			if (reto.getCreador().equals(usuario))
+			if (reto.getCreador().equals(usuario) || reto.getParticipantes().contains(usuario)) {
 				retosUsuario.add(reto);
+			}
 		}
 		
 		return retosUsuario;

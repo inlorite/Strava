@@ -13,6 +13,15 @@ public class Reto {
 	private float tiempo;
 	private String creador;
 	private List<String> participantes = new ArrayList<>();
+	private String tipoReto;
+
+	public String getTipoReto() {
+		return tipoReto;
+	}
+
+	public void setTipoReto(String tipoReto) {
+		this.tipoReto = tipoReto;
+	}
 
 	public List<String> getParticipantes() {
 		return participantes;
@@ -94,7 +103,8 @@ public class Reto {
 	@Override
 	public String toString() {
 		return "Reto [nombre=" + nombre + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", distancia="
-				+ distancia + ", tiempo=" + tiempo + ", creador=" + creador + "]";
+				+ distancia + ", tiempo=" + tiempo + ", creador=" + creador + ", participantes=" + participantes
+				+ ", tipoReto=" + tipoReto + "]";
 	}
 
 }
