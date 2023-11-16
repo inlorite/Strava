@@ -1,6 +1,7 @@
 package es.deusto.ingenieria.sd.auctions.server.data.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class RetoDTO implements Serializable {
 	private float distancia;
 	private float tiempo;
 	private String creador;
-	private List<String> participantes;
+	private List<String> participantes = new ArrayList<>();
 	private String tipoReto;
 
 	public String getTipoReto() {

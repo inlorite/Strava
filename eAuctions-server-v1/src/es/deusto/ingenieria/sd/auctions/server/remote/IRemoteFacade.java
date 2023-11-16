@@ -18,6 +18,8 @@ public interface IRemoteFacade extends Remote {
 	public void logout(long token) throws RemoteException;
 
 	public long register(UsuarioRegisterDTO usuarioRegisterDTO) throws RemoteException;
+	
+	public String getUsuario(long token) throws RemoteException;
 
 	// Métodos SesionEntrenamiento
 

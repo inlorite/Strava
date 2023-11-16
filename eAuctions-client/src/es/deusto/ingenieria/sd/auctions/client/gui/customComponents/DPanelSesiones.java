@@ -141,8 +141,6 @@ public class DPanelSesiones extends JPanel {
 						
 						if (resultado) {
 							System.out.println("sesion creada");
-							AutenticacionWindow.getInstance().setVisible(false);
-							StravaWindow.getInstance().setVisible(true);
 						} else {
 							System.out.println("sesion incorrecta");
 						}

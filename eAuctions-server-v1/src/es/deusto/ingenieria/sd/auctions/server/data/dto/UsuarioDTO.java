@@ -1,6 +1,7 @@
 package es.deusto.ingenieria.sd.auctions.server.data.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +15,7 @@ public class UsuarioDTO implements Serializable {
 	private float altura;
 	private int frecuenciaCardiacaMax;
 	private int frecuenciaCardiacaReposo;
-	private List<SesionEntrenamientoDTO> sesionesEntrenamiento;
+	private List<SesionEntrenamientoDTO> sesionesEntrenamiento = new ArrayList<>();
 
 	public List<SesionEntrenamientoDTO> getSesionesEntrenamiento() {
 		return sesionesEntrenamiento;

@@ -68,6 +68,16 @@ public class AutenticacionController {
 		}
 	}
 	
+	public String getUsuario() {
+			try {
+				return ServiceLocator.getInstance().getService().getUsuario(AutenticacionController.token);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+				return null;
+			}
+
+	}
+	
 	public static AutenticacionController getInstance() {
 		if (instance == null) {
 			instance = new AutenticacionController();

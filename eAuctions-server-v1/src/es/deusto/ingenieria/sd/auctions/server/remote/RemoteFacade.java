@@ -237,4 +237,9 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		}
 	}
 
+	@Override
+	public String getUsuario(long token) throws RemoteException {	
+		return AutenticacionAppService.getInstance().getUsuario(serverState.get(token).getNombre()).getNombre();
+	}
+
 }
