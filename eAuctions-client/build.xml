@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project basedir="." default="2.client" name="eAuctions-client">    
+<project basedir="." default="2.client" name="Strava-client">    
 	<property environment="env"/>
 	<property name="source.dir" location="src"/>
    	<property name="build.dir" location="bin"/>
 	<property name="lib.dir" location="lib"/>
 	<property name="rmiregistry.port" value="1099"/>
 	<property name="rmiregistry.IP" value="127.0.0.1"/> 
-	<property name="server.name" value="eAuctions"/>
+	<property name="server.name" value="Strava"/>
 	<property name="policy.file" location="security/java.policy"/>	
 
 	<path id="classpath">

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project basedir="." default="4.server" name="eAuctions-server-v1">    
+<project basedir="." default="4.server" name="Strava-server-v1">    
 	<property name="src.dir" location="src"/>
    	<property name="bin.dir" location="bin"/>
 	<property name="dist.dir" location="dist"/>
 	<property name="lib.dir" location="lib"/>
-	<property name="export.file" value="eAuctions.jar"/>
+	<property name="export.file" value="Strava.jar"/>
 	<property name="policy.file" location="security/java.policy"/>	
 	<property name="rmiregistry.IP" value="127.0.0.1"/> 
 	<property name="rmiregistry.port" value="1099"/> 
-	<property name="server.name" value="eAuctions"/>
+	<property name="server.name" value="Strava"/>
 
 	<path id="classpath">
         <fileset dir="${lib.dir}">
