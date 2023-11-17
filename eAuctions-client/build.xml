@@ -23,7 +23,7 @@
     </target>
     
 	<target name="2.client" depends="1.build"  description="Runs Client program">
-		<java classname="es.deusto.ingenieria.sd.auctions.client.MainProgram" classpathref="classpath" fork="true">
+		<java classname="es.deusto.ingenieria.sd.strava.client.MainProgram" classpathref="classpath" fork="true">
 			<jvmarg value="-Djava.security.policy=${policy.file}"/>			
         	<arg value="${rmiregistry.IP}"/> 
 	 		<arg value="${rmiregistry.port}"/> 

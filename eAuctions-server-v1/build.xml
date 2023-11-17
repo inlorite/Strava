@@ -30,12 +30,12 @@
 	</target>
 	
 	<target name="3.local.test" depends="1.build" description="Runs local repository test">
-		<java classname="es.deusto.ingenieria.sd.auctions.server.test.LocalTest" classpathref="classpath" fork="true">
+		<java classname="es.deusto.ingenieria.sd.strava.server.test.LocalTest" classpathref="classpath" fork="true">
 		</java>
     </target>
 	
 	<target name="4.server" depends="1.build" description="Runs the Server">
-		<java classname="es.deusto.ingenieria.sd.auctions.server.MainProgram" classpathref="classpath" fork="true">
+		<java classname="es.deusto.ingenieria.sd.strava.server.MainProgram" classpathref="classpath" fork="true">
         	<jvmarg value="-Djava.rmi.server.codebase=file:${bin.dir}/"/>
 			<jvmarg value="-Djava.security.policy=${policy.file}"/>
         	<arg value="${rmiregistry.IP}"/> 
