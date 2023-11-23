@@ -91,7 +91,7 @@ public class AutenticacionWindow extends JFrame {
 				JTextField tfFrecCardiMax = new JTextField();
 				JTextField tfFrecCardiRep = new JTextField();
 				JPasswordField pfContrasena = new JPasswordField();
-				String[] options = {"Meta","Google"};
+				String[] options = {"Facebook","Google"};
 				JComboBox<String> cbTipo = new JComboBox<String>(options);
 				
 				Object[] fields = {

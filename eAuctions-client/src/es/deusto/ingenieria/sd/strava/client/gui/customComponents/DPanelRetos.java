@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.ComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -14,11 +15,13 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -34,64 +37,119 @@ public class DPanelRetos extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JPanel pGetRetos;
 	private JPanel pApDes;
-	private JButton bApuntarse;
-	private JButton bDesapuntarse;
 	private JScrollPane spRetos;
 	private JList<RetoDTO> lRetos;
 	private DefaultListModel<RetoDTO> dlmRetos;
 
 	private JPanel pGetRetosUsuario;
 	private JPanel pCrearEliminar;
-	private JButton bCrearReto;
-	private JButton bEliminarReto;
 	private JScrollPane spRetosUsuario;
 	private JList<RetoDTO> lRetosUsuario;
 	private DefaultListModel<RetoDTO> dlmRetosUsuario;
+
+	// Nueva interfaz
+
+	// Izquierda
+	private JPanel pRetos;
+	private JComboBox<String> cbFiltro;
+
+	private JTable tRetos;
+	private DefaultTableModel dtmRetos;
+
+	private JPanel pBotones;
+	private JPanel pBotonesRetosCreados;
+	private JButton bCrearReto;
+	private JButton bEliminarReto;
+	private JPanel pBotonesRetosApuntados;
+	private JButton bDesapuntarse;
+	private JPanel pBotonesRetosDesapuntados;
+	private JButton bApuntarse;
+
+	// Derecha
+	private JPanel pDetalle;
 
 	public DPanelRetos() {
 
 		this.setLayout(new GridLayout(1, 2, 5, 5));
 
-		pGetRetos = new JPanel();
-		pGetRetos.setLayout(new BorderLayout(5, 5));
-		pGetRetos.setBorder(new TitledBorder("Obtener retos"));
-		lRetos = new JList<>();
-		dlmRetos = new DefaultListModel<>();
-		dlmRetos.addAll(StravaController.getInstance().getRetos());
-		lRetos.setModel(dlmRetos);
-		spRetos = new JScrollPane(lRetos);
-		spRetos.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		spRetos.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-		bApuntarse = new JButton("Apuntarse a reto");
-		bDesapuntarse = new JButton("Desapuntarse del reto");
-		pApDes = new JPanel();
-		pApDes.setLayout(new GridLayout(1, 2, 5, 5));
-		pApDes.add(bApuntarse);
-		pApDes.add(bDesapuntarse);
-		pGetRetos.add(spRetos, BorderLayout.CENTER);
-		pGetRetos.add(pApDes, BorderLayout.SOUTH);
-		this.add(pGetRetos);
+		// Panel Izquierdo
 
-		pGetRetosUsuario = new JPanel();
-		pGetRetosUsuario.setLayout(new BorderLayout(5, 5));
-		pGetRetosUsuario.setBorder(new TitledBorder("Obtener retos usuario"));
-		lRetosUsuario = new JList<>();
-		dlmRetosUsuario = new DefaultListModel<>();
-		dlmRetosUsuario.addAll(StravaController.getInstance().getRetos(AutenticacionController.getToken()));
-		lRetosUsuario.setModel(dlmRetosUsuario);
-		spRetosUsuario = new JScrollPane(lRetosUsuario);
-		spRetosUsuario.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		spRetosUsuario.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-		bCrearReto = new JButton("Crear reto");
-		bEliminarReto = new JButton("Eliminar reto");
-		pCrearEliminar = new JPanel();
-		pCrearEliminar.setLayout(new GridLayout(1, 2, 5, 5));
-		pCrearEliminar.add(bCrearReto);
-		pCrearEliminar.add(bEliminarReto);
-		pGetRetosUsuario.add(spRetosUsuario, BorderLayout.CENTER);
-		pGetRetosUsuario.add(pCrearEliminar, BorderLayout.SOUTH);
-		this.add(pGetRetosUsuario);
+		pRetos = new JPanel();
+		pRetos.setLayout(new BorderLayout(5, 5));
+		pRetos.setBorder(new TitledBorder("Panel retos"));
 
+		String[] filtros = { "Creados", "Apuntados", "Desapuntados" };
+		cbFiltro = new JComboBox<String>(filtros);
+		pRetos.add(cbFiltro, BorderLayout.NORTH);
+
+		dtmRetos = new DefaultTableModel(new Object[] { "Nombre", "Fecha Inicio", "Tipo" }, 0);
+		tRetos = new JTable(dtmRetos) {
+			private static final long serialVersionUID = 1L;
+
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			};
+		};
+		pRetos.add(tRetos, BorderLayout.CENTER);
+		
+		pBotonesRetosCreados = new JPanel();
+		bCrearReto = new JButton();
+		bEliminarReto = new JButton();
+		pBotonesRetosCreados.add(bCrearReto);
+		pBotonesRetosCreados.add(bEliminarReto);
+		
+		pBotonesRetosDesapuntados = new JPanel();
+		bApuntarse = new JButton();
+		pBotonesRetosDesapuntados.add(bApuntarse);
+		
+		pBotonesRetosApuntados = new JPanel();
+		bDesapuntarse = new JButton();
+		pBotonesRetosApuntados.add(bDesapuntarse);
+		
+		pBotones = new JPanel();
+		pRetos.add(pBotones);
+
+		this.add(pRetos);
+		
+		// Panel Derecho
+		
+		pDetalle = new JPanel();
+		pDetalle.setLayout(new BorderLayout(5, 5));
+
+		/*
+		 * pGetRetos = new JPanel(); pGetRetos.setLayout(new BorderLayout(5, 5));
+		 * pGetRetos.setBorder(new TitledBorder("Obtener retos")); lRetos = new
+		 * JList<>(); dlmRetos = new DefaultListModel<>();
+		 * dlmRetos.addAll(StravaController.getInstance().getRetos());
+		 * lRetos.setModel(dlmRetos); spRetos = new JScrollPane(lRetos);
+		 * spRetos.setHorizontalScrollBarPolicy(ScrollPaneConstants.
+		 * HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		 * spRetos.setVerticalScrollBarPolicy(ScrollPaneConstants.
+		 * VERTICAL_SCROLLBAR_AS_NEEDED); bApuntarse = new JButton("Apuntarse a reto");
+		 * bDesapuntarse = new JButton("Desapuntarse del reto"); pApDes = new JPanel();
+		 * pApDes.setLayout(new GridLayout(1, 2, 5, 5)); pApDes.add(bApuntarse);
+		 * pApDes.add(bDesapuntarse); pGetRetos.add(spRetos, BorderLayout.CENTER);
+		 * pGetRetos.add(pApDes, BorderLayout.SOUTH); this.add(pGetRetos);
+		 * 
+		 * pGetRetosUsuario = new JPanel(); pGetRetosUsuario.setLayout(new
+		 * BorderLayout(5, 5)); pGetRetosUsuario.setBorder(new
+		 * TitledBorder("Obtener retos usuario")); lRetosUsuario = new JList<>();
+		 * dlmRetosUsuario = new DefaultListModel<>();
+		 * dlmRetosUsuario.addAll(StravaController.getInstance().getRetos(
+		 * AutenticacionController.getToken()));
+		 * lRetosUsuario.setModel(dlmRetosUsuario); spRetosUsuario = new
+		 * JScrollPane(lRetosUsuario);
+		 * spRetosUsuario.setHorizontalScrollBarPolicy(ScrollPaneConstants.
+		 * HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		 * spRetosUsuario.setVerticalScrollBarPolicy(ScrollPaneConstants.
+		 * VERTICAL_SCROLLBAR_AS_NEEDED); bCrearReto = new JButton("Crear reto");
+		 * bEliminarReto = new JButton("Eliminar reto"); pCrearEliminar = new JPanel();
+		 * pCrearEliminar.setLayout(new GridLayout(1, 2, 5, 5));
+		 * pCrearEliminar.add(bCrearReto); pCrearEliminar.add(bEliminarReto);
+		 * pGetRetosUsuario.add(spRetosUsuario, BorderLayout.CENTER);
+		 * pGetRetosUsuario.add(pCrearEliminar, BorderLayout.SOUTH);
+		 * this.add(pGetRetosUsuario);
+		 */
 		bApuntarse.addActionListener(new ActionListener() {
 
 			@Override
@@ -190,16 +248,16 @@ public class DPanelRetos extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (lRetosUsuario.getSelectedValue() != null) {
-					boolean resultado = StravaWindow.getInstance().eliminarReto(lRetosUsuario.getSelectedValue().getNombre(),
-							AutenticacionController.getToken());
+					boolean resultado = StravaWindow.getInstance().eliminarReto(
+							lRetosUsuario.getSelectedValue().getNombre(), AutenticacionController.getToken());
 					if (resultado) {
 						System.out.println("Reto eliminado correctamente");
 						dlmRetos = new DefaultListModel<>();
 						dlmRetos.addAll(StravaController.getInstance().getRetos());
 						lRetos.setModel(dlmRetos);
 						dlmRetosUsuario = new DefaultListModel<>();
-						dlmRetosUsuario.addAll(
-						StravaController.getInstance().getRetos(AutenticacionController.getToken()));
+						dlmRetosUsuario
+								.addAll(StravaController.getInstance().getRetos(AutenticacionController.getToken()));
 						lRetosUsuario.setModel(dlmRetosUsuario);
 					} else {
 						System.out.println("No se ha podido eliminar el reto");
@@ -233,7 +291,6 @@ public class DPanelRetos extends JPanel {
 				}
 			}
 		});
-		
-		
+
 	}
 }
