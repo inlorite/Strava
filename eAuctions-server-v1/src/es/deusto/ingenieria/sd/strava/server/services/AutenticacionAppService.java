@@ -126,7 +126,7 @@ public class AutenticacionAppService {
 	public boolean register(Usuario usuario) {
 		// TODO: Get User using DAO and check
 		if (!usuarios.contains(usuario)) {
-			usuarios.add(usuario);
+			usuarios.add(usuario); 
 			System.out.println(usuario);
 			return true;
 		}
