@@ -7,6 +7,10 @@ import java.awt.event.WindowListener;
 import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import javax.swing.*;
 
@@ -36,23 +40,44 @@ public class StravaWindow extends JFrame {
 
 	public static boolean networking = true;
 
+	private static JPanel carruselPanel;
+	private static JLabel imagenLabel;
+	private Timer timer;
+	private static int indiceImagen;
+
+	private static JPanel header;
+
+	private String[] nombresImagenes = {
+			"src\\es\\deusto\\ingenieria\\sd\\strava\\client\\gui\\assets\\Blackkiller_LI.jpg",
+			"src\\es\\deusto\\ingenieria\\sd\\strava\\client\\gui\\assets\\logo titans acabado.png",
+			"src\\es\\deusto\\ingenieria\\sd\\strava\\client\\gui\\assets\\Blackkiller.png" };
+
 	public StravaWindow() {
 
 		cp = this.getContentPane();
 		cp.setLayout(new BorderLayout(GAP, GAP));
-
 		this.setMinimumSize(new Dimension(1000, 800));
 
 		mainPanel = new JPanel();
 		cl = new CardLayout(GAP, GAP);
 		mainPanel.setLayout(cl);
+		header = new JPanel(new BorderLayout());
 
+		carruselPanel = new JPanel(new BorderLayout());
 		menuBar = new DMenuBar();
-
+		
+		ImageIcon iiLogo = new ImageIcon("src\\es\\deusto\\ingenieria\\sd\\strava\\client\\gui\\assets\\logo.png");
+		JLabel lLogo = new JLabel(iiLogo);
+		lLogo.setAlignmentX(CENTER_ALIGNMENT);
+		header.add(lLogo, BorderLayout.NORTH);
+		
+		header.add(carruselPanel, BorderLayout.CENTER);
+		header.add(menuBar,BorderLayout.SOUTH);
+		header.setMinimumSize(new Dimension(400,300));
 		pSesiones = new DPanelSesiones();
 		pRetos = new DPanelRetos();
 
-		cp.add(menuBar, BorderLayout.NORTH);
+		cp.add(header, BorderLayout.NORTH);
 
 		mainPanel.add(pSesiones, "SESIONES");
 		mainPanel.add(pRetos, "RETOS");
@@ -68,7 +93,28 @@ public class StravaWindow extends JFrame {
 //			vChat = new VChat();
 //			client = new Client(VLogin.loggedUser, vChat.dlmChatbox);
 //		}
-		
+
+		// CARRUSEL
+
+		imagenLabel = new JLabel();
+		imagenLabel.setSize(400, 300);
+		carruselPanel.add(imagenLabel, BorderLayout.CENTER);
+
+		// Configurar el temporizador para cambiar las imágenes cada 2000 milisegundos
+		// (2 segundos)
+		timer = new Timer(2000, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mostrarSiguienteImagen();
+			}
+		});
+
+		// Mostrar la primera imagen al iniciar
+		this.mostrarSiguienteImagen();
+
+		// Iniciar el temporizador
+		timer.start();
+
 		this.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -94,8 +140,8 @@ public class StravaWindow extends JFrame {
 		return instance;
 	}
 
-	//Metodos sesiones
-	
+	// Metodos sesiones
+
 	public boolean crearSesionEntrenamiento(long token, String titulo, float distancia, Date fechaInicio,
 			long horaInicio, float duracion, String deporte) {
 
@@ -104,7 +150,7 @@ public class StravaWindow extends JFrame {
 	}
 
 	public List<SesionEntrenamientoDTO> getSesionesEntrenamiento(long token) {
-		
+
 		return StravaController.getInstance().getSesionesEntrenamiento(token);
 	}
 
@@ -115,34 +161,51 @@ public class StravaWindow extends JFrame {
 
 	// Métodos Reto
 
-	public boolean crearReto(String nombre, Date fechaInicio, Date fechaFin, float distancia, float tiempo,
-			long token, String tipoReto) {
+	public boolean crearReto(String nombre, Date fechaInicio, Date fechaFin, float distancia, float tiempo, long token,
+			String tipoReto) {
 
-		return StravaController.getInstance().crearReto(nombre, fechaInicio, fechaFin, distancia, tiempo, token, tipoReto);
+		return StravaController.getInstance().crearReto(nombre, fechaInicio, fechaFin, distancia, tiempo, token,
+				tipoReto);
 	}
-	
+
 	public List<RetoDTO> getRetos(long token) {
-		
-		return StravaController.getInstance().getRetos(token);			
+
+		return StravaController.getInstance().getRetos(token);
 	}
-	
+
 	public List<RetoDTO> getRetos() {
 
-			return StravaController.getInstance().getRetos();	
+		return StravaController.getInstance().getRetos();
 	}
-	
+
 	public boolean apuntarseReto(String reto, long token) {
-		
-			return StravaController.getInstance().apuntarseReto(reto, token);
+
+		return StravaController.getInstance().apuntarseReto(reto, token);
 	}
-	
+
 	public boolean desapuntarseReto(String reto, long token) {
-		
-			return StravaController.getInstance().desapuntarseReto(reto, token);
+
+		return StravaController.getInstance().desapuntarseReto(reto, token);
 	}
 
 	public boolean eliminarReto(String reto, long token) {
-		
-			return StravaController.getInstance().eliminarReto(reto, token);
+
+		return StravaController.getInstance().eliminarReto(reto, token);
 	}
+
+	private void mostrarSiguienteImagen() {
+		// Obtener la URL de la imagen
+		// Cambiar la imagen en el JLabel y escalarla al tamaño del JLabel
+		ImageIcon imagenIcono = new ImageIcon(nombresImagenes[indiceImagen]);
+		Image imagen = imagenIcono.getImage();
+		Image imagenEscalada = imagen.getScaledInstance(imagenLabel.getWidth(), imagenLabel.getHeight(),
+				Image.SCALE_SMOOTH);
+		
+		imagenLabel.setIcon(new ImageIcon(imagenEscalada));
+	
+
+		// Incrementar el índice para mostrar la siguiente imagen en la próxima llamada
+		indiceImagen = (indiceImagen + 1) % nombresImagenes.length;
+	}
+
 }
