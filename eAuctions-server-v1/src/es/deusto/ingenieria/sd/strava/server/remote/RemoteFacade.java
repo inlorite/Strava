@@ -152,7 +152,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		System.out.println(" * RemoteFacade crearReto()");
 
 		Reto reto;
-		retoDTO.setCreador(serverState.get(token).getNombre());
+		retoDTO.setCreador(serverState.get(token));
 
 		if (retoDTO != null && this.serverState.containsKey(token)) {
 			// Convert domain object to DTO

@@ -19,7 +19,6 @@ public class AutenticacionAppService {
 		return usuarios;
 	}
 	
-	
 	private AutenticacionAppService() {
 		//TODO: remove when DAO Pattern is implemented
 		//this.initializeData();

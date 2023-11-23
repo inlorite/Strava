@@ -43,8 +43,8 @@ public class AutenticacionController {
 		}
 	}
 	
-	public boolean register(String nombre, String email, Date fechaNacimiento, float peso, float altura, int frecuenciaCardiacaMax, int frecuenciaCardiacaReposo, String contrasena) {
-		if (!nombre.isEmpty() && !email.isEmpty() && fechaNacimiento != null && peso != 0 && altura != 0 && frecuenciaCardiacaMax != 0 && frecuenciaCardiacaReposo != 0 && !contrasena.isEmpty()) {
+	public boolean register(String nombre, String email, Date fechaNacimiento, float peso, float altura, int frecuenciaCardiacaMax, int frecuenciaCardiacaReposo, String contrasena, String tipo) {
+		if (!nombre.isEmpty() && !email.isEmpty() && fechaNacimiento != null && peso != 0 && altura != 0 && frecuenciaCardiacaMax != 0 && frecuenciaCardiacaReposo != 0 && !contrasena.isEmpty() && !tipo.isEmpty()) {
 			try {
 				UsuarioRegisterDTO usuario = new UsuarioRegisterDTO();
 				usuario.setNombre(nombre);
@@ -55,6 +55,7 @@ public class AutenticacionController {
 				usuario.setFrecuenciaCardiacaMax(frecuenciaCardiacaMax);
 				usuario.setFrecuenciaCardiacaReposo(frecuenciaCardiacaReposo);
 				usuario.setContrasena(contrasena);
+				usuario.setTipoServicio(tipo);
 				
 				this.token = ServiceLocator.getInstance().getService().register(usuario);
 				return true;

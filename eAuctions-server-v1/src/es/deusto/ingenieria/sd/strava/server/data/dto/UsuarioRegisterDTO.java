@@ -3,6 +3,8 @@ package es.deusto.ingenieria.sd.strava.server.data.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.swing.ImageIcon;
+
 //This class implements DTO pattern
 public class UsuarioRegisterDTO implements Serializable {
 	// This attribute is needed to implement the "Serializable" interface.
@@ -15,6 +17,24 @@ public class UsuarioRegisterDTO implements Serializable {
 	private int frecuenciaCardiacaMax;
 	private int frecuenciaCardiacaReposo;
 	private String contrasena;
+	private String tipoServicio;
+	private ImageIcon img;
+	
+	public String getTipoServicio() {
+		return tipoServicio;
+	}
+
+	public void setTipoServicio(String tipoServicio) {
+		this.tipoServicio = tipoServicio;
+	}
+
+	public ImageIcon getImg() {
+		return img;
+	}
+
+	public void setImg(ImageIcon img) {
+		this.img = img;
+	}
 
 	public String getEmail() {
 		return email;

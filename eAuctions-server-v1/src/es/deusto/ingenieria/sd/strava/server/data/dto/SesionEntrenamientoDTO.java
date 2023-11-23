@@ -3,6 +3,8 @@ package es.deusto.ingenieria.sd.strava.server.data.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.swing.ImageIcon;
+
 import es.deusto.ingenieria.sd.strava.server.data.domain.Deporte;
 
 public class SesionEntrenamientoDTO implements Serializable {
@@ -14,6 +16,15 @@ public class SesionEntrenamientoDTO implements Serializable {
 	private long horaInicio;
 	private float duracion;
 	private String deporte;
+	private ImageIcon mapImg;
+
+	public ImageIcon getMapImg() {
+		return mapImg;
+	}
+
+	public void setMapImg(ImageIcon mapImg) {
+		this.mapImg = mapImg;
+	}
 
 	public String getDeporte() {
 		return deporte;

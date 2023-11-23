@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.ImageIcon;
+
 //This class implements DTO pattern
 public class UsuarioDTO implements Serializable {
 	// This attribute is needed to implement the "Serializable" interface.
@@ -16,6 +18,24 @@ public class UsuarioDTO implements Serializable {
 	private int frecuenciaCardiacaMax;
 	private int frecuenciaCardiacaReposo;
 	private List<SesionEntrenamientoDTO> sesionesEntrenamiento = new ArrayList<>();
+	private String tipoServicio;
+	private ImageIcon img;
+
+	public String getTipoServicio() {
+		return tipoServicio;
+	}
+
+	public void setTipoServicio(String tipoServicio) {
+		this.tipoServicio = tipoServicio;
+	}
+
+	public ImageIcon getImg() {
+		return img;
+	}
+
+	public void setImg(ImageIcon img) {
+		this.img = img;
+	}
 
 	public List<SesionEntrenamientoDTO> getSesionesEntrenamiento() {
 		return sesionesEntrenamiento;

@@ -132,7 +132,7 @@ public class AutenticacionWindow extends JFrame {
 						String contrasena = "test";
 						*/
 						
-						boolean register = register(nombre, email, fechaNacimiento, peso, altura, frecuenciaCardiacaMax, frecuenciaCardiacaReposo, contrasena);
+						boolean register = register(nombre, email, fechaNacimiento, peso, altura, frecuenciaCardiacaMax, frecuenciaCardiacaReposo, contrasena, tipo);
 						
 						if (register) {
 							System.out.println("te has registrado");
@@ -197,10 +197,10 @@ public class AutenticacionWindow extends JFrame {
 		return true;
 	}
 	
-	public boolean register(String nombre, String email, Date fechaNacimiento, float peso, float altura, int frecuenciaCardiacaMax, int frecuenciaCardiacaReposo, String contrasena) {
+	public boolean register(String nombre, String email, Date fechaNacimiento, float peso, float altura, int frecuenciaCardiacaMax, int frecuenciaCardiacaReposo, String contrasena, String tipo) {
 		String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex(contrasena);
 		
-		return AutenticacionController.getInstance().register(nombre, email, fechaNacimiento, peso, altura, frecuenciaCardiacaMax, frecuenciaCardiacaReposo, sha1);
+		return AutenticacionController.getInstance().register(nombre, email, fechaNacimiento, peso, altura, frecuenciaCardiacaMax, frecuenciaCardiacaReposo, sha1, tipo);
 	}
 	
 	public static AutenticacionWindow getInstance() {

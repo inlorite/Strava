@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import javax.swing.ImageIcon;
+
 public class Usuario {
 	private String nombre;
 	private String email;
@@ -15,7 +17,24 @@ public class Usuario {
 	private int frecuenciaCardiacaReposo;
 	private String contrasena;
 	private List<SesionEntrenamiento> sesionesEntrenamiento = new ArrayList<SesionEntrenamiento>();
+	private String tipoServicio;
+	private ImageIcon img;
 	
+	public String getTipoServicio() {
+		return tipoServicio;
+	}
+
+	public void setTipoServicio(String tipoServicio) {
+		this.tipoServicio = tipoServicio;
+	}
+	
+	public ImageIcon getImg() {
+		return img;
+	}
+
+	public void setImg(ImageIcon img) {
+		this.img = img;
+	}
 
 	public List<SesionEntrenamiento> getSesionesEntrenamiento() {
 		return sesionesEntrenamiento;
@@ -115,8 +134,7 @@ public class Usuario {
 		return "Usuario [nombre=" + nombre + ", email=" + email + ", fechaNacimiento=" + fechaNacimiento + ", peso="
 				+ peso + ", altura=" + altura + ", frecuenciaCardiacaMax=" + frecuenciaCardiacaMax
 				+ ", frecuenciaCardiacaReposo=" + frecuenciaCardiacaReposo + ", contrasena=" + contrasena
-				+ ", sesionesEntrenamiento=" + sesionesEntrenamiento + "]";
+				+ ", sesionesEntrenamiento=" + sesionesEntrenamiento + ", tipoServicio=" + tipoServicio + "]";
 	}
-
 	
 }

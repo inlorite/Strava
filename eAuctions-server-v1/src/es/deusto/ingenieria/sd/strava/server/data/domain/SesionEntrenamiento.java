@@ -3,6 +3,8 @@ package es.deusto.ingenieria.sd.strava.server.data.domain;
 import java.util.Date;
 import java.util.Objects;
 
+import javax.swing.ImageIcon;
+
 public class SesionEntrenamiento {
 	private String titulo;
 	private float distancia;
@@ -10,6 +12,15 @@ public class SesionEntrenamiento {
 	private long horaInicio;
 	private float duracion;
 	private String deporte;
+	private ImageIcon mapImg;
+
+	public ImageIcon getMapImg() {
+		return mapImg;
+	}
+
+	public void setMapImg(ImageIcon mapImg) {
+		this.mapImg = mapImg;
+	}
 
 	public String getDeporte() {
 		return deporte;

@@ -26,6 +26,8 @@ public class UsuarioAssembler {
 		dto.setFechaNacimiento(usuario.getFechaNacimiento());
 		dto.setFrecuenciaCardiacaMax(usuario.getFrecuenciaCardiacaMax());
 		dto.setFrecuenciaCardiacaReposo(usuario.getFrecuenciaCardiacaReposo());
+		dto.setTipoServicio(usuario.getTipoServicio());
+		dto.setImg(usuario.getImg());
 
 		return dto;
 	}

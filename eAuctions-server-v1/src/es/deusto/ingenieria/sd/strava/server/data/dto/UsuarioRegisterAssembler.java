@@ -32,6 +32,8 @@ public class UsuarioRegisterAssembler {
 		usuario.setEmail(dto.getEmail());
 		usuario.setContrasena(dto.getContrasena());
 		usuario.setSesionesEntrenamiento(new ArrayList<SesionEntrenamiento>());
+		usuario.setTipoServicio(dto.getTipoServicio());
+		usuario.setImg(dto.getImg());
 
 		return usuario;
 	}
