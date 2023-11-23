@@ -15,6 +15,7 @@ import es.deusto.ingenieria.sd.strava.server.data.dto.RetoAssembler;
 import es.deusto.ingenieria.sd.strava.server.data.dto.RetoDTO;
 import es.deusto.ingenieria.sd.strava.server.data.dto.SesionEntrenamientoAssembler;
 import es.deusto.ingenieria.sd.strava.server.data.dto.SesionEntrenamientoDTO;
+import es.deusto.ingenieria.sd.strava.server.data.dto.UsuarioAssembler;
 import es.deusto.ingenieria.sd.strava.server.data.dto.UsuarioRegisterAssembler;
 import es.deusto.ingenieria.sd.strava.server.data.dto.UsuarioRegisterDTO;
 import es.deusto.ingenieria.sd.strava.server.services.AutenticacionAppService;
@@ -152,7 +153,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		System.out.println(" * RemoteFacade crearReto()");
 
 		Reto reto;
-		retoDTO.setCreador(serverState.get(token));
+		retoDTO.setCreador(UsuarioAssembler.getInstance().usuarioToDTO(serverState.get(token)));
 
 		if (retoDTO != null && this.serverState.containsKey(token)) {
 			// Convert domain object to DTO

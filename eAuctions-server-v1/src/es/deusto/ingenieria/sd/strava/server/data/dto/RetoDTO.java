@@ -16,8 +16,8 @@ public class RetoDTO implements Serializable {
 	private Date fechaFin;
 	private float distancia;
 	private float tiempo;
-	private Usuario creador;
-	private List<Usuario> participantes = new ArrayList<>();
+	private UsuarioDTO creador;
+	private List<UsuarioDTO> participantes = new ArrayList<>();
 	private String tipoReto;
 
 	public String getTipoReto() {
@@ -28,11 +28,11 @@ public class RetoDTO implements Serializable {
 		this.tipoReto = tipoReto;
 	}
 
-	public List<Usuario> getParticipantes() {
+	public List<UsuarioDTO> getParticipantes() {
 		return participantes;
 	}
 
-	public void setParticipantes(List<Usuario> participantes) {
+	public void setParticipantes(List<UsuarioDTO> participantes) {
 		this.participantes = participantes;
 	}
 
@@ -76,11 +76,11 @@ public class RetoDTO implements Serializable {
 		this.tiempo = tiempo;
 	}
 	
-	public Usuario getCreador() {
+	public UsuarioDTO getCreador() {
 		return creador;
 	}
 
-	public void setCreador(Usuario creador) {
+	public void setCreador(UsuarioDTO creador) {
 		this.creador = creador;
 	}
 

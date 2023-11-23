@@ -16,7 +16,8 @@ public class Usuario {
 	private int frecuenciaCardiacaMax;
 	private int frecuenciaCardiacaReposo;
 	private String contrasena;
-	private List<SesionEntrenamiento> sesionesEntrenamiento = new ArrayList<SesionEntrenamiento>();
+	private List<SesionEntrenamiento> sesionesEntrenamiento = new ArrayList<>();
+	//private List<Reto> retos = new ArrayList<>();
 	private String tipoServicio;
 	private ImageIcon img;
 	

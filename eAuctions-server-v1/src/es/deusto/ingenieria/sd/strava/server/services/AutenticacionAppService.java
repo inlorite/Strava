@@ -1,5 +1,6 @@
 package es.deusto.ingenieria.sd.strava.server.services;
 
+import java.net.Socket;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -108,7 +109,7 @@ public class AutenticacionAppService {
 	}
 
 	public Usuario login(String email, String password) {
-		// TODO: Get User using DAO and check
+		
 		for (Usuario u : usuarios) {
 			if (u.getEmail().equals(email)) {
 				if (u.getContrasena().equals(password)) {
@@ -121,6 +122,10 @@ public class AutenticacionAppService {
 			}
 		}
 		return null;
+
+		/*
+		Socket socket = new Socket("localhost", 4321);
+		*/
 	}
 
 	public boolean register(Usuario usuario) {

@@ -28,8 +28,8 @@ public class RetoAssembler {
 		dto.setFechaInicio(reto.getFechaInicio());
 		dto.setNombre(reto.getNombre());
 		dto.setTiempo(reto.getTiempo());
-		dto.setCreador(reto.getCreador());
-		dto.setParticipantes(reto.getParticipantes());
+		dto.setCreador(UsuarioAssembler.getInstance().usuarioToDTO(reto.getCreador()));
+		dto.setParticipantes(UsuarioAssembler.getInstance().usuarioToDTO(reto.getParticipantes()));
 		dto.setTipoReto(reto.getTipoReto());
 
 		return dto;
@@ -43,8 +43,8 @@ public class RetoAssembler {
 		reto.setFechaInicio(dto.getFechaInicio());
 		reto.setNombre(dto.getNombre());
 		reto.setTiempo(dto.getTiempo());
-		reto.setCreador(dto.getCreador());
-		reto.setParticipantes(dto.getParticipantes());
+		reto.setCreador(UsuarioAssembler.getInstance().dtoToUsuario(dto.getCreador()));
+		reto.setParticipantes(UsuarioAssembler.getInstance().dtoToUsuario(dto.getParticipantes()));
 		reto.setTipoReto(dto.getTipoReto());
 
 		return reto;
