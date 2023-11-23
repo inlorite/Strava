@@ -14,6 +14,7 @@ import java.util.logging.Level;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -35,6 +36,8 @@ public class AutenticacionWindow extends JFrame {
 	JPasswordField tfPassword;
 	JButton bRegister;
 	JButton bLogin;
+	JButton bLoginG;
+	JButton bLoginM;
 
 	private AutenticacionWindow() {
 		Container cp = this.getContentPane();
@@ -47,7 +50,7 @@ public class AutenticacionWindow extends JFrame {
 
 		// FORMULARIO
 		JPanel pData = new JPanel();
-		pData.setLayout(new GridLayout(5, 1, 5, 10));
+		pData.setLayout(new GridLayout(7, 1, 5, 10));
 		pData.setBorder(new EmptyBorder(new Insets(10, 10, 10, 10)));
 		
 		JPanel pButton = new JPanel();
@@ -61,10 +64,17 @@ public class AutenticacionWindow extends JFrame {
 		tfPassword = new JPasswordField();
 		pData.add(tfPassword);
 		
+		
+		bLoginG = new JButton("Login Meta");
+		bLoginM = new JButton("Login Google");
+		pData.add(bLoginG);
+		pData.add(bLoginM);
+		
 		bRegister = new JButton("Register");
 		pButton.add(bRegister);
 		bLogin = new JButton("Login");
 		pButton.add(bLogin);
+
 		pData.add(pButton);
 		
 		cp.add(pData);
@@ -81,6 +91,8 @@ public class AutenticacionWindow extends JFrame {
 				JTextField tfFrecCardiMax = new JTextField();
 				JTextField tfFrecCardiRep = new JTextField();
 				JPasswordField pfContrasena = new JPasswordField();
+				String[] options = {"Meta","Google"};
+				JComboBox<String> cbTipo = new JComboBox<String>(options);
 				
 				Object[] fields = {
 						"Nombre", tfNombre,
@@ -90,7 +102,8 @@ public class AutenticacionWindow extends JFrame {
 						"Altura", tfAltura,
 						"Frecuencia cardiaca maxima", tfFrecCardiMax,
 						"Frecuencia cardiaca reposo", tfFrecCardiRep,
-						"Contrasena", pfContrasena
+						"Contrasena", pfContrasena,
+						"Servicio", cbTipo
 				};
 				
 				int result = JOptionPane.showConfirmDialog(null, fields, "Registro", JOptionPane.OK_CANCEL_OPTION);
@@ -106,6 +119,7 @@ public class AutenticacionWindow extends JFrame {
 						int frecuenciaCardiacaReposo = Integer.parseInt(tfFrecCardiRep.getText());
 						@SuppressWarnings("deprecation")
 						String contrasena = pfContrasena.getText();
+						String tipo = cbTipo.getSelectedItem().toString();
 						
 						/*
 						String nombre = "test";
@@ -136,27 +150,27 @@ public class AutenticacionWindow extends JFrame {
 			}
 		});
 
-		bLogin.addActionListener(new ActionListener() {
-
-			@SuppressWarnings("deprecation")
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String email = tfEmail.getText();
-				String password = tfPassword.getText();
-
-				boolean login = login(email, password);
-
-				if (login) {
-					System.out.println("hola te has logueado");
-					AutenticacionWindow.getInstance().setVisible(false);
-					StravaWindow.getInstance().setVisible(true);
-				} else {
-					System.out.println("datos incorrectos");
-				}
-
-			}
-
-		});
+//		bLogin.addActionListener(new ActionListener() {
+//
+//			@SuppressWarnings("deprecation")
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				String email = tfEmail.getText();
+//				String password = tfPassword.getText();
+//
+//				boolean login = login(email, password);
+//
+//				if (login) {
+//					System.out.println("hola te has logueado");
+//					AutenticacionWindow.getInstance().setVisible(false);
+//					StravaWindow.getInstance().setVisible(true);
+//				} else {
+//					System.out.println("datos incorrectos");
+//				}
+//
+//			}
+//
+//		});
 		
 		this.addWindowListener(new WindowAdapter() {
 			@Override
