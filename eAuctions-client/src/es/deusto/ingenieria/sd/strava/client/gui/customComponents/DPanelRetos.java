@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
@@ -151,6 +152,8 @@ public class DPanelRetos extends JPanel {
 		 * pGetRetosUsuario.add(pCrearEliminar, BorderLayout.SOUTH);
 		 * this.add(pGetRetosUsuario);
 		 */
+
+		/* ACTUALIZADO */
 		bApuntarse.addActionListener(new ActionListener() {
 
 			@Override
@@ -170,6 +173,7 @@ public class DPanelRetos extends JPanel {
 			}
 		});
 
+		/* ACTUALIZADO */
 		bDesapuntarse.addActionListener(new ActionListener() {
 
 			@Override
@@ -189,6 +193,7 @@ public class DPanelRetos extends JPanel {
 			}
 		});
 
+		/* ACTUALIZADO */
 		bCrearReto.addActionListener(new ActionListener() {
 
 			@Override
@@ -221,13 +226,7 @@ public class DPanelRetos extends JPanel {
 
 						if (resultado) {
 							System.out.println("reto creado");
-							dlmRetos = new DefaultListModel<>();
-							dlmRetos.addAll(StravaController.getInstance().getRetos());
-							lRetos.setModel(dlmRetos);
-							dlmRetosUsuario = new DefaultListModel<>();
-							dlmRetosUsuario.addAll(
-									StravaController.getInstance().getRetos(AutenticacionController.getToken()));
-							lRetosUsuario.setModel(dlmRetosUsuario);
+							cargarTabla(StravaController.getInstance().getRetos());
 						} else {
 							System.out.println("reto no creado");
 						}
@@ -240,22 +239,17 @@ public class DPanelRetos extends JPanel {
 			}
 		});
 
+		/* ACTUALIZADO */
 		bEliminarReto.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (lRetosUsuario.getSelectedValue() != null) {
+				if (tRetos.getSelectedRow() != -1) {
 					boolean resultado = StravaWindow.getInstance().eliminarReto(
-							lRetosUsuario.getSelectedValue().getNombre(), AutenticacionController.getToken());
+							(String) tRetos.getValueAt(tRetos.getSelectedRow(), 0), AutenticacionController.getToken());
 					if (resultado) {
 						System.out.println("Reto eliminado correctamente");
-						dlmRetos = new DefaultListModel<>();
-						dlmRetos.addAll(StravaController.getInstance().getRetos());
-						lRetos.setModel(dlmRetos);
-						dlmRetosUsuario = new DefaultListModel<>();
-						dlmRetosUsuario
-								.addAll(StravaController.getInstance().getRetos(AutenticacionController.getToken()));
-						lRetosUsuario.setModel(dlmRetosUsuario);
+						cargarTabla(StravaController.getInstance().getRetos());
 					} else {
 						System.out.println("No se ha podido eliminar el reto");
 					}
@@ -289,26 +283,82 @@ public class DPanelRetos extends JPanel {
 			}
 		});
 
+		/* JTABLE SELECTION CHANGED LISTENER */
+		ListSelectionModel cellSelectionModel = tRetos.getSelectionModel();
+		cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+		cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				String retoSeleccionado = null;
+
+				if (tRetos.getSelectedRow() != -1) {
+					retoSeleccionado = (String) tRetos.getValueAt(tRetos.getSelectedRow(), 0);
+
+					updateDetalles();
+
+				} else {
+					System.out.println("Ningun reto seleccionado.");
+					return;
+				}
+
+				System.out.println("Selected: " + retoSeleccionado);
+			}
+
+		});
+
+		/* COMBOBOX LISTENER */
+		cbFiltro.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				cargarTabla(StravaController.getInstance().getRetos());
+
+				switch (cbFiltro.getSelectedIndex()) {
+				case 0:
+					// CREADOS
+					pBotones = pBotonesRetosCreados;
+					return;
+				case 1:
+					// APUNTADOS
+					pBotones = pBotonesRetosApuntados;
+					return;
+				case 2:
+					// DESAPUNTADOS
+					pBotones = pBotonesRetosDesapuntados;
+					return;
+				default:
+					return;
+				}
+			}
+		});
+
 	}
 
+	/* FUNCION QUE CARGA EL MODELO DE JTABLE CORRESPONDIENTE */
 	private void cargarTabla(List<RetoDTO> retos) {
-		
+
 		if (cbFiltro.getSelectedIndex() == -1) {
 			System.out.println("No se ha podido cargar la tabla.");
 			return;
 		}
-		
+
 		if (cbFiltro.getSelectedIndex() == 0) {
 			// CREADOS
+			retos = StravaController.getInstance().getRetos(AutenticacionController.getToken());
 		} else if (cbFiltro.getSelectedIndex() == 1) {
 			// APUNTADOS
 		} else {
 			// DESAPUNTADOS
 		}
-		
-		// meter esto en el IF con cada getReto()
+
+		// cambiar el atributo List retos en el IF
 		for (RetoDTO reto : retos) {
 			dtmRetos.addRow(new Object[] { reto.getNombre(), reto.getFechaFin(), reto.getTipoReto() });
 		}
+	}
+
+	/* FUNCION QUE ACTUALIZA LA VISTA DE DETALLE */
+	private void updateDetalles() {
+
 	}
 }
