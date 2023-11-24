@@ -83,6 +83,7 @@ public class DPanelRetos extends JPanel {
 		pRetos.add(cbFiltro, BorderLayout.NORTH);
 
 		dtmRetos = new DefaultTableModel(new Object[] { "Nombre", "Fecha Inicio", "Tipo" }, 0);
+		cargarTabla(StravaController.getInstance().getRetos());
 		tRetos = new JTable(dtmRetos) {
 			private static final long serialVersionUID = 1L;
 
@@ -90,29 +91,29 @@ public class DPanelRetos extends JPanel {
 				return false;
 			};
 		};
-		pRetos.add(tRetos, BorderLayout.CENTER);
-		
+		pRetos.add(new JScrollPane(tRetos), BorderLayout.CENTER);
+
 		pBotonesRetosCreados = new JPanel();
 		bCrearReto = new JButton();
 		bEliminarReto = new JButton();
 		pBotonesRetosCreados.add(bCrearReto);
 		pBotonesRetosCreados.add(bEliminarReto);
-		
+
 		pBotonesRetosDesapuntados = new JPanel();
 		bApuntarse = new JButton();
 		pBotonesRetosDesapuntados.add(bApuntarse);
-		
+
 		pBotonesRetosApuntados = new JPanel();
 		bDesapuntarse = new JButton();
 		pBotonesRetosApuntados.add(bDesapuntarse);
-		
+
 		pBotones = new JPanel();
 		pRetos.add(pBotones);
 
 		this.add(pRetos);
-		
+
 		// Panel Derecho
-		
+
 		pDetalle = new JPanel();
 		pDetalle.setLayout(new BorderLayout(5, 5));
 
@@ -154,14 +155,12 @@ public class DPanelRetos extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (lRetos.getSelectedValue() != null) {
-					boolean resultado = StravaWindow.getInstance().apuntarseReto(lRetos.getSelectedValue().getNombre(),
-							AutenticacionController.getToken());
+				if (tRetos.getSelectedRow() != -1) {
+					boolean resultado = StravaWindow.getInstance().apuntarseReto(
+							(String) tRetos.getValueAt(tRetos.getSelectedRow(), 0), AutenticacionController.getToken());
 					if (resultado) {
 						System.out.println("Apuntado correctamente");
-						dlmRetos = new DefaultListModel<>();
-						dlmRetos.addAll(StravaController.getInstance().getRetos());
-						lRetos.setModel(dlmRetos);
+						cargarTabla(StravaController.getInstance().getRetos());
 					} else {
 						System.out.println("No se ha podido apuntar al reto");
 					}
@@ -175,16 +174,14 @@ public class DPanelRetos extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (lRetos.getSelectedValue() != null) {
+				if (tRetos.getSelectedRow() != -1) {
 					boolean resultado = StravaWindow.getInstance().desapuntarseReto(
-							lRetos.getSelectedValue().getNombre(), AutenticacionController.getToken());
+							(String) tRetos.getValueAt(tRetos.getSelectedRow(), 0), AutenticacionController.getToken());
 					if (resultado) {
 						System.out.println("Desapuntado correctamente");
-						dlmRetos = new DefaultListModel<>();
-						dlmRetos.addAll(StravaController.getInstance().getRetos());
-						lRetos.setModel(dlmRetos);
+						cargarTabla(StravaController.getInstance().getRetos());
 					} else {
-						System.out.println("No se ha podido desapuntar del reto");
+						System.out.println("No se ha podido desapuntarse al reto");
 					}
 
 				}
@@ -292,5 +289,26 @@ public class DPanelRetos extends JPanel {
 			}
 		});
 
+	}
+
+	private void cargarTabla(List<RetoDTO> retos) {
+		
+		if (cbFiltro.getSelectedIndex() == -1) {
+			System.out.println("No se ha podido cargar la tabla.");
+			return;
+		}
+		
+		if (cbFiltro.getSelectedIndex() == 0) {
+			// CREADOS
+		} else if (cbFiltro.getSelectedIndex() == 1) {
+			// APUNTADOS
+		} else {
+			// DESAPUNTADOS
+		}
+		
+		// meter esto en el IF con cada getReto()
+		for (RetoDTO reto : retos) {
+			dtmRetos.addRow(new Object[] { reto.getNombre(), reto.getFechaFin(), reto.getTipoReto() });
+		}
 	}
 }
