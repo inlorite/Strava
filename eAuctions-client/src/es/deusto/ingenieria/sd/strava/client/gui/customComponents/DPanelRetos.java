@@ -9,8 +9,10 @@ import java.util.List;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -28,6 +30,7 @@ import com.toedter.calendar.JDateChooser;
 
 import es.deusto.ingenieria.sd.strava.server.data.dto.RetoDTO;
 import es.deusto.ingenieria.sd.strava.server.data.dto.SesionEntrenamientoDTO;
+import es.deusto.ingenieria.sd.strava.server.data.dto.UsuarioDTO;
 import es.deusto.ingenieria.sd.strava.client.controller.AutenticacionController;
 import es.deusto.ingenieria.sd.strava.client.controller.StravaController;
 import es.deusto.ingenieria.sd.strava.client.gui.AutenticacionWindow;
@@ -68,6 +71,24 @@ public class DPanelRetos extends JPanel {
 
 	// Derecha
 	private JPanel pDetalle;
+
+	private JPanel pArriba;
+	private JLabel lNombreReto;
+	private JLabel lFechaInicio;
+	private JLabel lFechaFin;
+
+	private JPanel pAbajo;
+	private JLabel lTipoReto;
+	private JLabel lDistancia;
+	private JLabel lTiempo;
+
+	private JPanel pCreador;
+	private ImageIcon imagenIcono;
+	private JLabel lIcono;
+	private JLabel lNombre;
+
+	private JTable tParticipantes;
+	private DefaultTableModel dtmParticipantes;
 
 	public DPanelRetos() {
 
@@ -116,7 +137,45 @@ public class DPanelRetos extends JPanel {
 		// Panel Derecho
 
 		pDetalle = new JPanel();
-		pDetalle.setLayout(new BorderLayout(5, 5));
+		pDetalle.setLayout(new GridLayout(4, 1, 5, 5));
+
+		pArriba = new JPanel();
+		lNombreReto = new JLabel();
+		lFechaInicio = new JLabel();
+		lFechaFin = new JLabel();
+		pArriba.add(lNombreReto);
+		pArriba.add(lFechaInicio);
+		pArriba.add(lFechaFin);
+		pDetalle.add(pArriba);
+
+		pAbajo = new JPanel();
+		lTipoReto = new JLabel();
+		lDistancia = new JLabel();
+		lTiempo = new JLabel();
+		pAbajo.add(lTipoReto);
+		pAbajo.add(lDistancia);
+		pAbajo.add(lTiempo);
+		pDetalle.add(pAbajo);
+
+		imagenIcono = new ImageIcon();
+		lIcono = new JLabel(imagenIcono);
+		lNombre = new JLabel();
+		pCreador.add(new JLabel("Creador del reto:"));
+		pCreador.add(lIcono);
+		pCreador.add(lNombre);
+		pDetalle.add(pCreador);
+
+		dtmParticipantes = new DefaultTableModel(new Object[] { "Icono", "Nombre" }, 0);
+		tParticipantes = new JTable(dtmParticipantes) {
+			private static final long serialVersionUID = 1L;
+
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			};
+		};
+		pDetalle.add(new JScrollPane(tParticipantes));
+
+		this.add(pDetalle);
 
 		/*
 		 * pGetRetos = new JPanel(); pGetRetos.setLayout(new BorderLayout(5, 5));
@@ -360,5 +419,36 @@ public class DPanelRetos extends JPanel {
 	/* FUNCION QUE ACTUALIZA LA VISTA DE DETALLE */
 	private void updateDetalles() {
 
+		if (tRetos.getSelectedRow() == -1)
+			return;
+
+		RetoDTO reto;
+
+		for (RetoDTO reto_i : StravaController.getInstance().getRetos()) {
+			if (reto.getNombre().equals(tRetos.getValueAt(tRetos.getSelectedRow(), 0))) {
+				reto = reto_i;
+				break;
+			}
+		}
+
+		if (reto == null)
+			return;
+
+		// Faltan por cambiar el resto de elementos
+		lNombreReto = new JLabel(reto.getNombre());
+		lFechaInicio = new JLabel(reto.getFechaInicio().toString());
+		lFechaFin = new JLabel(reto.getFechaFin().toString());
+
+		lTipoReto = new JLabel(reto.getTipoReto());
+		lDistancia = new JLabel(reto.getDistancia() + "");
+		lTiempo = new JLabel(reto.getTiempo() + "");
+
+		lNombre = new JLabel(reto.getCreador().getNombre());
+		imagenIcono = new ImageIcon(); // RECUPERAR EL ICONO Y CONVERTIRLO A IMAGEN
+		lIcono = new JLabel(imagenIcono);
+
+		for (UsuarioDTO usuario : reto.getParticipantes()) {
+			dtmRetos.addRow(new Object[] { usuario.getImg(), usuario.getNombre() });
+		}
 	}
 }
