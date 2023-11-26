@@ -40,17 +40,6 @@ import es.deusto.ingenieria.sd.strava.client.gui.StravaWindow;
 public class DPanelRetos extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel pGetRetos;
-	private JPanel pApDes;
-	private JScrollPane spRetos;
-	private JList<RetoDTO> lRetos;
-	private DefaultListModel<RetoDTO> dlmRetos;
-
-	private JPanel pGetRetosUsuario;
-	private JPanel pCrearEliminar;
-	private JScrollPane spRetosUsuario;
-	private JList<RetoDTO> lRetosUsuario;
-	private DefaultListModel<RetoDTO> dlmRetosUsuario;
 
 	// Nueva interfaz
 
