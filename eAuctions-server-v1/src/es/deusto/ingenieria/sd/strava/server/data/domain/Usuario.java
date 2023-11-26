@@ -16,9 +16,26 @@ public class Usuario {
 	private int frecuenciaCardiacaMax;
 	private int frecuenciaCardiacaReposo;
 	private String contrasena;
-	private List<SesionEntrenamiento> sesionesEntrenamiento = new ArrayList<>();
-	//private List<Reto> retos = new ArrayList<>();
 	private String tipoServicio;
+	private List<SesionEntrenamiento> sesionesEntrenamiento = new ArrayList<>();
+	private List<Reto> retosCreados = new ArrayList<>();
+	private List<Reto> retosApuntados = new ArrayList<>();
+	
+	public List<Reto> getRetosCreados() {
+		return retosCreados;
+	}
+
+	public void setRetosCreados(List<Reto> retosCreados) {
+		this.retosCreados = retosCreados;
+	}
+
+	public List<Reto> getRetosApuntados() {
+		return retosApuntados;
+	}
+
+	public void setRetosApuntados(List<Reto> retosApuntados) {
+		this.retosApuntados = retosApuntados;
+	}
 	
 	public String getTipoServicio() {
 		return tipoServicio;

@@ -16,15 +16,6 @@ public class SesionEntrenamientoDTO implements Serializable {
 	private long horaInicio;
 	private float duracion;
 	private String deporte;
-	private ImageIcon mapImg;
-
-	public ImageIcon getMapImg() {
-		return mapImg;
-	}
-
-	public void setMapImg(ImageIcon mapImg) {
-		this.mapImg = mapImg;
-	}
 
 	public String getDeporte() {
 		return deporte;

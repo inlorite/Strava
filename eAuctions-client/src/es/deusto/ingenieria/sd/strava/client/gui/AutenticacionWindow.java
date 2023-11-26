@@ -36,8 +36,6 @@ public class AutenticacionWindow extends JFrame {
 	JPasswordField tfPassword;
 	JButton bRegister;
 	JButton bLogin;
-	JButton bLoginG;
-	JButton bLoginM;
 
 	private AutenticacionWindow() {
 		Container cp = this.getContentPane();
@@ -50,7 +48,7 @@ public class AutenticacionWindow extends JFrame {
 
 		// FORMULARIO
 		JPanel pData = new JPanel();
-		pData.setLayout(new GridLayout(7, 1, 5, 10));
+		pData.setLayout(new GridLayout(5, 1, 5, 10));
 		pData.setBorder(new EmptyBorder(new Insets(10, 10, 10, 10)));
 		
 		JPanel pButton = new JPanel();
@@ -63,12 +61,6 @@ public class AutenticacionWindow extends JFrame {
 		pData.add(new JLabel("Password: "));
 		tfPassword = new JPasswordField();
 		pData.add(tfPassword);
-		
-		
-		bLoginG = new JButton("Login Meta");
-		bLoginM = new JButton("Login Google");
-		pData.add(bLoginG);
-		pData.add(bLoginM);
 		
 		bRegister = new JButton("Register");
 		pButton.add(bRegister);
@@ -157,8 +149,9 @@ public class AutenticacionWindow extends JFrame {
 //			public void actionPerformed(ActionEvent e) {
 //				String email = tfEmail.getText();
 //				String password = tfPassword.getText();
+//				String tipo = cbTipo.getSelectedItem().toString();
 //
-//				boolean login = login(email, password);
+//				boolean login = login(email, password,tipo);
 //
 //				if (login) {
 //					System.out.println("hola te has logueado");
@@ -172,12 +165,6 @@ public class AutenticacionWindow extends JFrame {
 //
 //		});
 		
-		this.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				AutenticacionController.getInstance().logout();
-			}
-		});
 
 		this.setTitle("Strava Autenticacion");
 		this.pack();
@@ -187,10 +174,10 @@ public class AutenticacionWindow extends JFrame {
 		this.setVisible(true);
 	}
 
-	public boolean login(String email, String password) {
+	public boolean login(String email, String password, String tipo) {
 		String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex(password);
 
-		return AutenticacionController.getInstance().login(email, sha1);
+		return AutenticacionController.getInstance().login(email, sha1,tipo);
 	}
 
 	public boolean logout() {

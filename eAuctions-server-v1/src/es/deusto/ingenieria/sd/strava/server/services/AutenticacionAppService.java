@@ -108,7 +108,7 @@ public class AutenticacionAppService {
 		return null;
 	}
 
-	public Usuario login(String email, String password) {
+	public Usuario login(String email, String password, String tipo) {
 		
 		for (Usuario u : usuarios) {
 			if (u.getEmail().equals(email)) {

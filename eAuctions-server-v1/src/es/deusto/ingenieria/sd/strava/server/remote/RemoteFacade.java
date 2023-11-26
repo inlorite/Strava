@@ -35,11 +35,11 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	/////////////////////// METODOS AUTENTICACION ///////////////////////
 
 	@Override
-	public synchronized long login(String email, String password) throws RemoteException {
+	public synchronized long login(String email, String password, String tipo) throws RemoteException {
 		System.out.println(" * RemoteFacade login(): " + email + " / " + password);
 
 		// Perform login() using LoginAppService
-		Usuario user = AutenticacionAppService.getInstance().login(email, password);
+		Usuario user = AutenticacionAppService.getInstance().login(email, password, tipo);
 
 		// If login() success user is stored in the Server State
 		if (user != null) {
@@ -81,7 +81,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 
 		if (AutenticacionAppService.getInstance().register(usuario)) {
 			try {
-				return login(usuario.getEmail(), usuario.getContrasena());
+				return login(usuario.getEmail(), usuario.getContrasena(),usuario.getTipoServicio());
 			} catch (RemoteException ex) {
 				throw ex;
 			}
@@ -163,7 +163,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		}
 
 		// Create Reto using RetosAppService.getInstance()
-		RetosAppService.getInstance().crearReto(reto);
+		RetosAppService.getInstance().crearReto(reto,reto.getCreador());
 		
 		return true;
 	}
@@ -189,17 +189,59 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		}
 	}
 
-	public List<RetoDTO> getRetos() throws RemoteException {
-		System.out.println(" * RemoteFacade getRetos()");
+//	public List<RetoDTO> getRetos() throws RemoteException {
+//		System.out.println(" * RemoteFacade getRetos()");
+//
+//		// Get Reto using RetosAppService.getInstance()
+//		List<Reto> retos = RetosAppService.getInstance().getRetos();
+//
+//		if (retos != null) {
+//			// Convert domain object to DTO
+//			return RetoAssembler.getInstance().retoToDTO(retos);
+//		} else {
+//			throw new RemoteException("getRetos() fails!");
+//		}
+//	}
+	
+	@Override
+	public List<RetoDTO> getRetosApuntados(long token) throws RemoteException {
+		System.out.println(" * RemoteFacade getRetosApuntados(token)");
 
-		// Get Reto using RetosAppService.getInstance()
-		List<Reto> retos = RetosAppService.getInstance().getRetos();
+		List<Reto> retos;
+
+		// Get SesionEntrenamiento using SesionesEntrenamientoAppService.getInstance()
+		if (this.serverState.containsKey(token)) {
+			retos = RetosAppService.getInstance().getRetosApuntados(this.serverState.get(token));
+		} else {
+			throw new RemoteException("getRetos(token) fails!");
+		}
 
 		if (retos != null) {
 			// Convert domain object to DTO
 			return RetoAssembler.getInstance().retoToDTO(retos);
 		} else {
-			throw new RemoteException("getRetos() fails!");
+			throw new RemoteException("getRetos(token) fails!");
+		}
+	}
+
+	@Override
+	public List<RetoDTO> getRetosDesapuntados(long token) throws RemoteException {
+		System.out.println(" * RemoteFacade getRetosDesapuntados(token)");
+
+		List<Reto> retos;
+
+		// Get SesionEntrenamiento using SesionesEntrenamientoAppService.getInstance()
+		if (this.serverState.containsKey(token)) {
+			retos = RetosAppService.getInstance().getRetosDesapuntados(this.serverState.get(token));
+		} else {
+			throw new RemoteException("getRetos(token) fails!");
+		}
+
+		if (retos != null) {
+			// Convert domain object to DTO
+			return RetoAssembler.getInstance().retoToDTO(retos);
+		} else {
+			throw new RemoteException("getRetos(token) fails!");
 		}
 	}
 
@@ -208,7 +250,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 
 		if (reto != null && this.serverState.containsKey(token)) {
 			// Apuntarse Reto using RetosAppService.getInstance()
-			RetosAppService.getInstance().apuntarseReto(this.serverState.get(token).getNombre(), reto);
+			RetosAppService.getInstance().apuntarseReto(this.serverState.get(token), reto);
 			return true;
 		} else {
 			throw new RemoteException("apuntarseReto() fails!");
@@ -220,7 +262,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 
 		if (reto != null && this.serverState.containsKey(token)) {
 			// Desapuntarse Reto using RetosAppService.getInstance()
-			RetosAppService.getInstance().desapuntarseReto(this.serverState.get(token).getNombre(), reto);
+			RetosAppService.getInstance().desapuntarseReto(this.serverState.get(token), reto);
 			return true;
 		} else {
 			throw new RemoteException("desapuntarseReto() fails!");
@@ -232,7 +274,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 
 		if (reto != null && this.serverState.containsKey(token)) {
 			// Delete Reto using RetosAppService.getInstance()
-			RetosAppService.getInstance().eliminarReto(serverState.get(token).getNombre(), reto);
+			RetosAppService.getInstance().eliminarReto(serverState.get(token), reto);
 			return true;
 		} else {
 			throw new RemoteException("eliminarReto() fails!");
@@ -243,5 +285,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	public String getUsuario(long token) throws RemoteException {	
 		return AutenticacionAppService.getInstance().getUsuario(serverState.get(token).getNombre()).getNombre();
 	}
+
+	
 
 }

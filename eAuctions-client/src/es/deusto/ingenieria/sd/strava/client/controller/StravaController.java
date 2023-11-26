@@ -83,11 +83,20 @@ public class StravaController {
 		}
 	}
 
-	public List<RetoDTO> getRetos() {
+	public List<RetoDTO> getRetosApuntados(long token) {
 		try {
-			return ServiceLocator.getInstance().getService().getRetos();
+			return ServiceLocator.getInstance().getService().getRetosApuntados(token);
 		} catch (RemoteException e) {
-			System.out.println("# Error getting Retos: " + e);
+			System.out.println("# Error getting user's Retos: " + e);
+			return null;
+		}
+	}
+	
+	public List<RetoDTO> getRetosDesapuntados(long token) {
+		try {
+			return ServiceLocator.getInstance().getService().getRetosDesapuntados(token);
+		} catch (RemoteException e) {
+			System.out.println("# Error getting user's Retos: " + e);
 			return null;
 		}
 	}

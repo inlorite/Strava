@@ -17,10 +17,10 @@ public class AutenticacionController {
 		return token;
 	}
 
-	public boolean login(String email, String password) {
+	public boolean login(String email, String password, String tipo) {
 		if (!email.isEmpty() && !password.isEmpty()) {
 			try {
-				AutenticacionController.token = ServiceLocator.getInstance().getService().login(email, password);			
+				AutenticacionController.token = ServiceLocator.getInstance().getService().login(email, password,tipo);			
 				return true;
 			} catch (RemoteException e) {
 				System.out.println("# Error during login: " + e);

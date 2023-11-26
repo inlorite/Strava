@@ -13,7 +13,7 @@ public interface IRemoteFacade extends Remote {
 
 	// Métodos Autenticación
 
-	public long login(String email, String password) throws RemoteException;
+	public long login(String email, String password, String tipo) throws RemoteException;
 
 	public void logout(long token) throws RemoteException;
 
@@ -35,11 +35,15 @@ public interface IRemoteFacade extends Remote {
 	
 	public List<RetoDTO> getRetos(long token) throws RemoteException;
 
-	public List<RetoDTO> getRetos() throws RemoteException;
+	public List<RetoDTO> getRetosApuntados(long token) throws RemoteException;
+	
+	public List<RetoDTO> getRetosDesapuntados(long token) throws RemoteException;
 
 	public boolean apuntarseReto(String reto, long token) throws RemoteException;
 
 	public boolean desapuntarseReto(String reto, long token) throws RemoteException;
 
 	public boolean eliminarReto(String reto, long token) throws RemoteException;
+	
+	
 }

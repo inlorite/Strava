@@ -412,10 +412,10 @@ public class DPanelRetos extends JPanel {
 			
 		} else if (cbFiltro.getSelectedIndex() == 1) {
 			// APUNTADOS
-			retos = StravaController.getInstance().getRetos();
+			retos = StravaController.getInstance().getRetosApuntados(AutenticacionController.getToken());
 		} else {
 			// DESAPUNTADOS
-			retos = StravaController.getInstance().getRetos();
+			retos = StravaController.getInstance().getRetosDesapuntados(AutenticacionController.getToken());
 		}
 
 		// cambiar el atributo List retos en el IF
@@ -431,8 +431,20 @@ public class DPanelRetos extends JPanel {
 			return;
 
 		RetoDTO reto = null;
-
-		for (RetoDTO reto_i : StravaController.getInstance().getRetos()) {
+		List<RetoDTO> retosLista = new ArrayList<>();
+		if (cbFiltro.getSelectedIndex() == 0) {
+			// CREADOS
+			retosLista = StravaController.getInstance().getRetos(AutenticacionController.getToken());
+			
+		} else if (cbFiltro.getSelectedIndex() == 1) {
+			// APUNTADOS
+			retosLista = StravaController.getInstance().getRetosApuntados(AutenticacionController.getToken());
+		} else {
+			// DESAPUNTADOS
+			retosLista = StravaController.getInstance().getRetosDesapuntados(AutenticacionController.getToken());
+		}
+		
+		for (RetoDTO reto_i : retosLista) {
 			if (reto_i.getNombre().equals(tRetos.getValueAt(tRetos.getSelectedRow(), 0))) {
 				reto = reto_i;
 				break;

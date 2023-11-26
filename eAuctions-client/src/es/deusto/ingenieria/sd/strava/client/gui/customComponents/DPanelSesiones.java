@@ -70,6 +70,7 @@ public class DPanelSesiones extends JPanel {
 	private static ImageIcon mapImg;
 	private static JLabel lImg;
 	private SimpleDateFormat sdf;
+	private static int filaSeleccionada = -1;
 	
 	
 	public DPanelSesiones() {
@@ -255,10 +256,10 @@ public class DPanelSesiones extends JPanel {
 		cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				String sesionSeleccionada = null;
-
-				if (tSesiones.getSelectedRow() != -1) {
+				
+				if (tSesiones.getSelectedRow() != -1 && filaSeleccionada!=tSesiones.getSelectedRow()) {
 					sesionSeleccionada = (String) tSesiones.getValueAt(tSesiones.getSelectedRow(), 0);
-					
+					filaSeleccionada = tSesiones.getSelectedRow();
 					updateDetalles();
 					pDetalle.updateUI();
 
@@ -370,7 +371,7 @@ public class DPanelSesiones extends JPanel {
 				"src\\es\\deusto\\ingenieria\\sd\\strava\\client\\gui\\assets\\ses6.png" 
 		};
 		
-		int random = (int) Math.random() * 6;
+		int random = (int) (Math.random() * 6);
 		System.out.println(urls[0]);
 		System.out.println(random + "pon algo cabron");
 		mapImg = new ImageIcon(urls[random]);		

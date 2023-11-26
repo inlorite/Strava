@@ -97,7 +97,7 @@ public class StravaWindow extends JFrame {
 		// CARRUSEL
 
 		imagenLabel = new JLabel();
-		imagenLabel.setSize(1000, 300);
+		imagenLabel.setSize(1000, 150);
 		carruselPanel.add(imagenLabel, BorderLayout.CENTER);
 
 		// Configurar el temporizador para cambiar las imágenes cada 2000 milisegundos
@@ -173,9 +173,14 @@ public class StravaWindow extends JFrame {
 		return StravaController.getInstance().getRetos(token);
 	}
 
-	public List<RetoDTO> getRetos() {
+	public List<RetoDTO> getRetosApuntados(long token) {
 
-		return StravaController.getInstance().getRetos();
+		return StravaController.getInstance().getRetosApuntados(token);
+	}
+	
+	public List<RetoDTO> getRetosDesapuntados(long token) {
+
+		return StravaController.getInstance().getRetosDesapuntados(token);
 	}
 
 	public boolean apuntarseReto(String reto, long token) {
