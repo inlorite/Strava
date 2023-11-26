@@ -129,7 +129,8 @@ public class DPanelRetos extends JPanel {
 
 		pDetalle = new JPanel();
 		pDetalle.setLayout(new GridLayout(4, 1, 5, 5));
-
+		pDetalle.setBorder(new TitledBorder("Panel detalle"));
+		
 		pArriba = new JPanel(new GridLayout(1, 3, 5, 5));
 		lNombreReto = new JLabel();
 		lFechaInicio = new JLabel();
@@ -443,6 +444,7 @@ public class DPanelRetos extends JPanel {
 		this.remove(pDetalle);
 		pDetalle = new JPanel();
 		pDetalle.setLayout(new GridLayout(4, 1, 5, 5));
+		pDetalle.setBorder(new TitledBorder("Panel detalle"));
 		lNombreReto = new JLabel(reto.getNombre());
 		System.out.println("Label :" + lNombreReto.getText());
 		lFechaInicio = new JLabel(reto.getFechaInicio().toString());

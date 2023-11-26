@@ -2,6 +2,7 @@ package es.deusto.ingenieria.sd.strava.client.gui.customComponents;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -99,7 +100,7 @@ public class DPanelSesiones extends JPanel {
 		bCrearSesion = new JButton("Crear Sesion");
 		pBotones.add(bCrearSesion);
 		
-		pSesiones.add(pBotones);
+		pSesiones.add(pBotones, BorderLayout.SOUTH);
 		
 		this.add(pSesiones);
 		
@@ -107,6 +108,7 @@ public class DPanelSesiones extends JPanel {
 		
 		pDetalle = new JPanel();
 		pDetalle.setLayout(new GridLayout(3, 1, 5, 5));
+		pDetalle.setBorder(new TitledBorder("Panel detalle"));
 		
 		pArriba = new JPanel(new GridLayout(1, 3, 5, 5));
 		lNombreSesion = new JLabel();
@@ -128,6 +130,7 @@ public class DPanelSesiones extends JPanel {
 		
 		mapImg = new ImageIcon();
 		lImg = new JLabel(mapImg);
+		lImg.setSize(100, 100);
 		pDetalle.add(lImg);
 		
 		this.add(pDetalle);
@@ -326,6 +329,7 @@ public class DPanelSesiones extends JPanel {
 		this.remove(pDetalle);
 		pDetalle = new JPanel();
 		pDetalle.setLayout(new GridLayout(3, 1, 5, 5));
+		pDetalle.setBorder(new TitledBorder("Panel detalle"));
 		lNombreSesion = new JLabel(sesion.getTitulo());
 		System.out.println("Label :" + lNombreSesion.getText());
 		lFechaInicio = new JLabel(sesion.getFechaInicio().toString());
@@ -349,18 +353,24 @@ public class DPanelSesiones extends JPanel {
 		pDetalle.add(pAbajo);
 		
 		String[] urls = { 
-				"..\\src\\es\\deusto\\ingenieria\\sd\\strava\\client\\gui\\assets\\ses1.png",
-				"..\\src\\es\\deusto\\ingenieria\\sd\\strava\\client\\gui\\assets\\ses2.png",
-				"..\\src\\es\\deusto\\ingenieria\\sd\\strava\\client\\gui\\assets\\ses3.png",
-				"..\\src\\es\\deusto\\ingenieria\\sd\\strava\\client\\gui\\assets\\ses4.png",
-				"..\\src\\es\\deusto\\ingenieria\\sd\\strava\\client\\gui\\assets\\ses5.png",
-				"..\\src\\es\\deusto\\ingenieria\\sd\\strava\\client\\gui\\assets\\ses6.png" 
+				"src\\es\\deusto\\ingenieria\\sd\\strava\\client\\gui\\assets\\ses1.png",
+				"src\\es\\deusto\\ingenieria\\sd\\strava\\client\\gui\\assets\\ses2.png",
+				"src\\es\\deusto\\ingenieria\\sd\\strava\\client\\gui\\assets\\ses3.png",
+				"src\\es\\deusto\\ingenieria\\sd\\strava\\client\\gui\\assets\\ses4.png",
+				"src\\es\\deusto\\ingenieria\\sd\\strava\\client\\gui\\assets\\ses5.png",
+				"src\\es\\deusto\\ingenieria\\sd\\strava\\client\\gui\\assets\\ses6.png" 
 		};
 		
 		int random = (int) Math.random() * 6;
+		System.out.println(urls[0]);
 		System.out.println(random + "pon algo cabron");
-		mapImg = new ImageIcon(urls[random]);
-		lImg = new JLabel(mapImg);
+		mapImg = new ImageIcon(urls[random]);		
+		lImg = new JLabel();
+		lImg.setSize(250, 150);
+		Image imagen = mapImg.getImage();
+		Image imagenEscalada = imagen.getScaledInstance(lImg.getWidth(), lImg.getHeight(),
+				Image.SCALE_SMOOTH);
+		lImg.setIcon(new ImageIcon(imagenEscalada));
 		pDetalle.add(lImg);
 		
 		
