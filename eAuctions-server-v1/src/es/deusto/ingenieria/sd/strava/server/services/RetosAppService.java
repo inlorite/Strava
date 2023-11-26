@@ -107,7 +107,7 @@ public class RetosAppService {
 		List<Reto> retosUsuario = new ArrayList<Reto>();
 		
 		for (Reto reto : retos) {
-			if (reto.getCreador().equals(usuario)) {
+			if (reto.getCreador().getNombre().equals(usuario)) {
 				retosUsuario.add(reto);
 			}
 		}
@@ -141,8 +141,8 @@ public class RetosAppService {
 		Reto r = this.getRetoPorNombre(reto);
 		
 		if (r != null) {
-			if (!r.getParticipantes().contains(usuario)) {
-				//r.getParticipantes().add(usuario);
+			if (!r.getParticipantes().contains(AutenticacionAppService.getInstance().getUsuario(usuario))) {
+				r.getParticipantes().add(AutenticacionAppService.getInstance().getUsuario(usuario));
 				return true;
 			}
 		}
@@ -153,8 +153,8 @@ public class RetosAppService {
 		Reto r = this.getRetoPorNombre(reto);		
 		
 		if (r != null) {
-			if (r.getParticipantes().contains(usuario)) {
-				r.getParticipantes().remove(usuario);
+			if (r.getParticipantes().contains(AutenticacionAppService.getInstance().getUsuario(usuario))) {
+				r.getParticipantes().remove(AutenticacionAppService.getInstance().getUsuario(usuario));
 				return true;
 			}
 		}
@@ -166,7 +166,7 @@ public class RetosAppService {
 		Reto r = this.getRetoPorNombre(reto);
 		
 		if (r != null) {
-			if (r.getCreador().equals(usuario)) {
+			if (r.getCreador().equals(AutenticacionAppService.getInstance().getUsuario(usuario))) {
 				this.retos.remove(r);
 				return true;
 			}

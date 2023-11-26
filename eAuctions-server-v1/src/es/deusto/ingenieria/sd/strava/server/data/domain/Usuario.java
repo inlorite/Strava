@@ -19,7 +19,6 @@ public class Usuario {
 	private List<SesionEntrenamiento> sesionesEntrenamiento = new ArrayList<>();
 	//private List<Reto> retos = new ArrayList<>();
 	private String tipoServicio;
-	private ImageIcon img;
 	
 	public String getTipoServicio() {
 		return tipoServicio;
@@ -27,14 +26,6 @@ public class Usuario {
 
 	public void setTipoServicio(String tipoServicio) {
 		this.tipoServicio = tipoServicio;
-	}
-	
-	public ImageIcon getImg() {
-		return img;
-	}
-
-	public void setImg(ImageIcon img) {
-		this.img = img;
 	}
 
 	public List<SesionEntrenamiento> getSesionesEntrenamiento() {

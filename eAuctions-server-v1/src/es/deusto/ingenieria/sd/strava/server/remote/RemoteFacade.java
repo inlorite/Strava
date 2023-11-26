@@ -176,13 +176,14 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		// Get SesionEntrenamiento using SesionesEntrenamientoAppService.getInstance()
 		if (this.serverState.containsKey(token)) {
 			retos = RetosAppService.getInstance().getRetos(this.serverState.get(token).getNombre());
+			System.out.println("Fachada longitud "+ retos.size());
 		} else {
 			throw new RemoteException("getRetos(token) fails!");
 		}
 
 		if (retos != null) {
 			// Convert domain object to DTO
-			return retos.stream().map(e -> RetoAssembler.getInstance().retoToDTO(e)).collect(Collectors.toList());
+			return RetoAssembler.getInstance().retoToDTO(retos);
 		} else {
 			throw new RemoteException("getRetos(token) fails!");
 		}
@@ -196,7 +197,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 
 		if (retos != null) {
 			// Convert domain object to DTO
-			return retos.stream().map(e -> RetoAssembler.getInstance().retoToDTO(e)).collect(Collectors.toList());
+			return RetoAssembler.getInstance().retoToDTO(retos);
 		} else {
 			throw new RemoteException("getRetos() fails!");
 		}

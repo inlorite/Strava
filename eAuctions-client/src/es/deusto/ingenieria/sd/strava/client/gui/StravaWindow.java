@@ -48,9 +48,9 @@ public class StravaWindow extends JFrame {
 	private static JPanel header;
 
 	private String[] nombresImagenes = {
-			"src\\es\\deusto\\ingenieria\\sd\\strava\\client\\gui\\assets\\Blackkiller_LI.jpg",
-			"src\\es\\deusto\\ingenieria\\sd\\strava\\client\\gui\\assets\\logo titans acabado.png",
-			"src\\es\\deusto\\ingenieria\\sd\\strava\\client\\gui\\assets\\Blackkiller.png" };
+			"src\\es\\deusto\\ingenieria\\sd\\strava\\client\\gui\\assets\\adidas.png",
+			"src\\es\\deusto\\ingenieria\\sd\\strava\\client\\gui\\assets\\newbalance.png",
+			"src\\es\\deusto\\ingenieria\\sd\\strava\\client\\gui\\assets\\nike.png" };
 
 	public StravaWindow() {
 

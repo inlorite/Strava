@@ -30,7 +30,6 @@ public class UsuarioAssembler {
 		dto.setFrecuenciaCardiacaMax(usuario.getFrecuenciaCardiacaMax());
 		dto.setFrecuenciaCardiacaReposo(usuario.getFrecuenciaCardiacaReposo());
 		dto.setTipoServicio(usuario.getTipoServicio());
-		dto.setImg(usuario.getImg());
 
 		return dto;
 	}
@@ -45,7 +44,6 @@ public class UsuarioAssembler {
 		usuario.setFrecuenciaCardiacaMax(dto.getFrecuenciaCardiacaMax());
 		usuario.setFrecuenciaCardiacaReposo(dto.getFrecuenciaCardiacaReposo());
 		usuario.setTipoServicio(dto.getTipoServicio());
-		usuario.setImg(dto.getImg());
 		
 		return usuario;
 	}

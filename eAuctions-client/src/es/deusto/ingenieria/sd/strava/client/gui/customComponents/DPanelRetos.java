@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -54,41 +55,41 @@ public class DPanelRetos extends JPanel {
 	// Nueva interfaz
 
 	// Izquierda
-	private JPanel pRetos;
-	private JComboBox<String> cbFiltro;
+	private static JPanel pRetos;
+	private static JComboBox<String> cbFiltro;
 
-	private JTable tRetos;
-	private DefaultTableModel dtmRetos;
+	private static JTable tRetos;
+	private static DefaultTableModel dtmRetos;
 
-	private JPanel pBotones;
-	private JPanel pBotonesRetosCreados;
-	private JButton bCrearReto;
-	private JButton bEliminarReto;
-	private JPanel pBotonesRetosApuntados;
-	private JButton bDesapuntarse;
-	private JPanel pBotonesRetosDesapuntados;
-	private JButton bApuntarse;
+	private static JPanel pBotones;
+	private static JPanel pBotonesRetosCreados;
+	private static JButton bCrearReto;
+	private static JButton bEliminarReto;
+	private static JPanel pBotonesRetosApuntados;
+	private static JButton bDesapuntarse;
+	private static JPanel pBotonesRetosDesapuntados;
+	private static JButton bApuntarse;
 
 	// Derecha
-	private JPanel pDetalle;
+	private static JPanel pDetalle;
 
-	private JPanel pArriba;
-	private JLabel lNombreReto;
-	private JLabel lFechaInicio;
-	private JLabel lFechaFin;
+	private static JPanel pArriba;
+	private static JLabel lNombreReto;
+	private static JLabel lFechaInicio;
+	private static JLabel lFechaFin;
 
-	private JPanel pAbajo;
-	private JLabel lTipoReto;
-	private JLabel lDistancia;
-	private JLabel lTiempo;
+	private static JPanel pAbajo;
+	private static JLabel lTipoReto;
+	private static JLabel lDistancia;
+	private static JLabel lTiempo;
 
-	private JPanel pCreador;
-	private ImageIcon imagenIcono;
-	private JLabel lIcono;
-	private JLabel lNombre;
+	private static JPanel pCreador;
+	private static ImageIcon imagenIcono;
+	private static JLabel lIcono;
+	private static JLabel lNombre;
 
-	private JTable tParticipantes;
-	private DefaultTableModel dtmParticipantes;
+	private static JTable tParticipantes;
+	private static DefaultTableModel dtmParticipantes;
 
 	public DPanelRetos() {
 
@@ -105,7 +106,7 @@ public class DPanelRetos extends JPanel {
 		pRetos.add(cbFiltro, BorderLayout.NORTH);
 
 		dtmRetos = new DefaultTableModel(new Object[] { "Nombre", "Fecha Inicio", "Tipo" }, 0);
-		cargarTabla(StravaController.getInstance().getRetos());
+		cargarTabla();
 		tRetos = new JTable(dtmRetos) {
 			private static final long serialVersionUID = 1L;
 
@@ -116,21 +117,22 @@ public class DPanelRetos extends JPanel {
 		pRetos.add(new JScrollPane(tRetos), BorderLayout.CENTER);
 
 		pBotonesRetosCreados = new JPanel();
-		bCrearReto = new JButton();
-		bEliminarReto = new JButton();
+		bCrearReto = new JButton("Crear reto");
+		bEliminarReto = new JButton("Eliminar reto");
 		pBotonesRetosCreados.add(bCrearReto);
 		pBotonesRetosCreados.add(bEliminarReto);
 
 		pBotonesRetosDesapuntados = new JPanel();
-		bApuntarse = new JButton();
+		bApuntarse = new JButton("Apuntarse");
 		pBotonesRetosDesapuntados.add(bApuntarse);
 
 		pBotonesRetosApuntados = new JPanel();
-		bDesapuntarse = new JButton();
+		bDesapuntarse = new JButton("Desapuntarse");
 		pBotonesRetosApuntados.add(bDesapuntarse);
 
 		pBotones = new JPanel();
-		pRetos.add(pBotones);
+		pBotones = pBotonesRetosCreados;
+		pRetos.add(pBotones, BorderLayout.SOUTH);
 
 		this.add(pRetos);
 
@@ -139,7 +141,7 @@ public class DPanelRetos extends JPanel {
 		pDetalle = new JPanel();
 		pDetalle.setLayout(new GridLayout(4, 1, 5, 5));
 
-		pArriba = new JPanel();
+		pArriba = new JPanel(new GridLayout(1, 3, 5, 5));
 		lNombreReto = new JLabel();
 		lFechaInicio = new JLabel();
 		lFechaFin = new JLabel();
@@ -148,7 +150,7 @@ public class DPanelRetos extends JPanel {
 		pArriba.add(lFechaFin);
 		pDetalle.add(pArriba);
 
-		pAbajo = new JPanel();
+		pAbajo = new JPanel(new GridLayout(1, 3, 5, 5));
 		lTipoReto = new JLabel();
 		lDistancia = new JLabel();
 		lTiempo = new JLabel();
@@ -160,12 +162,13 @@ public class DPanelRetos extends JPanel {
 		imagenIcono = new ImageIcon();
 		lIcono = new JLabel(imagenIcono);
 		lNombre = new JLabel();
+		pCreador = new JPanel(new GridLayout(1, 3, 5, 5));
 		pCreador.add(new JLabel("Creador del reto:"));
 		pCreador.add(lIcono);
 		pCreador.add(lNombre);
 		pDetalle.add(pCreador);
 
-		dtmParticipantes = new DefaultTableModel(new Object[] { "Icono", "Nombre" }, 0);
+		dtmParticipantes = new DefaultTableModel(new Object[] { "Nombre", "Fecha nacimiento" }, 0);
 		tParticipantes = new JTable(dtmParticipantes) {
 			private static final long serialVersionUID = 1L;
 
@@ -222,7 +225,7 @@ public class DPanelRetos extends JPanel {
 							(String) tRetos.getValueAt(tRetos.getSelectedRow(), 0), AutenticacionController.getToken());
 					if (resultado) {
 						System.out.println("Apuntado correctamente");
-						cargarTabla(StravaController.getInstance().getRetos());
+						cargarTabla();
 					} else {
 						System.out.println("No se ha podido apuntar al reto");
 					}
@@ -242,7 +245,7 @@ public class DPanelRetos extends JPanel {
 							(String) tRetos.getValueAt(tRetos.getSelectedRow(), 0), AutenticacionController.getToken());
 					if (resultado) {
 						System.out.println("Desapuntado correctamente");
-						cargarTabla(StravaController.getInstance().getRetos());
+						cargarTabla();
 					} else {
 						System.out.println("No se ha podido desapuntarse al reto");
 					}
@@ -285,7 +288,7 @@ public class DPanelRetos extends JPanel {
 
 						if (resultado) {
 							System.out.println("reto creado");
-							cargarTabla(StravaController.getInstance().getRetos());
+							cargarTabla();
 						} else {
 							System.out.println("reto no creado");
 						}
@@ -308,7 +311,7 @@ public class DPanelRetos extends JPanel {
 							(String) tRetos.getValueAt(tRetos.getSelectedRow(), 0), AutenticacionController.getToken());
 					if (resultado) {
 						System.out.println("Reto eliminado correctamente");
-						cargarTabla(StravaController.getInstance().getRetos());
+						cargarTabla();
 					} else {
 						System.out.println("No se ha podido eliminar el reto");
 					}
@@ -318,29 +321,29 @@ public class DPanelRetos extends JPanel {
 			}
 		});
 
-		lRetos.addListSelectionListener(new ListSelectionListener() {
-
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				if (lRetos.getSelectedValue() != null) {
-					if (lRetos.getSelectedValue().getCreador()
-							.equals(AutenticacionController.getInstance().getUsuario())) {
-						bApuntarse.setEnabled(false);
-						bDesapuntarse.setEnabled(false);
-					} else {
-						if (lRetos.getSelectedValue().getParticipantes()
-								.contains(AutenticacionController.getInstance().getUsuario())) {
-							bApuntarse.setEnabled(false);
-							bDesapuntarse.setEnabled(true);
-						} else {
-							bApuntarse.setEnabled(true);
-							bDesapuntarse.setEnabled(false);
-						}
-					}
-
-				}
-			}
-		});
+//		lRetos.addListSelectionListener(new ListSelectionListener() {
+//
+//			@Override
+//			public void valueChanged(ListSelectionEvent e) {
+//				if (lRetos.getSelectedValue() != null) {
+//					if (lRetos.getSelectedValue().getCreador()
+//							.equals(AutenticacionController.getInstance().getUsuario())) {
+//						bApuntarse.setEnabled(false);
+//						bDesapuntarse.setEnabled(false);
+//					} else {
+//						if (lRetos.getSelectedValue().getParticipantes()
+//								.contains(AutenticacionController.getInstance().getUsuario())) {
+//							bApuntarse.setEnabled(false);
+//							bDesapuntarse.setEnabled(true);
+//						} else {
+//							bApuntarse.setEnabled(true);
+//							bDesapuntarse.setEnabled(false);
+//						}
+//					}
+//
+//				}
+//			}
+//		});
 
 		/* JTABLE SELECTION CHANGED LISTENER */
 		ListSelectionModel cellSelectionModel = tRetos.getSelectionModel();
@@ -352,8 +355,9 @@ public class DPanelRetos extends JPanel {
 
 				if (tRetos.getSelectedRow() != -1) {
 					retoSeleccionado = (String) tRetos.getValueAt(tRetos.getSelectedRow(), 0);
-
+					
 					updateDetalles();
+					pDetalle.updateUI();
 
 				} else {
 					System.out.println("Ningun reto seleccionado.");
@@ -370,20 +374,28 @@ public class DPanelRetos extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				cargarTabla(StravaController.getInstance().getRetos());
-
+				
+				pRetos.remove(pBotones);
+				cargarTabla();
+				System.out.println(cbFiltro.getSelectedIndex());
 				switch (cbFiltro.getSelectedIndex()) {
 				case 0:
 					// CREADOS
 					pBotones = pBotonesRetosCreados;
+					pRetos.add(pBotones, BorderLayout.SOUTH);
+					pRetos.updateUI();
 					return;
 				case 1:
 					// APUNTADOS
 					pBotones = pBotonesRetosApuntados;
+					pRetos.add(pBotones, BorderLayout.SOUTH);
+					pRetos.updateUI();
 					return;
 				case 2:
 					// DESAPUNTADOS
 					pBotones = pBotonesRetosDesapuntados;
+					pRetos.add(pBotones, BorderLayout.SOUTH);
+					pRetos.updateUI();
 					return;
 				default:
 					return;
@@ -394,20 +406,24 @@ public class DPanelRetos extends JPanel {
 	}
 
 	/* FUNCION QUE CARGA EL MODELO DE JTABLE CORRESPONDIENTE */
-	private void cargarTabla(List<RetoDTO> retos) {
-
+	private void cargarTabla() {
+		
 		if (cbFiltro.getSelectedIndex() == -1) {
 			System.out.println("No se ha podido cargar la tabla.");
 			return;
 		}
-
+		List<RetoDTO> retos = new ArrayList<>();
+		dtmRetos.setRowCount(0);
 		if (cbFiltro.getSelectedIndex() == 0) {
 			// CREADOS
 			retos = StravaController.getInstance().getRetos(AutenticacionController.getToken());
+			
 		} else if (cbFiltro.getSelectedIndex() == 1) {
 			// APUNTADOS
+			retos = StravaController.getInstance().getRetos();
 		} else {
 			// DESAPUNTADOS
+			retos = StravaController.getInstance().getRetos();
 		}
 
 		// cambiar el atributo List retos en el IF
@@ -422,33 +438,69 @@ public class DPanelRetos extends JPanel {
 		if (tRetos.getSelectedRow() == -1)
 			return;
 
-		RetoDTO reto;
+		RetoDTO reto = null;
 
 		for (RetoDTO reto_i : StravaController.getInstance().getRetos()) {
-			if (reto.getNombre().equals(tRetos.getValueAt(tRetos.getSelectedRow(), 0))) {
+			if (reto_i.getNombre().equals(tRetos.getValueAt(tRetos.getSelectedRow(), 0))) {
 				reto = reto_i;
 				break;
 			}
 		}
-
+		
 		if (reto == null)
 			return;
 
-		// Faltan por cambiar el resto de elementos
+		System.out.println("Reto seleccionado "+ reto.toString());
+		this.remove(pDetalle);
+		pDetalle = new JPanel();
+		pDetalle.setLayout(new GridLayout(4, 1, 5, 5));
 		lNombreReto = new JLabel(reto.getNombre());
+		System.out.println("Label :" + lNombreReto.getText());
 		lFechaInicio = new JLabel(reto.getFechaInicio().toString());
 		lFechaFin = new JLabel(reto.getFechaFin().toString());
 
+		pArriba = new JPanel();
+		pArriba.setLayout(new GridLayout(1, 3, 5, 5));
+		pArriba.add(lNombreReto);
+		pArriba.add(lFechaInicio);
+		pArriba.add(lFechaFin);
+		pDetalle.add(pArriba);
 		lTipoReto = new JLabel(reto.getTipoReto());
 		lDistancia = new JLabel(reto.getDistancia() + "");
 		lTiempo = new JLabel(reto.getTiempo() + "");
+		
+		pAbajo = new JPanel();
+		pAbajo.setLayout(new GridLayout(1, 3, 5, 5));
+		pAbajo.add(lTipoReto);
+		pAbajo.add(lDistancia);
+		pAbajo.add(lTiempo);
+		pDetalle.add(pAbajo);
 
 		lNombre = new JLabel(reto.getCreador().getNombre());
 		imagenIcono = new ImageIcon(); // RECUPERAR EL ICONO Y CONVERTIRLO A IMAGEN
 		lIcono = new JLabel(imagenIcono);
-
+		pCreador = new JPanel();
+		pCreador.setLayout(new GridLayout(1, 3, 5, 5));
+		pCreador.add(new JLabel("Creador del reto:"));
+		pCreador.add(lNombre);
+		pCreador.add(lIcono);
+		pDetalle.add(pCreador);
+		
+		dtmParticipantes = new DefaultTableModel(new Object[] { "Nombre", "Fecha nacimiento" }, 0);
+		dtmParticipantes.setRowCount(0);
 		for (UsuarioDTO usuario : reto.getParticipantes()) {
-			dtmRetos.addRow(new Object[] { usuario.getImg(), usuario.getNombre() });
+			System.out.println("Nombre participante "+ usuario.getNombre());
+			dtmParticipantes.addRow(new Object[] { usuario.getNombre(), usuario.getFechaNacimiento() });
 		}
+		
+		tParticipantes = new JTable(dtmParticipantes) {
+			private static final long serialVersionUID = 1L;
+
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			};
+		};
+		pDetalle.add(new JScrollPane(tParticipantes));
+		this.add(pDetalle);
 	}
 }

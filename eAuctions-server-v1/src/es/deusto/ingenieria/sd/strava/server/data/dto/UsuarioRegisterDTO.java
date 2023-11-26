@@ -18,7 +18,6 @@ public class UsuarioRegisterDTO implements Serializable {
 	private int frecuenciaCardiacaReposo;
 	private String contrasena;
 	private String tipoServicio;
-	private ImageIcon img;
 	
 	public String getTipoServicio() {
 		return tipoServicio;
@@ -26,14 +25,6 @@ public class UsuarioRegisterDTO implements Serializable {
 
 	public void setTipoServicio(String tipoServicio) {
 		this.tipoServicio = tipoServicio;
-	}
-
-	public ImageIcon getImg() {
-		return img;
-	}
-
-	public void setImg(ImageIcon img) {
-		this.img = img;
 	}
 
 	public String getEmail() {
