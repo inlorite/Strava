@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -68,12 +69,13 @@ public class DPanelSesiones extends JPanel {
 	
 	private static ImageIcon mapImg;
 	private static JLabel lImg;
+	private SimpleDateFormat sdf;
 	
 	
 	public DPanelSesiones() {
 		
 		this.setLayout(new GridLayout(1, 2, 5, 5));
-		
+		sdf  = new SimpleDateFormat("dd/MM/yyyy");
 		// Panel Izquierdo
 		
 		pSesiones = new JPanel();
@@ -212,10 +214,10 @@ public class DPanelSesiones extends JPanel {
 				
 				Object[] fields = {
 						"Titulo", tfTitulo,
-						"Distancia", tfDistancia,
+						"Distancia (km)", tfDistancia,
 						"Fecha inicio", dcFechaInicio,
 						"Hora inicio", tfHoraInicio,
-						"Duracion", tfDuracion,
+						"Duracion (minutos)", tfDuracion,
 						"Deporte", cbDeporte
 				};
 				
@@ -330,10 +332,10 @@ public class DPanelSesiones extends JPanel {
 		pDetalle = new JPanel();
 		pDetalle.setLayout(new GridLayout(3, 1, 5, 5));
 		pDetalle.setBorder(new TitledBorder("Panel detalle"));
-		lNombreSesion = new JLabel(sesion.getTitulo());
-		System.out.println("Label :" + lNombreSesion.getText());
-		lFechaInicio = new JLabel(sesion.getFechaInicio().toString());
-		lHoraInicio = new JLabel(sesion.getHoraInicio() + ""); // TODO texto
+		lNombreSesion = new JLabel("Nombre: " +sesion.getTitulo());
+		
+		lFechaInicio = new JLabel("Fecha: " + sdf.format(sesion.getFechaInicio()));
+		lHoraInicio = new JLabel("Hora: " + sesion.getHoraInicio() + ""); // TODO texto
 
 		pArriba = new JPanel();
 		pArriba.setLayout(new GridLayout(1, 3, 5, 5));
@@ -341,9 +343,16 @@ public class DPanelSesiones extends JPanel {
 		pArriba.add(lFechaInicio);
 		pArriba.add(lHoraInicio);
 		pDetalle.add(pArriba);
-		lDeporte = new JLabel(sesion.getDeporte());
-		lDistancia = new JLabel(sesion.getDistancia() + "");
-		lDuracion = new JLabel(sesion.getDuracion() + "");
+		lDeporte = new JLabel("Deporte: " + sesion.getDeporte());
+		lDistancia = new JLabel("Distancia: " + sesion.getDistancia() + "km");
+		if(sesion.getDuracion()<60) {
+			lDuracion = new JLabel("Duracion: " + sesion.getDuracion() + "minutos");
+		}else {
+			int horas = (int) (sesion.getDuracion()/60);
+			int minutos = (int) (sesion.getDuracion()%60);
+			lDuracion = new JLabel("Duracion: " + horas + "h y "+ minutos +"min");
+		}
+		
 		
 		pAbajo = new JPanel();
 		pAbajo.setLayout(new GridLayout(1, 3, 5, 5));

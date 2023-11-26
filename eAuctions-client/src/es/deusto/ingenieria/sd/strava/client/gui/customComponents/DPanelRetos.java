@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -79,11 +80,12 @@ public class DPanelRetos extends JPanel {
 
 	private static JTable tParticipantes;
 	private static DefaultTableModel dtmParticipantes;
+	private SimpleDateFormat sdf;
 
 	public DPanelRetos() {
 
 		this.setLayout(new GridLayout(1, 2, 5, 5));
-
+		sdf  = new SimpleDateFormat("dd/MM/yyyy");
 		// Panel Izquierdo
 
 		pRetos = new JPanel();
@@ -260,7 +262,7 @@ public class DPanelRetos extends JPanel {
 				JComboBox<String> cbTipo = new JComboBox<>(opciones);
 
 				Object[] fields = { "Nombre", tfNombre, "Fecha inicio", dcFechaInicio, "Fecha fin", dcFechaFin,
-						"Distancia", tfDistancia, "Duracion", tfTiempo, "Tipo", cbTipo };
+						"Distancia(km)", tfDistancia, "Duracion(dias)", tfTiempo, "Tipo", cbTipo };
 
 				int result = JOptionPane.showConfirmDialog(null, fields, "CrearSesion", JOptionPane.OK_CANCEL_OPTION);
 
@@ -445,10 +447,9 @@ public class DPanelRetos extends JPanel {
 		pDetalle = new JPanel();
 		pDetalle.setLayout(new GridLayout(4, 1, 5, 5));
 		pDetalle.setBorder(new TitledBorder("Panel detalle"));
-		lNombreReto = new JLabel(reto.getNombre());
-		System.out.println("Label :" + lNombreReto.getText());
-		lFechaInicio = new JLabel(reto.getFechaInicio().toString());
-		lFechaFin = new JLabel(reto.getFechaFin().toString());
+		lNombreReto = new JLabel("Nombre: " + reto.getNombre());
+		lFechaInicio = new JLabel("Fecha inicio: " +sdf.format(reto.getFechaInicio()));
+		lFechaFin = new JLabel("Fecha fin: " +sdf.format(reto.getFechaInicio()));
 
 		pArriba = new JPanel();
 		pArriba.setLayout(new GridLayout(1, 3, 5, 5));
@@ -456,9 +457,29 @@ public class DPanelRetos extends JPanel {
 		pArriba.add(lFechaInicio);
 		pArriba.add(lFechaFin);
 		pDetalle.add(pArriba);
-		lTipoReto = new JLabel(reto.getTipoReto());
-		lDistancia = new JLabel(reto.getDistancia() + "");
-		lTiempo = new JLabel(reto.getTiempo() + "");
+		lTipoReto = new JLabel("Tipo: " + reto.getTipoReto());
+		lDistancia = new JLabel("Distancia: " + reto.getDistancia() + "km");
+			if(reto.getTiempo()<31) {
+				lTiempo = new JLabel(reto.getTiempo() + " dias");
+			}else if(reto.getTiempo()<365) {
+				int meses = (int) (reto.getTiempo()/30);
+				int dias = (int) (reto.getTiempo()%30);
+				lTiempo = new JLabel("Duracion: " + meses + "meses y "+ dias +"dias");
+			}else {
+				int anos =  (int) (reto.getTiempo()/365);
+				int resto = (int) (reto.getTiempo()%365);
+				if(resto>30) {
+					int meses = (int) (resto/30);
+					int dias = (int) (resto%30);
+					lTiempo = new JLabel("Duracion: "+anos+" anio(s) " + meses + "meses y "+ dias +"dias");
+				}else {
+					int dias = (int) (reto.getTiempo()%365);
+					lTiempo = new JLabel("Duracion: " + anos + "año(s) y "+ dias +"dias");
+				}
+							
+			}
+		
+
 		
 		pAbajo = new JPanel();
 		pAbajo.setLayout(new GridLayout(1, 3, 5, 5));

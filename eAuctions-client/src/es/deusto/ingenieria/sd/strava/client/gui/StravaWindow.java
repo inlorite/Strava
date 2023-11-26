@@ -101,8 +101,8 @@ public class StravaWindow extends JFrame {
 		carruselPanel.add(imagenLabel, BorderLayout.CENTER);
 
 		// Configurar el temporizador para cambiar las imágenes cada 2000 milisegundos
-		// (2 segundos)
-		timer = new Timer(2000, new ActionListener() {
+		// (4 segundos)
+		timer = new Timer(4000, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				mostrarSiguienteImagen();
