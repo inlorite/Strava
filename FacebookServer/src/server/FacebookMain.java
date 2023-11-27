@@ -40,16 +40,52 @@ public class FacebookMain {
 	            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 	            PrintWriter writer = new PrintWriter(new OutputStreamWriter(outputStream), true);
 
-				String userEmail = reader.readLine();
-				String userPassword = reader.readLine();
-				
-				writer.println(FacebookServiceGateway.getInstance().login(userEmail, userPassword)+"");
-				
+	            String instruccionCliente = null;
+	            String email = null;
+	            String contrasena = null;
+	            
+	            instruccionCliente = esperarRespuesta(reader, writer);
+	            email = esperarRespuesta(reader, writer);
+				contrasena = esperarRespuesta(reader, writer);
+	            
+	            if (instruccionCliente != null && email != null && contrasena != null) {
+					switch (instruccionCliente) {
+					case "LOGIN":
+			            writer.println(FacebookServiceGateway.getInstance().login(email, contrasena));
+			            break;
+					case "REGISTER":
+						writer.println(FacebookServiceGateway.getInstance().register(email, contrasena));
+						break;
+					default:
+						break;
+		            }
+					
+					reader.close();
+		            writer.close();
+		            socket.close();
+	            }
 			} catch (IOException e) {
 				e.printStackTrace();
 				closeServer();
 			}
 		}
+	}
+	
+	public String esperarRespuesta(BufferedReader reader, PrintWriter writer) {
+		String respuesta = null;
+		
+		try {
+			while ((respuesta = reader.readLine()) != null) {
+				System.out.println(respuesta);
+				writer.println("OK");
+				break;
+			}
+		} catch (IOException e) {
+			writer.println("NOT OK");
+			e.printStackTrace();
+		}
+		
+		return respuesta;
 	}
 	
 	public void closeServer() {

@@ -83,7 +83,7 @@ public class AutenticacionWindow extends JFrame {
 				JTextField tfFrecCardiMax = new JTextField();
 				JTextField tfFrecCardiRep = new JTextField();
 				JPasswordField pfContrasena = new JPasswordField();
-				String[] options = {"Facebook","Google"};
+				String[] options = {"FACEBOOK","GOOGLE"};
 				JComboBox<String> cbTipo = new JComboBox<String>(options);
 				
 				Object[] fields = {
@@ -142,28 +142,27 @@ public class AutenticacionWindow extends JFrame {
 			}
 		});
 
-//		bLogin.addActionListener(new ActionListener() {
-//
-//			@SuppressWarnings("deprecation")
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				String email = tfEmail.getText();
-//				String password = tfPassword.getText();
-//				String tipo = cbTipo.getSelectedItem().toString();
-//
-//				boolean login = login(email, password,tipo);
-//
-//				if (login) {
-//					System.out.println("hola te has logueado");
-//					AutenticacionWindow.getInstance().setVisible(false);
-//					StravaWindow.getInstance().setVisible(true);
-//				} else {
-//					System.out.println("datos incorrectos");
-//				}
-//
-//			}
-//
-//		});
+		bLogin.addActionListener(new ActionListener() {
+
+			@SuppressWarnings("deprecation")
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String email = tfEmail.getText();
+				String password = tfPassword.getText();
+
+				boolean login = login(email, password);
+
+				if (login) {
+					System.out.println("hola te has logueado");
+					AutenticacionWindow.getInstance().setVisible(false);
+					StravaWindow.getInstance().setVisible(true);
+				} else {
+					System.out.println("datos incorrectos");
+				}
+
+			}
+
+		});
 		
 
 		this.setTitle("Strava Autenticacion");
@@ -174,10 +173,10 @@ public class AutenticacionWindow extends JFrame {
 		this.setVisible(true);
 	}
 
-	public boolean login(String email, String password, String tipo) {
+	public boolean login(String email, String password) {
 		String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex(password);
 
-		return AutenticacionController.getInstance().login(email, sha1,tipo);
+		return AutenticacionController.getInstance().login(email, sha1);
 	}
 
 	public boolean logout() {

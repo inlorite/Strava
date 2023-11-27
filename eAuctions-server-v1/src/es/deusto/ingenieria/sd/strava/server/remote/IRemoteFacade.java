@@ -13,7 +13,7 @@ public interface IRemoteFacade extends Remote {
 
 	// Métodos Autenticación
 
-	public long login(String email, String password, String tipo) throws RemoteException;
+	public long login(String email, String password) throws RemoteException;
 
 	public void logout(long token) throws RemoteException;
 

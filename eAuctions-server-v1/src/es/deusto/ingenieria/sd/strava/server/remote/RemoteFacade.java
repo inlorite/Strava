@@ -35,11 +35,11 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	/////////////////////// METODOS AUTENTICACION ///////////////////////
 
 	@Override
-	public synchronized long login(String email, String password, String tipo) throws RemoteException {
+	public synchronized long login(String email, String password) throws RemoteException {
 		System.out.println(" * RemoteFacade login(): " + email + " / " + password);
 
 		// Perform login() using LoginAppService
-		Usuario user = AutenticacionAppService.getInstance().login(email, password, tipo);
+		Usuario user = AutenticacionAppService.getInstance().login(email, password);
 
 		// If login() success user is stored in the Server State
 		if (user != null) {
@@ -81,7 +81,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 
 		if (AutenticacionAppService.getInstance().register(usuario)) {
 			try {
-				return login(usuario.getEmail(), usuario.getContrasena(),usuario.getTipoServicio());
+				return login(usuario.getEmail(), usuario.getContrasena());
 			} catch (RemoteException ex) {
 				throw ex;
 			}

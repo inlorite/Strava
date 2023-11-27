@@ -1,6 +1,14 @@
 package es.deusto.ingenieria.sd.strava.server.services;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -108,34 +116,103 @@ public class AutenticacionAppService {
 		return null;
 	}
 
-	public Usuario login(String email, String password, String tipo) {
-		
+	public Usuario login(String email, String password) {
 		for (Usuario u : usuarios) {
 			if (u.getEmail().equals(email)) {
-				if (u.getContrasena().equals(password)) {
+				Boolean result = false;
+				
+				switch (u.getTipoServicio()) {
+				case "FACEBOOK":
+					result = conexionSocket(email, password, "LOGIN");
+					break;
+				case "GOOGLE":
+					break;
+				default:
+					break;
+				}
+				
+				if (result) {
 					return u;
 				} else {
-					System.out.println("Contrasena incorrecta.");
+					return null;
 				}
-			} else {
-				System.out.println("El usuario no existe.");
 			}
 		}
 		return null;
-
-		/*
-		Socket socket = new Socket("localhost", 4321);
-		*/
 	}
 
 	public boolean register(Usuario usuario) {
-		// TODO: Get User using DAO and check
-		if (!usuarios.contains(usuario)) {
-			usuarios.add(usuario); 
+		if (!usuarios.contains(usuario)) {			
+			Boolean result = false;
+			
+			switch (usuario.getTipoServicio()) {
+			case "FACEBOOK":
+				result = conexionSocket(usuario.getEmail(), usuario.getContrasena(), "REGISTER");
+				break;
+			case "GOOGLE":
+				break;
+			default:
+				break;
+			}
+			
 			System.out.println(usuario);
-			return true;
+			if (result) {
+				usuarios.add(usuario);
+				return true;
+			}
 		}
 		return false;
+	}
+	
+	public String enviarMensaje(BufferedReader reader, PrintWriter writer, String mensaje) {		
+		String respuesta = null;
+		
+		try {
+			writer.println(mensaje);
+			
+			while ((respuesta = reader.readLine()) != null) {
+				System.out.println(respuesta);
+				break;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return respuesta;
+	}
+	
+	public boolean conexionSocket(String email, String password, String operacion) {
+		boolean result = false;
+		
+		try {
+			Socket socket = new Socket("localhost", 4321);
+			
+			InputStream inputStream = socket.getInputStream();
+            OutputStream outputStream = socket.getOutputStream();
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            PrintWriter writer = new PrintWriter(new OutputStreamWriter(outputStream), true);
+            
+            String respuesta = null;
+            if (enviarMensaje(reader, writer, operacion).equals("OK")) {
+            	if (enviarMensaje(reader, writer, email).equals("OK")) {
+            		if (enviarMensaje(reader, writer, password).equals("OK")) {
+            			while ((respuesta = reader.readLine()) != null) {
+							result = Boolean.parseBoolean(respuesta);
+							break;
+						}
+                    }
+                }
+            }
+            
+            reader.close();
+            writer.close();
+            socket.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 
 	public static AutenticacionAppService getInstance() {
