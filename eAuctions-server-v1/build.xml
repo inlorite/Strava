@@ -9,18 +9,23 @@
 	<property name="rmiregistry.IP" value="127.0.0.1"/> 
 	<property name="rmiregistry.port" value="1099"/> 
 	<property name="server.name" value="Strava"/>
+	<property name="resources.dir" location="resources"/>
 
 	<path id="classpath">
         <fileset dir="${lib.dir}">
             <include name="**/*.jar"/>
         </fileset>
         <pathelement location="${bin.dir}"/>
+		<pathelement location="${resources.dir}"/>
     </path>
 	
 	<target name="1.build" description="Builds the project">
 		<delete dir="${bin.dir}"/>
 		<mkdir dir="${bin.dir}"/>
 		<javac srcdir="${src.dir}" destdir="${bin.dir}" classpathref="classpath" deprecation="true" fork="true" includeantruntime="no"/>
+		<copy todir="${bin.dir}">
+            <fileset dir="${resources.dir}"/>
+        </copy>
     </target>
 		
 	<target name="2.export" depends="1.build" description="Export classes into a .jar file">

@@ -8,12 +8,22 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.net.URI;
 import java.net.UnknownHostException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 
 import es.deusto.ingenieria.sd.strava.server.data.domain.SesionEntrenamiento;
 import es.deusto.ingenieria.sd.strava.server.data.domain.Usuario;
@@ -23,6 +33,11 @@ public class AutenticacionAppService {
 
 	private static AutenticacionAppService instance;
 	private List<Usuario> usuarios = new ArrayList<Usuario>();
+	
+	@Autowired
+	private RestTemplate restTemplate = new RestTemplate();
+	private String serverURL = "http://localhost";
+	private int serverPort = 8888;
 
 	public List<Usuario> getUsuarios() {
 		return usuarios;
@@ -31,6 +46,14 @@ public class AutenticacionAppService {
 	private AutenticacionAppService() {
 		//TODO: remove when DAO Pattern is implemented
 		//this.initializeData();
+		/*
+		Usuario u = new Usuario();
+		u.setEmail("xabi@gmail.com");
+		u.setContrasena("xabi");
+		u.setTipoServicio("GOOGLE");
+		this.usuarios.add(u);
+		System.out.println("usuario xabi creado");
+		*/
 	}
 
 	private void initializeData() {
@@ -126,6 +149,22 @@ public class AutenticacionAppService {
 					result = conexionSocket(email, password, "LOGIN");
 					break;
 				case "GOOGLE":
+					HttpHeaders headers = new HttpHeaders();
+			        headers.setContentType(MediaType.APPLICATION_JSON);
+			        List<MediaType> accepts = new ArrayList<>();
+		            accepts.add(MediaType.APPLICATION_JSON);
+		            headers.setAccept(accepts);
+			        
+			        String requestBody = String.format("{\"email\":\"%s\",\"contrasena\":\"%s\"}", email, password);
+			        
+			        HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, headers);
+			        
+			        ResponseEntity<String> response = restTemplate.exchange(String.format("%s:%d/user/login", serverURL, serverPort), HttpMethod.POST, requestEntity, String.class);
+					System.out.println(response);
+					
+					if (response.getStatusCode().value() == 200) {
+						result = true;
+					}
 					break;
 				default:
 					break;
@@ -142,24 +181,45 @@ public class AutenticacionAppService {
 	}
 
 	public boolean register(Usuario usuario) {
-		if (!usuarios.contains(usuario)) {			
-			Boolean result = false;
-			
-			switch (usuario.getTipoServicio()) {
-			case "FACEBOOK":
-				result = conexionSocket(usuario.getEmail(), usuario.getContrasena(), "REGISTER");
-				break;
-			case "GOOGLE":
-				break;
-			default:
-				break;
+		try {
+			if (!usuarios.contains(usuario)) {			
+				Boolean result = false;
+				System.out.println("dentro de register");
+				
+				switch (usuario.getTipoServicio()) {
+				case "FACEBOOK":
+					result = conexionSocket(usuario.getEmail(), usuario.getContrasena(), "REGISTER");
+					break;
+				case "GOOGLE":
+					HttpHeaders headers = new HttpHeaders();
+			        headers.setContentType(MediaType.APPLICATION_JSON);
+			        List<MediaType> accepts = new ArrayList<>();
+		            accepts.add(MediaType.APPLICATION_JSON);
+		            headers.setAccept(accepts);
+			        
+			        String requestBody = String.format("{\"email\":\"%s\",\"contrasena\":\"%s\"}", usuario.getEmail(), usuario.getContrasena());
+			        
+			        HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, headers);
+			        
+			        ResponseEntity<String> response = restTemplate.exchange(String.format("%s:%d/user/register", serverURL, serverPort), HttpMethod.POST, requestEntity, String.class);
+					System.out.println(response);
+					
+					if (response.getStatusCode().value() == 200) {
+						result = true;
+					}
+					break;
+				default:
+					break;
+				}
+				
+				System.out.println(usuario);
+				if (result) {
+					usuarios.add(usuario);
+					return true;
+				}
 			}
-			
-			System.out.println(usuario);
-			if (result) {
-				usuarios.add(usuario);
-				return true;
-			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return false;
 	}
