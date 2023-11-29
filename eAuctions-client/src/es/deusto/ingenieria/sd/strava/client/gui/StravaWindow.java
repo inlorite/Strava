@@ -69,11 +69,11 @@ public class StravaWindow extends JFrame {
 		ImageIcon iiLogo = new ImageIcon("src\\es\\deusto\\ingenieria\\sd\\strava\\client\\gui\\assets\\logo.png");
 		JLabel lLogo = new JLabel(iiLogo);
 		lLogo.setAlignmentX(CENTER_ALIGNMENT);
-		header.add(lLogo, BorderLayout.NORTH);
+		header.add(lLogo, BorderLayout.WEST);
 		
 		header.add(carruselPanel, BorderLayout.CENTER);
 		header.add(menuBar,BorderLayout.SOUTH);
-		header.setMinimumSize(new Dimension(400,300));
+		//header.setMinimumSize(new Dimension(400,300));
 		pSesiones = new DPanelSesiones();
 		pRetos = new DPanelRetos();
 
