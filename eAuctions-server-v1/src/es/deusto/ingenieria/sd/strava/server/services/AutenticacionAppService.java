@@ -1,43 +1,21 @@
 package es.deusto.ingenieria.sd.strava.server.services;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.net.Socket;
-import java.net.URI;
-import java.net.UnknownHostException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
-
 import es.deusto.ingenieria.sd.strava.server.data.domain.SesionEntrenamiento;
 import es.deusto.ingenieria.sd.strava.server.data.domain.Usuario;
+import es.deusto.ingenieria.sd.strava.server.factory.GatewayFactory;
+import es.deusto.ingenieria.sd.strava.server.gateway.IAuthGateway;
 
 //TODO: Implement Singleton Pattern
 public class AutenticacionAppService {
 
 	private static AutenticacionAppService instance;
 	private List<Usuario> usuarios = new ArrayList<Usuario>();
-	
-	@Autowired
-	private RestTemplate restTemplate = new RestTemplate();
-	private String serverURL = "http://localhost";
-	private int serverPort = 8888;
 
 	public List<Usuario> getUsuarios() {
 		return usuarios;
@@ -56,6 +34,7 @@ public class AutenticacionAppService {
 		*/
 	}
 
+	@SuppressWarnings("unused")
 	private void initializeData() {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
@@ -142,33 +121,8 @@ public class AutenticacionAppService {
 	public Usuario login(String email, String password) {
 		for (Usuario u : usuarios) {
 			if (u.getEmail().equals(email)) {
-				Boolean result = false;
-				
-				switch (u.getTipoServicio()) {
-				case "FACEBOOK":
-					result = conexionSocket(email, password, "LOGIN");
-					break;
-				case "GOOGLE":
-					HttpHeaders headers = new HttpHeaders();
-			        headers.setContentType(MediaType.APPLICATION_JSON);
-			        List<MediaType> accepts = new ArrayList<>();
-		            accepts.add(MediaType.APPLICATION_JSON);
-		            headers.setAccept(accepts);
-			        
-			        String requestBody = String.format("{\"email\":\"%s\",\"contrasena\":\"%s\"}", email, password);
-			        
-			        HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, headers);
-			        
-			        ResponseEntity<String> response = restTemplate.exchange(String.format("%s:%d/user/login", serverURL, serverPort), HttpMethod.POST, requestEntity, String.class);
-					System.out.println(response);
-					
-					if (response.getStatusCode().value() == 200) {
-						result = true;
-					}
-					break;
-				default:
-					break;
-				}
+				IAuthGateway gateway = GatewayFactory.getInstance().getGateway(u.getTipoServicio());
+				Boolean result = gateway.login(email, password);
 				
 				if (result) {
 					return u;
@@ -183,34 +137,8 @@ public class AutenticacionAppService {
 	public boolean register(Usuario usuario) {
 		try {
 			if (!usuarios.contains(usuario)) {			
-				Boolean result = false;
-				System.out.println("dentro de register");
-				
-				switch (usuario.getTipoServicio()) {
-				case "FACEBOOK":
-					result = conexionSocket(usuario.getEmail(), usuario.getContrasena(), "REGISTER");
-					break;
-				case "GOOGLE":
-					HttpHeaders headers = new HttpHeaders();
-			        headers.setContentType(MediaType.APPLICATION_JSON);
-			        List<MediaType> accepts = new ArrayList<>();
-		            accepts.add(MediaType.APPLICATION_JSON);
-		            headers.setAccept(accepts);
-			        
-			        String requestBody = String.format("{\"email\":\"%s\",\"contrasena\":\"%s\"}", usuario.getEmail(), usuario.getContrasena());
-			        
-			        HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, headers);
-			        
-			        ResponseEntity<String> response = restTemplate.exchange(String.format("%s:%d/user/register", serverURL, serverPort), HttpMethod.POST, requestEntity, String.class);
-					System.out.println(response);
-					
-					if (response.getStatusCode().value() == 200) {
-						result = true;
-					}
-					break;
-				default:
-					break;
-				}
+				IAuthGateway gateway = GatewayFactory.getInstance().getGateway(usuario.getTipoServicio());
+				Boolean result = gateway.register(usuario.getEmail(), usuario.getContrasena());
 				
 				System.out.println(usuario);
 				if (result) {
@@ -222,57 +150,6 @@ public class AutenticacionAppService {
 			e.printStackTrace();
 		}
 		return false;
-	}
-	
-	public String enviarMensaje(BufferedReader reader, PrintWriter writer, String mensaje) {		
-		String respuesta = null;
-		
-		try {
-			writer.println(mensaje);
-			
-			while ((respuesta = reader.readLine()) != null) {
-				System.out.println(respuesta);
-				break;
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		return respuesta;
-	}
-	
-	public boolean conexionSocket(String email, String password, String operacion) {
-		boolean result = false;
-		
-		try {
-			Socket socket = new Socket("localhost", 4321);
-			
-			InputStream inputStream = socket.getInputStream();
-            OutputStream outputStream = socket.getOutputStream();
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            PrintWriter writer = new PrintWriter(new OutputStreamWriter(outputStream), true);
-            
-            String respuesta = null;
-            if (enviarMensaje(reader, writer, operacion).equals("OK")) {
-            	if (enviarMensaje(reader, writer, email).equals("OK")) {
-            		if (enviarMensaje(reader, writer, password).equals("OK")) {
-            			while ((respuesta = reader.readLine()) != null) {
-							result = Boolean.parseBoolean(respuesta);
-							break;
-						}
-                    }
-                }
-            }
-            
-            reader.close();
-            writer.close();
-            socket.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return result;
 	}
 
 	public static AutenticacionAppService getInstance() {
