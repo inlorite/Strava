@@ -8,7 +8,10 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
 
 @Entity
 public class User {
@@ -21,7 +24,8 @@ public class User {
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
 	private Set<Bid> bids = new HashSet<>();
 	
-	@OneToMany(mappedBy = "owner", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+	@ManyToMany
+	@JoinTable(name = "usuario_reto",joinColumns = @JoinColumn(name = "email"),inverseJoinColumns = @JoinColumn(name = "reto_id"))
 	private Set<Article> articles = new HashSet<>();
 		
 	public String getNickname() {

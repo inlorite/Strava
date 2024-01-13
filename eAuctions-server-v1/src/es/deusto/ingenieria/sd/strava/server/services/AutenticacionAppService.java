@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import es.deusto.ingenieria.sd.strava.server.data.dao.UserDAO;
 import es.deusto.ingenieria.sd.strava.server.data.domain.SesionEntrenamiento;
 import es.deusto.ingenieria.sd.strava.server.data.domain.Usuario;
 import es.deusto.ingenieria.sd.strava.server.factory.GatewayFactory;
@@ -143,6 +144,7 @@ public class AutenticacionAppService {
 				System.out.println(usuario);
 				if (result) {
 					usuarios.add(usuario);
+					//UserDAO.getInstance().store(usuario);
 					return true;
 				}
 			}

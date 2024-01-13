@@ -3,15 +3,35 @@ package es.deusto.ingenieria.sd.strava.server.data.domain;
 import java.util.Date;
 import java.util.Objects;
 
-import javax.swing.ImageIcon;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
+@Entity
 public class SesionEntrenamiento {
+	@Id
 	private String titulo;
 	private float distancia;
 	private Date fechaInicio;
 	private long horaInicio;
 	private float duracion;
 	private String deporte;
+	@ManyToOne
+	private Usuario creador;
+
+	public Usuario getCreador() {
+		return creador;
+	}
+
+	public void setCreador(Usuario creador) {
+		this.creador = creador;
+	}
 
 	public String getDeporte() {
 		return deporte;

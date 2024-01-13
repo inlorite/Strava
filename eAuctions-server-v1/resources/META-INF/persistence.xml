@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
+        version="2.2">
+
+    <!-- Tutorial "unit" -->
+    <persistence-unit name="Strava">
+        <class>es.deusto.ingenieria.sd.strava.server.data.domain.Usuario</class>
+        <class>es.deusto.ingenieria.sd.strava.server.data.domain.Reto</class>
+        <class>es.deusto.ingenieria.sd.strava.server.data.domain.SesionEntrenamiento</class>
+        <exclude-unlisted-classes/>
+
+        <properties>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/stravaDB?verifyServerCertificate=false&amp;useSSL=false&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true"/>
+            <property name="javax.persistence.jdbc.user" value="root" />
+            <property name="javax.persistence.jdbc.password" value="root"/>
+            <property name="datanucleus.schema.autoCreateAll" value="true"/>
+        </properties>
+    </persistence-unit>
+</persistence>

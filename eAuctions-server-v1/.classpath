@@ -24,5 +24,12 @@
 	<classpathentry kind="lib" path="lib/spring-core-6.0.13.jar"/>
 	<classpathentry kind="lib" path="lib/spring-expression-6.0.13.jar"/>
 	<classpathentry kind="lib" path="lib/spring-web-6.0.13.jar"/>
+	<classpathentry kind="lib" path="lib/datanucleus-api-jpa-6.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/datanucleus-core-6.0.5.jar"/>
+	<classpathentry kind="lib" path="lib/datanucleus-jpa-query-6.0.0-release.jar"/>
+	<classpathentry kind="lib" path="lib/datanucleus-rdbms-6.0.5.jar"/>
+	<classpathentry kind="lib" path="lib/javax.persistence-2.2.4.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.14.jar"/>
+	<classpathentry kind="lib" path="lib/mysql-connector-j-8.1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

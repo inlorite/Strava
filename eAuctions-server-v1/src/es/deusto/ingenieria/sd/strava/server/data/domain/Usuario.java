@@ -5,10 +5,19 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-import javax.swing.ImageIcon;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
+@Entity
 public class Usuario {
 	private String nombre;
+	@Id
 	private String email;
 	private Date fechaNacimiento;
 	private float peso;
@@ -17,8 +26,12 @@ public class Usuario {
 	private int frecuenciaCardiacaReposo;
 	private String contrasena;
 	private String tipoServicio;
+	@OneToMany(mappedBy = "titulo", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
 	private List<SesionEntrenamiento> sesionesEntrenamiento = new ArrayList<>();
+	@OneToMany(mappedBy = "creador", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
 	private List<Reto> retosCreados = new ArrayList<>();
+	@ManyToMany
+    @JoinTable(name = "usuario_reto",joinColumns = @JoinColumn(name = "usuario_email"),inverseJoinColumns = @JoinColumn(name = "reto_nombre"))
 	private List<Reto> retosApuntados = new ArrayList<>();
 	
 	public List<Reto> getRetosCreados() {
