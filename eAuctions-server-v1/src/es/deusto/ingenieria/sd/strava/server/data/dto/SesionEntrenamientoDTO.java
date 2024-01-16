@@ -16,6 +16,15 @@ public class SesionEntrenamientoDTO implements Serializable {
 	private long horaInicio;
 	private float duracion;
 	private String deporte;
+	private UsuarioDTO creador;
+
+	public UsuarioDTO getCreador() {
+		return creador;
+	}
+
+	public void setCreador(UsuarioDTO creador) {
+		this.creador = creador;
+	}
 
 	public String getDeporte() {
 		return deporte;

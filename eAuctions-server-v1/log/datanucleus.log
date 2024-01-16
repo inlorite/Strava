@@ -1643,3 +1643,117 @@ org.datanucleus.exceptions.NucleusUserException: Encontro el Meta-Data de la cla
 11:55:55,138 (main) WARN  [DataNucleus.Datastore] - SQL Warning : 'BINARY as attribute of a type' is deprecated and will be removed in a future release. Please use a CHARACTER SET clause with _bin collation instead
 11:55:55,156 (main) WARN  [DataNucleus.Datastore] - SQL Warning : 'BINARY as attribute of a type' is deprecated and will be removed in a future release. Please use a CHARACTER SET clause with _bin collation instead
 11:55:55,156 (main) WARN  [DataNucleus.Datastore] - SQL Warning : 'BINARY as attribute of a type' is deprecated and will be removed in a future release. Please use a CHARACTER SET clause with _bin collation instead
+12:27:08,175 (main) WARN  [DataNucleus.Datastore] - SQL Warning : 'BINARY as attribute of a type' is deprecated and will be removed in a future release. Please use a CHARACTER SET clause with _bin collation instead
+12:27:08,175 (main) WARN  [DataNucleus.Datastore] - SQL Warning : 'BINARY as attribute of a type' is deprecated and will be removed in a future release. Please use a CHARACTER SET clause with _bin collation instead
+12:27:08,175 (main) WARN  [DataNucleus.Datastore] - SQL Warning : 'BINARY as attribute of a type' is deprecated and will be removed in a future release. Please use a CHARACTER SET clause with _bin collation instead
+12:27:08,197 (main) WARN  [DataNucleus.Datastore] - SQL Warning : 'BINARY as attribute of a type' is deprecated and will be removed in a future release. Please use a CHARACTER SET clause with _bin collation instead
+12:27:08,197 (main) WARN  [DataNucleus.Datastore] - SQL Warning : 'BINARY as attribute of a type' is deprecated and will be removed in a future release. Please use a CHARACTER SET clause with _bin collation instead
+12:27:08,197 (main) WARN  [DataNucleus.Datastore] - SQL Warning : 'BINARY as attribute of a type' is deprecated and will be removed in a future release. Please use a CHARACTER SET clause with _bin collation instead
+12:27:08,215 (main) WARN  [DataNucleus.Datastore] - SQL Warning : 'BINARY as attribute of a type' is deprecated and will be removed in a future release. Please use a CHARACTER SET clause with _bin collation instead
+12:27:08,215 (main) WARN  [DataNucleus.Datastore] - SQL Warning : 'BINARY as attribute of a type' is deprecated and will be removed in a future release. Please use a CHARACTER SET clause with _bin collation instead
+12:27:08,216 (main) WARN  [DataNucleus.Datastore] - SQL Warning : 'BINARY as attribute of a type' is deprecated and will be removed in a future release. Please use a CHARACTER SET clause with _bin collation instead
+12:27:08,216 (main) WARN  [DataNucleus.Datastore] - SQL Warning : 'BINARY as attribute of a type' is deprecated and will be removed in a future release. Please use a CHARACTER SET clause with _bin collation instead
+12:27:08,232 (main) WARN  [DataNucleus.Datastore] - SQL Warning : 'BINARY as attribute of a type' is deprecated and will be removed in a future release. Please use a CHARACTER SET clause with _bin collation instead
+12:27:08,232 (main) WARN  [DataNucleus.Datastore] - SQL Warning : 'BINARY as attribute of a type' is deprecated and will be removed in a future release. Please use a CHARACTER SET clause with _bin collation instead
+12:29:38,550 (RMI TCP Connection(3)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+12:29:38,554 (RMI TCP Connection(3)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+12:29:38,555 (RMI TCP Connection(3)-192.168.1.172) WARN  [DataNucleus.JPA] - Found persistence-unit with name "Strava" at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources but already found one with same name at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin
+12:29:38,716 (RMI TCP Connection(3)-192.168.1.172) ERROR [DataNucleus.MetaData] - Encontro el Meta-Data de la clase es.deusto.ingenieria.sd.strava.server.data.domain.SesionEntrenamiento pero la clase no esta analizado! Por favor, debes analizar la clase antes de usar DataNucleus.
+org.datanucleus.exceptions.NucleusUserException: Encontro el Meta-Data de la clase es.deusto.ingenieria.sd.strava.server.data.domain.SesionEntrenamiento pero la clase no esta analizado! Por favor, debes analizar la clase antes de usar DataNucleus.
+	at org.datanucleus.metadata.MetaDataManagerImpl.initialiseClassMetaData(MetaDataManagerImpl.java:2713)
+	at org.datanucleus.metadata.MetaDataManagerImpl.initialiseFileMetaData(MetaDataManagerImpl.java:2647)
+	at org.datanucleus.metadata.MetaDataManagerImpl.initialiseFileMetaDataForUse(MetaDataManagerImpl.java:1361)
+	at org.datanucleus.metadata.MetaDataManagerImpl.loadPersistenceUnit(MetaDataManagerImpl.java:1124)
+	at org.datanucleus.api.jpa.JPAEntityManagerFactory.initialiseNucleusContext(JPAEntityManagerFactory.java:921)
+	at org.datanucleus.api.jpa.JPAEntityManagerFactory.initialise(JPAEntityManagerFactory.java:513)
+	at org.datanucleus.api.jpa.JPAEntityManagerFactory.<init>(JPAEntityManagerFactory.java:417)
+	at org.datanucleus.api.jpa.PersistenceProviderImpl.createEntityManagerFactory(PersistenceProviderImpl.java:104)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:49)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:33)
+	at es.deusto.ingenieria.sd.strava.server.data.dao.DataAccessObjectBase.<clinit>(Unknown Source)
+	at es.deusto.ingenieria.sd.strava.server.services.AutenticacionAppService.register(Unknown Source)
+	at es.deusto.ingenieria.sd.strava.server.remote.RemoteFacade.register(Unknown Source)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+
+12:29:38,716 (RMI TCP Connection(3)-192.168.1.172) ERROR [DataNucleus.MetaData] - Encontro el Meta-Data de la clase es.deusto.ingenieria.sd.strava.server.data.domain.Usuario pero la clase no esta analizado! Por favor, debes analizar la clase antes de usar DataNucleus.
+org.datanucleus.exceptions.NucleusUserException: Encontro el Meta-Data de la clase es.deusto.ingenieria.sd.strava.server.data.domain.Usuario pero la clase no esta analizado! Por favor, debes analizar la clase antes de usar DataNucleus.
+	at org.datanucleus.metadata.MetaDataManagerImpl.initialiseClassMetaData(MetaDataManagerImpl.java:2713)
+	at org.datanucleus.metadata.MetaDataManagerImpl.initialiseFileMetaData(MetaDataManagerImpl.java:2647)
+	at org.datanucleus.metadata.MetaDataManagerImpl.initialiseFileMetaDataForUse(MetaDataManagerImpl.java:1361)
+	at org.datanucleus.metadata.MetaDataManagerImpl.loadPersistenceUnit(MetaDataManagerImpl.java:1124)
+	at org.datanucleus.api.jpa.JPAEntityManagerFactory.initialiseNucleusContext(JPAEntityManagerFactory.java:921)
+	at org.datanucleus.api.jpa.JPAEntityManagerFactory.initialise(JPAEntityManagerFactory.java:513)
+	at org.datanucleus.api.jpa.JPAEntityManagerFactory.<init>(JPAEntityManagerFactory.java:417)
+	at org.datanucleus.api.jpa.PersistenceProviderImpl.createEntityManagerFactory(PersistenceProviderImpl.java:104)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:49)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:33)
+	at es.deusto.ingenieria.sd.strava.server.data.dao.DataAccessObjectBase.<clinit>(Unknown Source)
+	at es.deusto.ingenieria.sd.strava.server.services.AutenticacionAppService.register(Unknown Source)
+	at es.deusto.ingenieria.sd.strava.server.remote.RemoteFacade.register(Unknown Source)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+
+12:29:38,716 (RMI TCP Connection(3)-192.168.1.172) ERROR [DataNucleus.MetaData] - Encontro el Meta-Data de la clase es.deusto.ingenieria.sd.strava.server.data.domain.Reto pero la clase no esta analizado! Por favor, debes analizar la clase antes de usar DataNucleus.
+org.datanucleus.exceptions.NucleusUserException: Encontro el Meta-Data de la clase es.deusto.ingenieria.sd.strava.server.data.domain.Reto pero la clase no esta analizado! Por favor, debes analizar la clase antes de usar DataNucleus.
+	at org.datanucleus.metadata.MetaDataManagerImpl.initialiseClassMetaData(MetaDataManagerImpl.java:2713)
+	at org.datanucleus.metadata.MetaDataManagerImpl.initialiseFileMetaData(MetaDataManagerImpl.java:2647)
+	at org.datanucleus.metadata.MetaDataManagerImpl.initialiseFileMetaDataForUse(MetaDataManagerImpl.java:1361)
+	at org.datanucleus.metadata.MetaDataManagerImpl.loadPersistenceUnit(MetaDataManagerImpl.java:1124)
+	at org.datanucleus.api.jpa.JPAEntityManagerFactory.initialiseNucleusContext(JPAEntityManagerFactory.java:921)
+	at org.datanucleus.api.jpa.JPAEntityManagerFactory.initialise(JPAEntityManagerFactory.java:513)
+	at org.datanucleus.api.jpa.JPAEntityManagerFactory.<init>(JPAEntityManagerFactory.java:417)
+	at org.datanucleus.api.jpa.PersistenceProviderImpl.createEntityManagerFactory(PersistenceProviderImpl.java:104)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:49)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:33)
+	at es.deusto.ingenieria.sd.strava.server.data.dao.DataAccessObjectBase.<clinit>(Unknown Source)
+	at es.deusto.ingenieria.sd.strava.server.services.AutenticacionAppService.register(Unknown Source)
+	at es.deusto.ingenieria.sd.strava.server.remote.RemoteFacade.register(Unknown Source)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+

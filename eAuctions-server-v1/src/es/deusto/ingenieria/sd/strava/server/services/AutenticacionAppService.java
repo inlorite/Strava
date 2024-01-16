@@ -144,7 +144,7 @@ public class AutenticacionAppService {
 				System.out.println(usuario);
 				if (result) {
 					usuarios.add(usuario);
-					//UserDAO.getInstance().store(usuario);
+					UserDAO.getInstance().store(usuario);
 					return true;
 				}
 			}

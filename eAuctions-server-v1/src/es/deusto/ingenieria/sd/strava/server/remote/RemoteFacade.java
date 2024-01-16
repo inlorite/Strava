@@ -96,7 +96,8 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		System.out.println(" * RemoteFacade crearSesionEntrenamiento()");
 
 		SesionEntrenamiento sesionEntrenamiento;
-
+		sesionEntrenamientoDTO.setCreador(UsuarioAssembler.getInstance().usuarioToDTO(serverState.get(token)));
+		
 		if (sesionEntrenamientoDTO != null && this.serverState.containsKey(token)) {
 			// Convert domain object to DTO
 			sesionEntrenamiento = SesionEntrenamientoAssembler.getInstance()

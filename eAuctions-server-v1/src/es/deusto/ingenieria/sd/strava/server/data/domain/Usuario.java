@@ -26,7 +26,7 @@ public class Usuario {
 	private int frecuenciaCardiacaReposo;
 	private String contrasena;
 	private String tipoServicio;
-	@OneToMany(mappedBy = "titulo", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+	@OneToMany(mappedBy = "creador", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
 	private List<SesionEntrenamiento> sesionesEntrenamiento = new ArrayList<>();
 	@OneToMany(mappedBy = "creador", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
 	private List<Reto> retosCreados = new ArrayList<>();

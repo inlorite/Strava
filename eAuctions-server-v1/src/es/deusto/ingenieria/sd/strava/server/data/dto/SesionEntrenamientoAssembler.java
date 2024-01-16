@@ -28,6 +28,7 @@ public class SesionEntrenamientoAssembler {
 		dto.setHoraInicio(sesionEntrenamiento.getHoraInicio());
 		dto.setDuracion(sesionEntrenamiento.getDuracion());
 		dto.setDeporte(sesionEntrenamiento.getDeporte());
+		dto.setCreador(UsuarioAssembler.getInstance().usuarioToDTO(sesionEntrenamiento.getCreador()));
 
 		return dto;
 	}
@@ -41,6 +42,7 @@ public class SesionEntrenamientoAssembler {
 		sesionEntrenamiento.setHoraInicio(dto.getHoraInicio());
 		sesionEntrenamiento.setDuracion(dto.getDuracion());
 		sesionEntrenamiento.setDeporte(dto.getDeporte());
+		sesionEntrenamiento.setCreador(UsuarioAssembler.getInstance().dtoToUsuario(dto.getCreador()));
 
 		return sesionEntrenamiento;
 	}
