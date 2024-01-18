@@ -88,7 +88,7 @@ public class SesionEntrenamientoDAO extends DataAccessObjectBase implements IDat
 		try {
 			tx.begin();
 
-			Query q = em.createQuery("SELECT u FROM User u");
+			Query q = em.createQuery("SELECT u FROM SesionEntrenamiento u");
 			users = (List<SesionEntrenamiento>) q.getResultList();
 						
 			tx.commit();

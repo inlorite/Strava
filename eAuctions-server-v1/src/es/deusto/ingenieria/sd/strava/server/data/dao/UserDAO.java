@@ -84,13 +84,10 @@ public class UserDAO extends DataAccessObjectBase implements IDataAccessObject<U
 		EntityTransaction tx = em.getTransaction();
 		
 		List<Usuario> users = new ArrayList<>();
-
 		try {
 			tx.begin();
-
-			Query q = em.createQuery("SELECT u FROM User u");
-			users = (List<Usuario>) q.getResultList();
-						
+			Query q = em.createQuery("SELECT u FROM Usuario u");
+			users = (List<Usuario>) q.getResultList();	
 			tx.commit();
 		} catch (Exception ex) {
 			System.out.println("  $ Error querying all users: " + ex.getMessage());

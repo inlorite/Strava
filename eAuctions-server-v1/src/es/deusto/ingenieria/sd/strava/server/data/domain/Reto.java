@@ -23,9 +23,9 @@ public class Reto {
 	private Date fechaFin;
 	private float distancia;
 	private float tiempo;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
 	private Usuario creador;
-	@ManyToMany(mappedBy = "retosApuntados")
+	@ManyToMany(mappedBy = "retosApuntados",fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
 	private List<Usuario> participantes = new ArrayList<>();
 	private String tipoReto;
 

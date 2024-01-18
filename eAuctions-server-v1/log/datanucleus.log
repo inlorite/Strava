@@ -1757,3 +1757,302 @@ org.datanucleus.exceptions.NucleusUserException: Encontro el Meta-Data de la cla
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
 	at java.base/java.lang.Thread.run(Thread.java:833)
 
+13:08:28,534 (RMI TCP Connection(3)-192.168.1.41) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/inigo/git/Strava/eAuctions-server-v1/bin/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+13:08:28,544 (RMI TCP Connection(3)-192.168.1.41) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/inigo/git/Strava/eAuctions-server-v1/resources/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+13:08:28,548 (RMI TCP Connection(3)-192.168.1.41) WARN  [DataNucleus.JPA] - Found persistence-unit with name "Strava" at file:/C:/Users/inigo/git/Strava/eAuctions-server-v1/resources but already found one with same name at file:/C:/Users/inigo/git/Strava/eAuctions-server-v1/bin
+13:08:28,923 (RMI TCP Connection(3)-192.168.1.41) ERROR [DataNucleus.MetaData] - Encontro el Meta-Data de la clase es.deusto.ingenieria.sd.strava.server.data.domain.SesionEntrenamiento pero la clase no esta analizado! Por favor, debes analizar la clase antes de usar DataNucleus.
+org.datanucleus.exceptions.NucleusUserException: Encontro el Meta-Data de la clase es.deusto.ingenieria.sd.strava.server.data.domain.SesionEntrenamiento pero la clase no esta analizado! Por favor, debes analizar la clase antes de usar DataNucleus.
+	at org.datanucleus.metadata.MetaDataManagerImpl.initialiseClassMetaData(MetaDataManagerImpl.java:2713)
+	at org.datanucleus.metadata.MetaDataManagerImpl.initialiseFileMetaData(MetaDataManagerImpl.java:2647)
+	at org.datanucleus.metadata.MetaDataManagerImpl.initialiseFileMetaDataForUse(MetaDataManagerImpl.java:1361)
+	at org.datanucleus.metadata.MetaDataManagerImpl.loadPersistenceUnit(MetaDataManagerImpl.java:1124)
+	at org.datanucleus.api.jpa.JPAEntityManagerFactory.initialiseNucleusContext(JPAEntityManagerFactory.java:921)
+	at org.datanucleus.api.jpa.JPAEntityManagerFactory.initialise(JPAEntityManagerFactory.java:513)
+	at org.datanucleus.api.jpa.JPAEntityManagerFactory.<init>(JPAEntityManagerFactory.java:417)
+	at org.datanucleus.api.jpa.PersistenceProviderImpl.createEntityManagerFactory(PersistenceProviderImpl.java:104)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:49)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:33)
+	at es.deusto.ingenieria.sd.strava.server.data.dao.DataAccessObjectBase.<clinit>(Unknown Source)
+	at es.deusto.ingenieria.sd.strava.server.services.AutenticacionAppService.register(Unknown Source)
+	at es.deusto.ingenieria.sd.strava.server.remote.RemoteFacade.register(Unknown Source)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+
+13:08:28,925 (RMI TCP Connection(3)-192.168.1.41) ERROR [DataNucleus.MetaData] - Encontro el Meta-Data de la clase es.deusto.ingenieria.sd.strava.server.data.domain.Usuario pero la clase no esta analizado! Por favor, debes analizar la clase antes de usar DataNucleus.
+org.datanucleus.exceptions.NucleusUserException: Encontro el Meta-Data de la clase es.deusto.ingenieria.sd.strava.server.data.domain.Usuario pero la clase no esta analizado! Por favor, debes analizar la clase antes de usar DataNucleus.
+	at org.datanucleus.metadata.MetaDataManagerImpl.initialiseClassMetaData(MetaDataManagerImpl.java:2713)
+	at org.datanucleus.metadata.MetaDataManagerImpl.initialiseFileMetaData(MetaDataManagerImpl.java:2647)
+	at org.datanucleus.metadata.MetaDataManagerImpl.initialiseFileMetaDataForUse(MetaDataManagerImpl.java:1361)
+	at org.datanucleus.metadata.MetaDataManagerImpl.loadPersistenceUnit(MetaDataManagerImpl.java:1124)
+	at org.datanucleus.api.jpa.JPAEntityManagerFactory.initialiseNucleusContext(JPAEntityManagerFactory.java:921)
+	at org.datanucleus.api.jpa.JPAEntityManagerFactory.initialise(JPAEntityManagerFactory.java:513)
+	at org.datanucleus.api.jpa.JPAEntityManagerFactory.<init>(JPAEntityManagerFactory.java:417)
+	at org.datanucleus.api.jpa.PersistenceProviderImpl.createEntityManagerFactory(PersistenceProviderImpl.java:104)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:49)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:33)
+	at es.deusto.ingenieria.sd.strava.server.data.dao.DataAccessObjectBase.<clinit>(Unknown Source)
+	at es.deusto.ingenieria.sd.strava.server.services.AutenticacionAppService.register(Unknown Source)
+	at es.deusto.ingenieria.sd.strava.server.remote.RemoteFacade.register(Unknown Source)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+
+13:08:28,926 (RMI TCP Connection(3)-192.168.1.41) ERROR [DataNucleus.MetaData] - Encontro el Meta-Data de la clase es.deusto.ingenieria.sd.strava.server.data.domain.Reto pero la clase no esta analizado! Por favor, debes analizar la clase antes de usar DataNucleus.
+org.datanucleus.exceptions.NucleusUserException: Encontro el Meta-Data de la clase es.deusto.ingenieria.sd.strava.server.data.domain.Reto pero la clase no esta analizado! Por favor, debes analizar la clase antes de usar DataNucleus.
+	at org.datanucleus.metadata.MetaDataManagerImpl.initialiseClassMetaData(MetaDataManagerImpl.java:2713)
+	at org.datanucleus.metadata.MetaDataManagerImpl.initialiseFileMetaData(MetaDataManagerImpl.java:2647)
+	at org.datanucleus.metadata.MetaDataManagerImpl.initialiseFileMetaDataForUse(MetaDataManagerImpl.java:1361)
+	at org.datanucleus.metadata.MetaDataManagerImpl.loadPersistenceUnit(MetaDataManagerImpl.java:1124)
+	at org.datanucleus.api.jpa.JPAEntityManagerFactory.initialiseNucleusContext(JPAEntityManagerFactory.java:921)
+	at org.datanucleus.api.jpa.JPAEntityManagerFactory.initialise(JPAEntityManagerFactory.java:513)
+	at org.datanucleus.api.jpa.JPAEntityManagerFactory.<init>(JPAEntityManagerFactory.java:417)
+	at org.datanucleus.api.jpa.PersistenceProviderImpl.createEntityManagerFactory(PersistenceProviderImpl.java:104)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:49)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:33)
+	at es.deusto.ingenieria.sd.strava.server.data.dao.DataAccessObjectBase.<clinit>(Unknown Source)
+	at es.deusto.ingenieria.sd.strava.server.services.AutenticacionAppService.register(Unknown Source)
+	at es.deusto.ingenieria.sd.strava.server.remote.RemoteFacade.register(Unknown Source)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+
+13:12:59,498 (RMI TCP Connection(3)-192.168.1.41) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/inigo/git/Strava/eAuctions-server-v1/bin/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+13:12:59,509 (RMI TCP Connection(3)-192.168.1.41) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/inigo/git/Strava/eAuctions-server-v1/resources/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+13:12:59,515 (RMI TCP Connection(3)-192.168.1.41) WARN  [DataNucleus.JPA] - Found persistence-unit with name "Strava" at file:/C:/Users/inigo/git/Strava/eAuctions-server-v1/resources but already found one with same name at file:/C:/Users/inigo/git/Strava/eAuctions-server-v1/bin
+13:13:00,700 (RMI TCP Connection(3)-192.168.1.41) ERROR [DataNucleus.Datastore.Schema] - La inicialización del base de datos ha fallado.
+Unknown database 'stravadb'
+org.datanucleus.exceptions.NucleusDataStoreException: Unknown database 'stravadb'
+	at org.datanucleus.store.rdbms.ConnectionFactoryImpl$ManagedConnectionImpl.getConnection(ConnectionFactoryImpl.java:513)
+	at org.datanucleus.store.rdbms.RDBMSStoreManager.<init>(RDBMSStoreManager.java:285)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+	at org.datanucleus.util.ClassUtils.newInstance(ClassUtils.java:81)
+	at org.datanucleus.plugin.NonManagedPluginRegistry.createExecutableExtension(NonManagedPluginRegistry.java:592)
+	at org.datanucleus.plugin.PluginManager.createExecutableExtension(PluginManager.java:296)
+	at org.datanucleus.store.StoreManagerHelper.createStoreManagerForProperties(StoreManagerHelper.java:77)
+	at org.datanucleus.PersistenceNucleusContextImpl.initialise(PersistenceNucleusContextImpl.java:424)
+	at org.datanucleus.api.jpa.JPAEntityManagerFactory.initialiseNucleusContext(JPAEntityManagerFactory.java:924)
+	at org.datanucleus.api.jpa.JPAEntityManagerFactory.initialise(JPAEntityManagerFactory.java:513)
+	at org.datanucleus.api.jpa.JPAEntityManagerFactory.<init>(JPAEntityManagerFactory.java:417)
+	at org.datanucleus.api.jpa.PersistenceProviderImpl.createEntityManagerFactory(PersistenceProviderImpl.java:104)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:49)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:33)
+	at es.deusto.ingenieria.sd.strava.server.data.dao.DataAccessObjectBase.<clinit>(Unknown Source)
+	at es.deusto.ingenieria.sd.strava.server.services.AutenticacionAppService.register(Unknown Source)
+	at es.deusto.ingenieria.sd.strava.server.remote.RemoteFacade.register(Unknown Source)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+Caused by: java.sql.SQLSyntaxErrorException: Unknown database 'stravadb'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:121)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:819)
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:440)
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:239)
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:188)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:681)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:190)
+	at org.datanucleus.store.rdbms.datasource.dbcp2.DriverManagerConnectionFactory.createConnection(DriverManagerConnectionFactory.java:123)
+	at org.datanucleus.store.rdbms.datasource.dbcp2.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:353)
+	at org.datanucleus.store.rdbms.datasource.dbcp2.pool2.impl.GenericObjectPool.create(GenericObjectPool.java:899)
+	at org.datanucleus.store.rdbms.datasource.dbcp2.pool2.impl.GenericObjectPool.borrowObject(GenericObjectPool.java:429)
+	at org.datanucleus.store.rdbms.datasource.dbcp2.pool2.impl.GenericObjectPool.borrowObject(GenericObjectPool.java:354)
+	at org.datanucleus.store.rdbms.datasource.dbcp2.PoolingDataSource.getConnection(PoolingDataSource.java:132)
+	at org.datanucleus.store.rdbms.ConnectionFactoryImpl$ManagedConnectionImpl.getConnection(ConnectionFactoryImpl.java:496)
+	... 37 more
+Nested Throwables StackTrace:
+java.sql.SQLSyntaxErrorException: Unknown database 'stravadb'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:121)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:819)
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:440)
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:239)
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:188)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:681)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:190)
+	at org.datanucleus.store.rdbms.datasource.dbcp2.DriverManagerConnectionFactory.createConnection(DriverManagerConnectionFactory.java:123)
+	at org.datanucleus.store.rdbms.datasource.dbcp2.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:353)
+	at org.datanucleus.store.rdbms.datasource.dbcp2.pool2.impl.GenericObjectPool.create(GenericObjectPool.java:899)
+	at org.datanucleus.store.rdbms.datasource.dbcp2.pool2.impl.GenericObjectPool.borrowObject(GenericObjectPool.java:429)
+	at org.datanucleus.store.rdbms.datasource.dbcp2.pool2.impl.GenericObjectPool.borrowObject(GenericObjectPool.java:354)
+	at org.datanucleus.store.rdbms.datasource.dbcp2.PoolingDataSource.getConnection(PoolingDataSource.java:132)
+	at org.datanucleus.store.rdbms.ConnectionFactoryImpl$ManagedConnectionImpl.getConnection(ConnectionFactoryImpl.java:496)
+	at org.datanucleus.store.rdbms.RDBMSStoreManager.<init>(RDBMSStoreManager.java:285)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+	at org.datanucleus.util.ClassUtils.newInstance(ClassUtils.java:81)
+	at org.datanucleus.plugin.NonManagedPluginRegistry.createExecutableExtension(NonManagedPluginRegistry.java:592)
+	at org.datanucleus.plugin.PluginManager.createExecutableExtension(PluginManager.java:296)
+	at org.datanucleus.store.StoreManagerHelper.createStoreManagerForProperties(StoreManagerHelper.java:77)
+	at org.datanucleus.PersistenceNucleusContextImpl.initialise(PersistenceNucleusContextImpl.java:424)
+	at org.datanucleus.api.jpa.JPAEntityManagerFactory.initialiseNucleusContext(JPAEntityManagerFactory.java:924)
+	at org.datanucleus.api.jpa.JPAEntityManagerFactory.initialise(JPAEntityManagerFactory.java:513)
+	at org.datanucleus.api.jpa.JPAEntityManagerFactory.<init>(JPAEntityManagerFactory.java:417)
+	at org.datanucleus.api.jpa.PersistenceProviderImpl.createEntityManagerFactory(PersistenceProviderImpl.java:104)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:49)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:33)
+	at es.deusto.ingenieria.sd.strava.server.data.dao.DataAccessObjectBase.<clinit>(Unknown Source)
+	at es.deusto.ingenieria.sd.strava.server.services.AutenticacionAppService.register(Unknown Source)
+	at es.deusto.ingenieria.sd.strava.server.remote.RemoteFacade.register(Unknown Source)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+13:13:00,704 (RMI TCP Connection(3)-192.168.1.41) ERROR [DataNucleus.Datastore] - Exception thrown creating StoreManager : Unknown database 'stravadb'
+13:19:14,651 (main) ERROR [DataNucleus.Datastore] - Exception thrown creating StoreManager : No hay ningun StoreManager del tipo "excel". Por favor compruebe que usted ha puesto "datanucleus.storeManagerType" correctamente y que todos los plugins necesarios estan en el CLASSPATH
+13:19:14,653 (main) ERROR [DataNucleus.SchemaTool] - Error creating NucleusContext
+No hay ningun StoreManager del tipo "excel". Por favor compruebe que usted ha puesto "datanucleus.storeManagerType" correctamente y que todos los plugins necesarios estan en el CLASSPATH
+org.datanucleus.exceptions.NucleusUserException: No hay ningun StoreManager del tipo "excel". Por favor compruebe que usted ha puesto "datanucleus.storeManagerType" correctamente y que todos los plugins necesarios estan en el CLASSPATH
+	at org.datanucleus.store.StoreManagerHelper.createStoreManagerForProperties(StoreManagerHelper.java:138)
+	at org.datanucleus.PersistenceNucleusContextImpl.initialise(PersistenceNucleusContextImpl.java:424)
+	at org.datanucleus.store.schema.SchemaTool.getNucleusContextForMode(SchemaTool.java:740)
+	at org.datanucleus.store.schema.SchemaTool.main(SchemaTool.java:295)
+13:24:35,332 (RMI TCP Connection(3)-192.168.1.41) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/inigo/git/Strava/eAuctions-server-v1/bin/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+13:24:35,342 (RMI TCP Connection(3)-192.168.1.41) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/inigo/git/Strava/eAuctions-server-v1/resources/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+13:24:35,345 (RMI TCP Connection(3)-192.168.1.41) WARN  [DataNucleus.JPA] - Found persistence-unit with name "Strava" at file:/C:/Users/inigo/git/Strava/eAuctions-server-v1/resources but already found one with same name at file:/C:/Users/inigo/git/Strava/eAuctions-server-v1/bin
+17:40:59,166 (RMI TCP Connection(3)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+17:40:59,170 (RMI TCP Connection(3)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+17:40:59,171 (RMI TCP Connection(3)-192.168.1.172) WARN  [DataNucleus.JPA] - Found persistence-unit with name "Strava" at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources but already found one with same name at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin
+17:40:59,725 (RMI TCP Connection(3)-192.168.1.172) WARN  [DataNucleus.Datastore] - SQL Warning : 'BINARY as attribute of a type' is deprecated and will be removed in a future release. Please use a CHARACTER SET clause with _bin collation instead
+17:40:59,726 (RMI TCP Connection(3)-192.168.1.172) WARN  [DataNucleus.Datastore] - SQL Warning : 'BINARY as attribute of a type' is deprecated and will be removed in a future release. Please use a CHARACTER SET clause with _bin collation instead
+17:40:59,726 (RMI TCP Connection(3)-192.168.1.172) WARN  [DataNucleus.Datastore] - SQL Warning : 'BINARY as attribute of a type' is deprecated and will be removed in a future release. Please use a CHARACTER SET clause with _bin collation instead
+17:40:59,746 (RMI TCP Connection(3)-192.168.1.172) WARN  [DataNucleus.Datastore] - SQL Warning : 'BINARY as attribute of a type' is deprecated and will be removed in a future release. Please use a CHARACTER SET clause with _bin collation instead
+17:40:59,746 (RMI TCP Connection(3)-192.168.1.172) WARN  [DataNucleus.Datastore] - SQL Warning : 'BINARY as attribute of a type' is deprecated and will be removed in a future release. Please use a CHARACTER SET clause with _bin collation instead
+17:40:59,746 (RMI TCP Connection(3)-192.168.1.172) WARN  [DataNucleus.Datastore] - SQL Warning : 'BINARY as attribute of a type' is deprecated and will be removed in a future release. Please use a CHARACTER SET clause with _bin collation instead
+17:40:59,762 (RMI TCP Connection(3)-192.168.1.172) WARN  [DataNucleus.Datastore] - SQL Warning : 'BINARY as attribute of a type' is deprecated and will be removed in a future release. Please use a CHARACTER SET clause with _bin collation instead
+17:40:59,762 (RMI TCP Connection(3)-192.168.1.172) WARN  [DataNucleus.Datastore] - SQL Warning : 'BINARY as attribute of a type' is deprecated and will be removed in a future release. Please use a CHARACTER SET clause with _bin collation instead
+17:40:59,762 (RMI TCP Connection(3)-192.168.1.172) WARN  [DataNucleus.Datastore] - SQL Warning : 'BINARY as attribute of a type' is deprecated and will be removed in a future release. Please use a CHARACTER SET clause with _bin collation instead
+17:40:59,762 (RMI TCP Connection(3)-192.168.1.172) WARN  [DataNucleus.Datastore] - SQL Warning : 'BINARY as attribute of a type' is deprecated and will be removed in a future release. Please use a CHARACTER SET clause with _bin collation instead
+17:40:59,776 (RMI TCP Connection(3)-192.168.1.172) WARN  [DataNucleus.Datastore] - SQL Warning : 'BINARY as attribute of a type' is deprecated and will be removed in a future release. Please use a CHARACTER SET clause with _bin collation instead
+17:40:59,776 (RMI TCP Connection(3)-192.168.1.172) WARN  [DataNucleus.Datastore] - SQL Warning : 'BINARY as attribute of a type' is deprecated and will be removed in a future release. Please use a CHARACTER SET clause with _bin collation instead
+18:31:28,060 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+18:31:28,064 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+18:31:28,065 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.JPA] - Found persistence-unit with name "Strava" at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources but already found one with same name at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin
+18:38:50,388 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+18:38:50,392 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+18:38:50,393 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.JPA] - Found persistence-unit with name "Strava" at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources but already found one with same name at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin
+18:41:19,869 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+18:41:19,874 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+18:41:19,875 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.JPA] - Found persistence-unit with name "Strava" at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources but already found one with same name at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin
+18:42:42,439 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+18:42:42,443 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+18:42:42,445 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.JPA] - Found persistence-unit with name "Strava" at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources but already found one with same name at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin
+18:45:41,857 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+18:45:41,862 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+18:45:41,863 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.JPA] - Found persistence-unit with name "Strava" at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources but already found one with same name at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin
+18:48:33,102 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+18:48:33,107 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+18:48:33,108 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.JPA] - Found persistence-unit with name "Strava" at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources but already found one with same name at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin
+18:49:37,115 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+18:49:37,120 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+18:49:37,121 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.JPA] - Found persistence-unit with name "Strava" at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources but already found one with same name at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin
+18:51:27,679 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+18:51:27,684 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+18:51:27,685 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.JPA] - Found persistence-unit with name "Strava" at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources but already found one with same name at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin
+18:52:32,899 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+18:52:32,904 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+18:52:32,905 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.JPA] - Found persistence-unit with name "Strava" at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources but already found one with same name at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin
+18:53:17,870 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+18:53:17,875 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+18:53:17,876 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.JPA] - Found persistence-unit with name "Strava" at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources but already found one with same name at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin
+18:55:29,365 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+18:55:29,370 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+18:55:29,371 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.JPA] - Found persistence-unit with name "Strava" at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources but already found one with same name at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin
+18:58:31,871 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+18:58:31,876 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+18:58:31,877 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.JPA] - Found persistence-unit with name "Strava" at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources but already found one with same name at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin
+19:00:27,268 (RMI TCP Connection(3)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+19:00:27,273 (RMI TCP Connection(3)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+19:00:27,274 (RMI TCP Connection(3)-192.168.1.172) WARN  [DataNucleus.JPA] - Found persistence-unit with name "Strava" at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources but already found one with same name at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin
+19:00:27,956 (RMI TCP Connection(3)-192.168.1.172) WARN  [DataNucleus.Datastore.Persist] - Persistencia del objeto "es.deusto.ingenieria.sd.strava.server.data.domain.Usuario@3741c78a" con SQL "INSERT INTO `USUARIO` (`ALTURA`,`CONTRASENA`,`FECHANACIMIENTO`,`FRECUENCIACARDIACAMAX`,`FRECUENCIACARDIACAREPOSO`,`NOMBRE`,`PESO`,`TIPOSERVICIO`,`EMAIL`) VALUES (?,?,?,?,?,?,?,?,?)" ha tirado un error : Data truncation: Incorrect datetime value: '1960-01-07 19:00:10.5' for column 'FECHANACIMIENTO' at row 1
+19:02:25,213 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+19:02:25,217 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+19:02:25,218 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.JPA] - Found persistence-unit with name "Strava" at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources but already found one with same name at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin
+19:09:38,318 (RMI TCP Connection(3)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+19:09:38,322 (RMI TCP Connection(3)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+19:09:38,323 (RMI TCP Connection(3)-192.168.1.172) WARN  [DataNucleus.JPA] - Found persistence-unit with name "Strava" at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources but already found one with same name at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin
+19:10:07,180 (RMI TCP Connection(3)-192.168.1.172) WARN  [DataNucleus.Datastore.Persist] - Persistencia del objeto "es.deusto.ingenieria.sd.strava.server.data.domain.Usuario@7f189194" con SQL "INSERT INTO `USUARIO` (`ALTURA`,`CONTRASENA`,`FECHANACIMIENTO`,`FRECUENCIACARDIACAMAX`,`FRECUENCIACARDIACAREPOSO`,`NOMBRE`,`PESO`,`TIPOSERVICIO`,`EMAIL`) VALUES (?,?,?,?,?,?,?,?,?)" ha tirado un error : Column 'EMAIL' cannot be null
+19:12:29,677 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+19:12:29,681 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+19:12:29,682 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.JPA] - Found persistence-unit with name "Strava" at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources but already found one with same name at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin
+19:12:38,856 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.Datastore.Persist] - Persistencia del objeto "es.deusto.ingenieria.sd.strava.server.data.domain.Usuario@48719f67" con SQL "INSERT INTO `USUARIO` (`ALTURA`,`CONTRASENA`,`FECHANACIMIENTO`,`FRECUENCIACARDIACAMAX`,`FRECUENCIACARDIACAREPOSO`,`NOMBRE`,`PESO`,`TIPOSERVICIO`,`EMAIL`) VALUES (?,?,?,?,?,?,?,?,?)" ha tirado un error : Column 'EMAIL' cannot be null
+19:14:00,895 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+19:14:00,900 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.MetaData] - Error en el analizo del archivo "file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources/META-INF/persistence.xml" a la linea 5, columna 23 : cvc-elt.1.a: No se ha encontrado la declaración del elemento 'persistence'. - Por favor compruebe el DTD y la validad de este MetaData.
+19:14:00,901 (RMI TCP Connection(2)-192.168.1.172) WARN  [DataNucleus.JPA] - Found persistence-unit with name "Strava" at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/resources but already found one with same name at file:/C:/Users/usuario/Desktop/Workspace/Strava/eAuctions-server-v1/bin
+19:14:51,757 (RMI TCP Connection(4)-192.168.1.172) WARN  [DataNucleus.Datastore.Persist] - Persistencia del objeto "es.deusto.ingenieria.sd.strava.server.data.domain.Usuario@752953b2" con SQL "INSERT INTO `USUARIO` (`ALTURA`,`CONTRASENA`,`FECHANACIMIENTO`,`FRECUENCIACARDIACAMAX`,`FRECUENCIACARDIACAREPOSO`,`NOMBRE`,`PESO`,`TIPOSERVICIO`,`EMAIL`) VALUES (?,?,?,?,?,?,?,?,?)" ha tirado un error : Column 'EMAIL' cannot be null

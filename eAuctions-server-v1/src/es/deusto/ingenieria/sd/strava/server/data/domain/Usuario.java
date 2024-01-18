@@ -156,7 +156,7 @@ public class Usuario {
 		return "Usuario [nombre=" + nombre + ", email=" + email + ", fechaNacimiento=" + fechaNacimiento + ", peso="
 				+ peso + ", altura=" + altura + ", frecuenciaCardiacaMax=" + frecuenciaCardiacaMax
 				+ ", frecuenciaCardiacaReposo=" + frecuenciaCardiacaReposo + ", contrasena=" + contrasena
-				+ ", sesionesEntrenamiento=" + sesionesEntrenamiento + ", tipoServicio=" + tipoServicio + "]";
+				+ ", tipoServicio=" + tipoServicio + "]";
 	}
 	
 }

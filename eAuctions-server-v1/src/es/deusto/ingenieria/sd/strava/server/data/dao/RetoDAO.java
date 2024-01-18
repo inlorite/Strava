@@ -44,7 +44,7 @@ public class RetoDAO extends DataAccessObjectBase implements IDataAccessObject<R
 			
 			tx.commit();
 		} catch (Exception ex) {
-			System.out.println("  $ Error storing User: " + ex.getMessage());
+			System.out.println("  $ Error storing Reto: " + ex.getMessage());
 		} finally {
 			if (tx != null && tx.isActive()) {
 				tx.rollback();
@@ -67,7 +67,7 @@ public class RetoDAO extends DataAccessObjectBase implements IDataAccessObject<R
 			
 			tx.commit();
 		} catch (Exception ex) {
-			System.out.println("  $ Error removing an User: " + ex.getMessage());
+			System.out.println("  $ Error removing an Reto: " + ex.getMessage());
 		} finally {
 			if (tx != null && tx.isActive()) {
 				tx.rollback();
@@ -88,7 +88,7 @@ public class RetoDAO extends DataAccessObjectBase implements IDataAccessObject<R
 		try {
 			tx.begin();
 
-			Query q = em.createQuery("SELECT u FROM User u");
+			Query q = em.createQuery("SELECT u FROM Reto u");
 			users = (List<Reto>) q.getResultList();
 						
 			tx.commit();
